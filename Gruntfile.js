@@ -101,6 +101,9 @@ module.exports = function(grunt) {
     } // watch
   }); // initConfig
   
+  grunt.registerTask('sass', ['compass:dev', 'notify:sass']);
+  grunt.registerTask('jade', ['jade', 'notify:jade']);
+  grunt.registerTask('js', ['browserify:dev', 'notify:browserify']);
   grunt.registerTask('default', ['watch']);
 
 }; // exports
