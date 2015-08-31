@@ -2,6 +2,9 @@ var Backbone = require('backbone');
 
 var Location = Backbone.Model.extend({
 
+    // TODO is this right?
+    url: 'physicians/search',
+
     defaults: {
         city: '',
         state: '', 
@@ -12,7 +15,13 @@ var Location = Backbone.Model.extend({
 
     initialize: function() {
         console.log('location init\'d');
-    }
+    },
+
+    validate: function(fields) {
+
+    },
+
+    
 
 });
 

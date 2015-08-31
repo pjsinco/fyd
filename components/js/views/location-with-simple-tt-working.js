@@ -5,7 +5,7 @@ var Backbone = require('backbone'),
 
 var LocationView = Backbone.View.extend({
 
-    el: $('#location'),
+    el: $('.tt'),
     
     twitterTypeahead: function() {
 
@@ -24,8 +24,22 @@ var LocationView = Backbone.View.extend({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('val'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: _.map(states, function(d) { 
-                return { val: d };
+                var datum = { val: d };
+                console.log(datum);
+                return datum;
             })
+            //local: [
+            //    { val: 'one' },
+            //    { val: 'two' },
+            //    { val: 'three' },
+            //    { val: 'four' },
+            //    { val: 'five' },
+            //    { val: 'six' },
+            //    { val: 'seven' },
+            //    { val: 'eight' },
+            //    { val: 'nine' },
+            //    { val: 'ten' }
+            //]
         });
 
         // initialize the bloodhound suggestion engine
