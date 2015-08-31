@@ -1,40 +1,72 @@
 %focus {
-      border: 2px solid darken($primarycolor, 10%);
-      outline: 0;
-      @include transition-property(border);
-      @include transition-duration(.2s);
+    border: 1px solid $primarycolor;
+    outline: 0;
+    @include transition-property(border);
+    @include transition-duration(.2s);
 }
 
 .find-your-do {
 
+    text-align: center;
+
+    form {
+      padding: 1em;
+      margin: 1em;
+      background-color: $secondarycolor;  
+      border: 1px solid $accentcolor;
+    }
+     
+    textarea {
+      line-height: 1.4;
+    
+      &:focus {
+        @include transition-property(border);
+        @include transition-duration(.2s);
+        border: 1px solid $primarycolor;
+        outline: 0;
+      }
+    }
+    
     input {
+      vertical-align: middle;
+    }
     
-      padding: .5em;
-      margin-bottom: 1em;
-      width: 63%;
-      border-radius: 5px;
-      box-shadow: 0 0 8px rgba($primarycolor,.5);
-      border-color: #fff;
-      color: $primarycolor;
-      font-size: 1.2em;
-      display: inline-block;
-      border-left-style: solid;
-      border-top-style: solid;
-      border-right-style: solid;
-      border-bottom-style: solid;
-      border-width: 2px;
+    input, textarea {
+        padding: .5em;
+        margin-bottom: 1em;
+        margin-right: .5em;
+        width: 37%;
+        height: 3em;
+        font-size: 1em;
+        /*display: inline-block;*/
+        border-left-style: solid;
+        border-top-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        border-width: 1px;
+        border-color: $gray;
+        color: $fontcolor;
     
-      &[type='submit'] {
-        left: -.3em;
-        position: relative;
-        width: 25%;
-        float: right;
-      }
+        &[type='text']:focus {
+          @extend %focus;
+        }
+
+        &[type='submit'] {
+            width: 10%;
+            color: $white;
+            background: $primarycolor;
+        }
+     
     
-      &[type='text']:focus {
-        @extend %focus;
-      }
     } // input
+    
+    hr {
+      margin-bottom: 1.6875em;
+      margin-top: 3em;
+      border: 0;
+      height: 0;
+      border-top: 1px solid $lightgray;
+    }
 
 }
 

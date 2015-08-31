@@ -19,7 +19,8 @@ $linkcolor: $blue;
 /*
  * TYPOGRAPHY
  */
-$primaryfont: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+/*$primaryfont: 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+$primaryfont: 'gothambook', sans-serif;
 $secondaryfont: Georgia, serif;
 
 $fontcolor: $verydark;
@@ -27,15 +28,16 @@ $font-color-lighter: $gray;
 $font-color-lightest: $mediumgray;
 
 $font-size-base: 1.125em;
-$normal: 400;
-$bold: 600;
+$fontlight: 200;
+$fontnormal: 400;
+$fontbold: 600;
 $bodylineheight: 1.4;
 $bodylineheight-bigger: 1.65;
 
 /*
  * Layout
  */
-$site-width: 62em;
+$sitewidth: 62em;
 $outside-gutter-small: .5em;
 $outside-gutter-medium: 1.25em;
 $outside-gutter-large: 2em;
@@ -54,22 +56,14 @@ $fastduration: .1s;
 $mediumduration: .2s;
 $slowduration: .5s;
 
-/*
- * Breakpoint
+/**
+ * BREAKPOINTS
+ * 
  */
-$all: 'all';
-$screen: 'screen';
-// $small-start not needed--for quick sizing in chrome dev
-$small-start              : 20em;        //  320px
-$small-minor-start        : 25.625em;    //  410px
-$medium-start             : 30em;        //  480px
-$medium-minor-start       : 36em;        //  576px
-$medium-minor-minor-start : 43em;        //  688px
-$large-start-minus-1      : 47.9375em;   //  767px
-$large-start              : 48em;        //  768px
-$leaderboard-start        : 50.5625em;   //  809px
-$large-minor-start        : 56em;        //  896px
-$max-site-start           : $site-width; //  992px
-$xlarge-start-minus-1     : 63.9375em;   //  1023px
-$xlarge-start             : 64em;        //  1024px
-$xxlarge-start            : 90em;        //  1440px
+$all            : 'all';
+$screen         : 'screen';
+$smallstart    : 20em;        // 320px
+$mediumstart   : 30em;        // 480px
+$largestart    : 48em;        // 768px
+$desktopstart : $sitewidth; // 992px
+
