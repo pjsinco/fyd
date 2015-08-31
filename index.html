@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Find Your DO workbench</title>
+    </head>
+    <body>
+        <h1>Find Your DO workbench</h1>
+        <div class="row">
+            <div class="col-xs-12">
+                <form method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" id="findADo" name="findADo" class="form-inline findADo">
+                    <input id="city" name="city" type="hidden">
+                    <input id="state" name="state" type="hidden">
+                    <input id="zip" name="zip" type="hidden">
+                    <input id="lat" name="lat" type="hidden">
+                    <input id="lon" name="lon" type="hidden">
+                    <input id="sCode" name="s_code" type="hidden">
+                    <div class="form-group">
+                        <input class="form-control input-lg" id="specialty" placeholder="Search by name or specialty" name="specialty" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" id="location" placeholder="City, state or zip" name="location" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary btn-lg" type="submit" value="Find a DO">
+                    </div>
+                </form>
+            </div>
+        </div>
+    <script src="http://localhost:35729/livereload.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>
