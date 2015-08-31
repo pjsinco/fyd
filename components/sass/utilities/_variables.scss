@@ -1,0 +1,75 @@
+/*
+ * COLORS
+ */
+$verydark: #333;
+$white: #fff;
+$gray: #808080;
+$mediumgray: #b3b3b3;
+$lightgray: #ddd;
+$extralightgray: #f5f5f5;
+
+
+$blue: #077cc2;
+
+$primarycolor: $blue;
+$secondarycolor: $mediumgray;
+$accentcolor: fuchsia;
+$linkcolor: $blue;
+
+/*
+ * TYPOGRAPHY
+ */
+$primaryfont: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$secondaryfont: Georgia, serif;
+
+$fontcolor: $verydark;
+$font-color-lighter: $gray;
+$font-color-lightest: $mediumgray;
+
+$font-size-base: 1.125em;
+$normal: 400;
+$bold: 600;
+$bodylineheight: 1.4;
+$bodylineheight-bigger: 1.65;
+
+/*
+ * Layout
+ */
+$site-width: 62em;
+$outside-gutter-small: .5em;
+$outside-gutter-medium: 1.25em;
+$outside-gutter-large: 2em;
+
+/*
+ * Misc
+ */
+$border-radius: 4px;
+
+/**
+ * For hover.css
+ */
+
+// Durations
+$fastduration: .1s;
+$mediumduration: .2s;
+$slowduration: .5s;
+
+/*
+ * Breakpoint
+ */
+$all: 'all';
+$screen: 'screen';
+// $small-start not needed--for quick sizing in chrome dev
+$small-start              : 20em;        //  320px
+$small-minor-start        : 25.625em;    //  410px
+$medium-start             : 30em;        //  480px
+$medium-minor-start       : 36em;        //  576px
+$medium-minor-minor-start : 43em;        //  688px
+$large-start-minus-1      : 47.9375em;   //  767px
+$large-start              : 48em;        //  768px
+$leaderboard-start        : 50.5625em;   //  809px
+$large-minor-start        : 56em;        //  896px
+$max-site-start           : $site-width; //  992px
+$xlarge-start-minus-1     : 63.9375em;   //  1023px
+$xlarge-start             : 64em;        //  1024px
+$xxlarge-start            : 90em;        //  1440px

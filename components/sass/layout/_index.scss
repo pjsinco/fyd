@@ -1,0 +1,6 @@
+.container {
+  @include clearfix;
+  @include container($gridpage);
+  margin-top: 1em;
+}
+

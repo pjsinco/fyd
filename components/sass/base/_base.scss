@@ -1,0 +1,80 @@
+html {
+  font-size: 100%;
+  line-height: 1;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: $primaryfont;
+  background-color: $white;
+}
+
+a {
+  text-decoration: none;
+  color: $linkcolor;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  /*max-width: 100%;*/
+  height: auto;
+}
+
+form {
+  background-color: $secondarycolor;  
+  /*@include border-radius(4px);*/
+  /*box-shadow: 3px 3px 3px lighten($dark, 30%);*/
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid $accentcolor;
+}
+ 
+textarea {
+  line-height: 1.4;
+
+  &:focus {
+    border: 1px solid $primarycolor;
+    outline: 0;
+    @include transition-property(border);
+    @include transition-duration(.2s);
+  }
+}
+
+input {
+  vertical-align: middle;
+}
+
+input, textarea {
+  padding: .5em;
+  margin-bottom: 1em;
+  /*width: 100%;*/
+  font-size: 1em;
+  /*display: inline-block;*/
+  border-left-style: solid;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: $gray;
+  color: $fontcolor;
+
+  &[type='text']:focus {
+    @extend textarea:focus;
+  }
+
+  &[type='email']:focus {
+    @extend textarea:focus;
+  }
+
+} // input
+
+hr {
+  margin-bottom: 1.6875em;
+  margin-top: 3em;
+  border: 0;
+  height: 0;
+  border-top: 1px solid $lightgray;
+}

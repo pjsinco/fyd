@@ -23,17 +23,12 @@
     "grunt-browserify": "^4.0.0",
     "grunt-contrib-compass": "^1.0.3",
     "grunt-contrib-watch": "^0.6.1",
-    "gulp": "^3.9.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.0.4",
-    "gulp-sourcemaps": "^1.5.2",
-    "madison": "0.0.8",
-    "tiny-lr": "^0.1.6",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "grunt-notify": "^0.4.1",
+    "madison": "0.0.8"
   },
   "dependencies": {
     "backbone": "^1.2.2",
+    "grunt-contrib-jade": "^0.15.0",
     "jquery": "^2.1.4",
     "underscore": "^1.8.3"
   }
