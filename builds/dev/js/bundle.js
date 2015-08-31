@@ -19,7 +19,7 @@ var Location = Backbone.Model.extend({
 
 module.exports = Location;
 
-},{"backbone":4}],2:[function(require,module,exports){
+},{"backbone":5}],2:[function(require,module,exports){
 var $ = require('jquery');
 
 //https://github.com/twitter/typeahead.js/issues/872
@@ -1808,15 +1808,16 @@ module.exports = (function($) {
     })();
 })(window.jQuery);
 
-},{"jquery":5}],3:[function(require,module,exports){
+},{"jquery":6}],3:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
+    _ = require('underscore'),
     typeahead = require('typeahead.0.10.5');
 
 var LocationView = Backbone.View.extend({
 
-    el: $('#bloodhound'),
-
+    el: $('.tt'),
+    
     twitterTypeahead: function() {
 
         var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
@@ -1830,24 +1831,55 @@ var LocationView = Backbone.View.extend({
             'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
         ];
 
-        var engine = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+//        $('.tt').typeahead({
+//            name: 'people',
+//            local: ['Elaine', 'Column', 'Kirsty', 'Chris Elder']
+//        });
+
+        var numbers = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('val'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local: states
+            local: _.map(states, function(d) { 
+                var datum = { val: d };
+                console.log(datum);
+                return datum;
+            })
+            //local: [
+            //    { num: 'one' },
+            //    { num: 'two' },
+            //    { num: 'three' },
+            //    { num: 'four' },
+            //    { num: 'five' },
+            //    { num: 'six' },
+            //    { num: 'seven' },
+            //    { num: 'eight' },
+            //    { num: 'nine' },
+            //    { num: 'ten' }
+            //]
         });
 
-        engine.initialize();
-
-        $('#bloodhound .typeahead').typeahead({
+        // initialize the bloodhound suggestion engine
+        numbers.initialize();
+        
+        // instantiate the typeahead UI
+        $('.tt').typeahead({
             hint: true,
             highlight: true,
             minLength: 1
         }, {
-            name: 'engine',
-            displayKey: 'value',
-            source: engine.ttAdapter()
+          displayKey: 'val',
+          source: numbers.ttAdapter()
         });
 
+
+        $('.tt').on('typeahead:opened', function() {
+            console.log('opentpyeahead');
+        });
+
+    },
+
+    hiya: function() {
+        console.log('hiyafunction');
     },
 
     render: function() {
@@ -1863,7 +1895,28 @@ var LocationView = Backbone.View.extend({
 
 module.exports = LocationView;
 
-},{"backbone":4,"jquery":5,"typeahead.0.10.5":2}],4:[function(require,module,exports){
+},{"backbone":5,"jquery":6,"typeahead.0.10.5":2,"underscore":7}],4:[function(require,module,exports){
+var Backbone = require('backbone'),
+    $ = require('jquery');
+
+var SampleView = Backbone.View.extend({
+
+    //el: '.sample',
+    el: $('.sample'),
+    render: function() {
+
+        this.$el.text('hiyajq');
+
+    }
+
+
+});
+
+
+
+module.exports = SampleView;
+
+},{"backbone":5,"jquery":6}],5:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.2
 
@@ -3760,7 +3813,7 @@ module.exports = LocationView;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":5,"underscore":6}],5:[function(require,module,exports){
+},{"jquery":6,"underscore":7}],6:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -12972,7 +13025,7 @@ return jQuery;
 
 }));
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -14526,15 +14579,19 @@ return jQuery;
 var Backbone = require('backbone'),
     $ = require('jquery'),
     Location = require('models/location'),
+    SampleView = require('views/sample');
     LocationView = require('views/location');
 
 Backbone.$ = $;
 
+
+
 module.exports = {
 
     location: Location,
-    LocationView: LocationView
+    LocationView: LocationView,
+    SampleView: SampleView
 
 };
 
-},{"backbone":4,"jquery":5,"models/location":1,"views/location":3}]},{},["app"]);
+},{"backbone":5,"jquery":6,"models/location":1,"views/location":3,"views/sample":4}]},{},["app"]);
