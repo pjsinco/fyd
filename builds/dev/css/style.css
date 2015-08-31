@@ -338,7 +338,7 @@ img {
 
 /* line 1, ../../../components/sass/layout/_row.scss */
 .row {
-  max-width: 65.375em;
+  max-width: 53.75em;
   margin-left: auto;
   margin-right: auto; }
   /* line 12, ../../../../../.rvm/gems/ruby-2.1.2/gems/susy-2.2.5/sass/susy/output/support/_clearfix.scss */
@@ -386,7 +386,7 @@ img {
   float: left;
   margin-left: 0;
   margin-right: 0; }
-@media screen and (min-width: 65.375em) {
+@media screen and (min-width: 53.75em) {
   /* line 7, ../../../components/sass/layout/_size.scss */
   .size-1-of-3 {
     width: 32.20339%;
@@ -414,7 +414,7 @@ img {
   padding-right: 5.67797%;
   position: relative;
   margin: 0 auto;
-  max-width: 65.375em; }
+  max-width: 53.75em; }
   /* line 7, ../../../components/sass/layout/_block.scss */
   .block--padding {
     padding: 1.5em 1.25em; }
@@ -423,7 +423,7 @@ img {
 .container {
   overflow: hidden;
   *zoom: 1;
-  max-width: 65.375em;
+  max-width: 53.75em;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1em; }
@@ -445,32 +445,37 @@ img {
       content: " ";
       z-index: 998; }
 
-/* line 1, ../../../components/sass/modules/_find-your-do.scss */
+/* line 4, ../../../components/sass/modules/_find-your-do.scss */
 .find-your-do input[type='text']:focus, .find-your-do textarea[type='text']:focus {
-  border: 1px solid #ffaa00;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #00eaff;
   outline: 0;
   -moz-transition-property: border;
   -o-transition-property: border;
   -webkit-transition-property: border;
   transition-property: border;
-  -moz-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
-  transition-duration: 0.2s; }
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s; }
 
-/* line 8, ../../../components/sass/modules/_find-your-do.scss */
+/* line 13, ../../../components/sass/modules/_find-your-do.scss */
 .find-your-do {
-  text-align: center; }
-  /* line 12, ../../../components/sass/modules/_find-your-do.scss */
+  text-align: center;
+  display: inline; }
+  /* line 18, ../../../components/sass/modules/_find-your-do.scss */
   .find-your-do form {
+    display: inline;
     padding: 1em;
     margin: 1em;
     background-color: #b3b3b3;
+    border-width: 2px;
     border: 1px solid fuchsia; }
-  /* line 19, ../../../components/sass/modules/_find-your-do.scss */
+  /* line 27, ../../../components/sass/modules/_find-your-do.scss */
   .find-your-do textarea {
     line-height: 1.4; }
-    /* line 22, ../../../components/sass/modules/_find-your-do.scss */
+    /* line 30, ../../../components/sass/modules/_find-your-do.scss */
     .find-your-do textarea:focus {
       -moz-transition-property: border;
       -o-transition-property: border;
@@ -482,31 +487,41 @@ img {
       transition-duration: 0.2s;
       border: 1px solid #ffaa00;
       outline: 0; }
-  /* line 30, ../../../components/sass/modules/_find-your-do.scss */
+  /* line 38, ../../../components/sass/modules/_find-your-do.scss */
   .find-your-do input {
     vertical-align: middle; }
-  /* line 34, ../../../components/sass/modules/_find-your-do.scss */
+  /* line 42, ../../../components/sass/modules/_find-your-do.scss */
   .find-your-do input, .find-your-do textarea {
-    padding: .5em;
+    padding-top: .5em;
+    padding-right: .5em;
+    padding-bottom: .5em;
+    padding-left: .75em;
     margin-bottom: 1em;
     margin-right: .5em;
-    width: 37%;
-    height: 3em;
+    width: 28%;
+    height: 3.6875em;
     font-size: 1em;
     /*display: inline-block;*/
     border-left-style: solid;
     border-top-style: solid;
     border-right-style: solid;
     border-bottom-style: solid;
-    border-width: 1px;
-    border-color: #808080;
+    border-width: 2px;
+    border-color: rgba(128, 128, 128, 0.1);
     color: #333; }
-    /* line 54, ../../../components/sass/modules/_find-your-do.scss */
+    /* line 65, ../../../components/sass/modules/_find-your-do.scss */
     .find-your-do input[type='submit'], .find-your-do textarea[type='submit'] {
-      width: 10%;
+      width: 12%;
+      margin-right: 0;
+      text-transform: uppercase;
+      font-weight: 600;
+      /*font-size: 1.125em;*/
+      letter-spacing: 1px;
       color: #fff;
-      background: #ffaa00; }
-  /* line 63, ../../../components/sass/modules/_find-your-do.scss */
+      border: none;
+      background: linear-gradient(to bottom, #ffaa00 0%, #ed9e00 100%);
+      box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.2); }
+  /* line 81, ../../../components/sass/modules/_find-your-do.scss */
   .find-your-do hr {
     margin-bottom: 1.6875em;
     margin-top: 3em;
@@ -516,22 +531,56 @@ img {
 
 /* line 1, ../../../components/sass/modules/_hero.scss */
 .hero {
-  position: relative; }
-  /* line 5, ../../../components/sass/modules/_hero.scss */
+  position: relative;
+  margin-left: auto;
+  margin-right: auto; }
+  /* line 7, ../../../components/sass/modules/_hero.scss */
+  .hero__body {
+    color: #fff;
+    font-size: 19px;
+    line-height: 1.7;
+    margin-bottom: 1.25em; }
+  /* line 14, ../../../components/sass/modules/_hero.scss */
+  .hero__image {
+    text-align: center; }
+    /* line 17, ../../../components/sass/modules/_hero.scss */
+    .hero__image--placeholder {
+      background-color: #b3b3b3;
+      width: 100%;
+      height: 500px; }
+  /* line 24, ../../../components/sass/modules/_hero.scss */
   .hero__overlay {
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    padding: 1em;
-    bottom: 0;
+    padding-top: 0;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    left: 0;
+    right: 0;
+    /*bottom: 0;*/
+    top: 0;
     width: 100%;
     background-color: rgba(255, 170, 0, 0.7); }
-  /* line 16, ../../../components/sass/modules/_hero.scss */
+  /* line 41, ../../../components/sass/modules/_hero.scss */
+  .hero__content {
+    /*text-align: center;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 53.75em; }
+  /* line 48, ../../../components/sass/modules/_hero.scss */
   .hero__title {
+    display: inline;
     margin-bottom: 1em;
+    margin-right: .5em;
     text-align: center;
-    font-weight: 200;
-    font-size: 2em; }
+    font-weight: 600;
+    font-size: 1.75em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    vertical-align: baseline;
+    color: #fff; }
 
 /* line 1, ../../../components/sass/modules/_promote.scss */
 .promote {
@@ -539,7 +588,7 @@ img {
   /*@include pad(.75 of $gridpage);*/
   overflow: hidden;
   *zoom: 1; }
-  @media screen and (min-width: 65.375em) {
+  @media screen and (min-width: 53.75em) {
     /* line 1, ../../../components/sass/modules/_promote.scss */
     .promote {
       padding-left: 5.67797%;
