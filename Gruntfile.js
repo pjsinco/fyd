@@ -13,10 +13,24 @@ module.exports = function(grunt) {
     notify: {
         sass: {
             options: {
-                title: 'Sass files built',
+                title: 'Sass',
                 message: 'Sass task complete'
             } 
         },
+
+        jade: {
+            options: {
+                title: 'Jade',
+                message: 'Jade compiled'
+            }
+        },
+
+        browserify: {
+            options: {
+                title: 'Browserify',
+                message: 'Browserified!'
+            }
+        }
     },
 
     autoprefixer: {
@@ -45,9 +59,11 @@ module.exports = function(grunt) {
             debug: true,
         },
         dev: {
-            //options: {
-                //alias: ['app:'] // make 'app' available in dev tools
-            //},
+            options: {
+                require: [ ['./components/js/main.js', {expose: 'app'} ] ]
+                //alias: ['app:'],
+                //external: ['app:']     
+            },
             src: ['components/js/main.js'],
             dest: 'builds/dev/js/bundle.js'
         },
@@ -73,12 +89,12 @@ module.exports = function(grunt) {
 
       compileHtml: {
         files: ['components/jade/*.jade'],
-        tasks: ['jade']
+        tasks: ['jade', 'notify:jade']
       },
 
       js: {
         files: ['components/js/**/*.js'],
-        tasks: ['browserify:dev']
+        tasks: ['browserify:dev', 'notify:browserify']
       }
 
     
