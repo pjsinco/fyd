@@ -6,25 +6,28 @@
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="size-1-of-1">
-          <div class="hero">
-            <div class="hero__image"></div>
-            <div class="hero__overlay">
-              <div class="hero__content">
-                <div class="hero__title">Find Your DO</div>
-                <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="find-your-do">
-                  <input id="city" name="city" type="hidden">
-                  <input id="state" name="state" type="hidden">
-                  <input id="zip" name="zip" type="hidden">
-                  <input id="lat" name="lat" type="hidden">
-                  <input id="lon" name="lon" type="hidden">
-                  <input id="sCode" name="s_code" type="hidden">
-                  <input id="specialty" placeholder="Search by name or specialty" name="specialty" type="text">
-                  <input id="location" placeholder="City, state or zip" name="location" type="text">
-                  <input type="submit" value="Go">
-                </form>
+    <div class="wrap--outer">
+      <div class="wrap--inner">
+        <header role="banner" id="top" class="promote row"></header>
+        <div class="row">
+          <div class="size-1-of-1">
+            <div class="hero">
+              <div class="hero__image"><img src="http://placehold.it/1046x562"></div>
+              <div class="hero__overlay">
+                <div class="hero__content">
+                  <div class="hero__title">Find Your DO</div>
+                  <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="find-your-do">
+                    <input id="city" name="city" type="hidden">
+                    <input id="state" name="state" type="hidden">
+                    <input id="zip" name="zip" type="hidden">
+                    <input id="lat" name="lat" type="hidden">
+                    <input id="lon" name="lon" type="hidden">
+                    <input id="sCode" name="s_code" type="hidden">
+                    <input id="specialty" placeholder="Search by name or specialty" name="specialty" type="text">
+                    <input id="location" placeholder="City, state or zip" name="location" type="text">
+                    <input type="submit" value="Go">
+                  </form>
+                </div>
               </div>
             </div>
           </div>
