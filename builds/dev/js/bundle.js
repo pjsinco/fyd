@@ -28,7 +28,7 @@ var Location = Backbone.Model.extend({
 
 module.exports = Location;
 
-},{"backbone":7}],2:[function(require,module,exports){
+},{"backbone":8}],2:[function(require,module,exports){
 var $ = require('jquery');
 
 //https://github.com/twitter/typeahead.js/issues/872
@@ -1817,10 +1817,11 @@ module.exports = (function($) {
     })();
 })(window.jQuery);
 
-},{"jquery":8}],3:[function(require,module,exports){
+},{"jquery":9}],3:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
+    typeahead = require('typeahead.0.10.5'),
     Location = require('models/location');
 
 var LocationForm = Backbone.View.extend({
@@ -1957,7 +1958,7 @@ var LocationForm = Backbone.View.extend({
 
 module.exports = LocationForm;
 
-},{"backbone":7,"jquery":8,"models/location":1,"underscore":9}],4:[function(require,module,exports){
+},{"backbone":8,"jquery":9,"models/location":1,"typeahead.0.10.5":2,"underscore":10}],4:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -1986,7 +1987,7 @@ var LocationView = Backbone.View.extend({
 
 module.exports = LocationView;
 
-},{"backbone":7,"jquery":8,"typeahead.0.10.5":2,"underscore":9}],5:[function(require,module,exports){
+},{"backbone":8,"jquery":9,"typeahead.0.10.5":2,"underscore":10}],5:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery');
 
@@ -2007,7 +2008,42 @@ var SampleView = Backbone.View.extend({
 
 module.exports = SampleView;
 
-},{"backbone":7,"jquery":8}],6:[function(require,module,exports){
+},{"backbone":8,"jquery":9}],6:[function(require,module,exports){
+var Backbone = require('backbone'),
+    _ = require('underscore'),
+    $ = require('jquery'),
+    Location = require('models/location'),
+    LocationFormView = require('views/location-form'),
+    SpecialtyView = require('views/specialty');
+
+var SearchForm = Backbone.View.extend({
+
+    el: '#findYourDO',
+
+    initialize: function() {
+
+        var location = new Location();
+        var locationFormView = new LocationFormView({ model: location });
+        locationFormView.render();
+
+        var specialtyView = new SpecialtyView();
+        specialtyView.render();
+    },
+
+    render: function() {
+        console.log('rendering search form');
+    },
+
+    events: {
+
+    }
+
+});
+
+module.exports = SearchForm;
+
+
+},{"backbone":8,"jquery":9,"models/location":1,"underscore":10,"views/location-form":3,"views/specialty":7}],7:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -2118,7 +2154,7 @@ var SpecialtyView = Backbone.View.extend({
 
 module.exports = SpecialtyView;
 
-},{"backbone":7,"jquery":8,"typeahead.0.10.5":2,"underscore":9}],7:[function(require,module,exports){
+},{"backbone":8,"jquery":9,"typeahead.0.10.5":2,"underscore":10}],8:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.2
 
@@ -4015,7 +4051,7 @@ module.exports = SpecialtyView;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":8,"underscore":9}],8:[function(require,module,exports){
+},{"jquery":9,"underscore":10}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -13227,7 +13263,7 @@ return jQuery;
 
 }));
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -14780,23 +14816,22 @@ return jQuery;
 },{}],"app":[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
-    Location = require('models/location'),
+    SearchForm = require('views/search-form');
+
+// TODO delete - for debugging only
+var Location = require('models/location'),
     SampleView = require('views/sample'),
     LocationView = require('views/location'),
-    SpecialtyView = require('views/specialty'),
+    SpecialtyView = require('views/specialty');
     LocationFormView = require('views/location-form');
 
 Backbone.$ = $;
 
 $(function () {
 
-    var location = new Location();
+    var searchForm = new SearchForm({ el: '#findYourDo' });
+    searchForm.render();
 
-    var locationFormView = new LocationFormView({ model: location });
-    locationFormView.render();
-
-    var specialtyView = new SpecialtyView();
-    specialtyView.render();
 });
 
 
@@ -14807,8 +14842,9 @@ module.exports = {
     LocationView: LocationView,
     SpecialtyView: SpecialtyView,
     LocationFormView: LocationFormView,
-    SampleView: SampleView
+    SampleView: SampleView,
+    SearchForm: SearchForm
 
 };
 
-},{"backbone":7,"jquery":8,"models/location":1,"views/location":4,"views/location-form":3,"views/sample":5,"views/specialty":6}]},{},["app"]);
+},{"backbone":8,"jquery":9,"models/location":1,"views/location":4,"views/location-form":3,"views/sample":5,"views/search-form":6,"views/specialty":7}]},{},["app"]);

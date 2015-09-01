@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
+    typeahead = require('typeahead.0.10.5'),
     Location = require('models/location');
 
 var LocationForm = Backbone.View.extend({
