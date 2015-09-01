@@ -24,7 +24,12 @@ var SearchForm = Backbone.View.extend({
     },
 
     events: {
+        'submit': 'formSubmit'
+    },
 
+    formSubmit: function(evt) {
+        evt.preventDefault();
+        console.log('form submitted');
     }
 
 });
