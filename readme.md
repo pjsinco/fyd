@@ -320,3 +320,8 @@ locations table
 #####Tue Sep  1 07:34:25 2015 CDT
 * [Backbone patterns](http://ricostacruz.com/backbone-patterns/)
     ```Here, I try to document the good practices that our team has learned along the way building Backbone applications.```
+
+* Make Typeahead stay open to debug CSS. In console:
+    ```
+    jQuery("#location").eq(0).val("M").trigger("input");
+    ```

@@ -14689,6 +14689,15 @@ var Backbone = require('backbone'),
 
 Backbone.$ = $;
 
+$(function () {
+
+    var locationFormView = new LocationFormView();
+    locationFormView.render();
+
+    var specialtyView = new SpecialtyView();
+    specialtyView.render();
+});
+
 
 
 module.exports = {

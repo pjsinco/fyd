@@ -44,9 +44,11 @@ $input-border-color: rgba($gray,.1);
         padding-right: .5em;
         padding-bottom: .5em;
         padding-left: .75em;
-        margin-bottom: 1em;
+        /*margin-bottom: 1em;*/
+        margin-bottom: 0;
         margin-right: .5em;
-        width: 28%;
+        /*width: 28%;*/
+        width: 15em;
         height: 3.6875em;
         font-size: 1em;
         /*display: inline-block;*/
@@ -63,7 +65,7 @@ $input-border-color: rgba($gray,.1);
         }
 
         &[type='submit'] {
-            width: 12%;
+            width: 3em;
             margin-right: 0;
             text-transform: uppercase;
             font-weight: $fontbold;
