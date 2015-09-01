@@ -316,3 +316,7 @@ locations table
 * StackOverflow: [Laravel 5 + AngularJS Cross Domain CORS](http://stackoverflow.com/questions/29045413/laravel-5-angularjs-cross-domain-cors)
 * StackOverflow: [Backbone JS: can one view trigger updates in other views?](http://stackoverflow.com/questions/9984859/backbone-js-can-one-view-trigger-updates-in-other-views)
 * Blog: [High Level Steps to Setting Up Twitter Typeahead.js to Work With Backbone.js](http://blog.jasonkim.ca/blog/2014/08/02/high-level-steps-to-setting-up-twitter-typeahead-dot-js/)
+
+#####Tue Sep  1 07:34:25 2015 CDT
+* [Backbone patterns](http://ricostacruz.com/backbone-patterns/)
+    ```Here, I try to document the good practices that our team has learned along the way building Backbone applications.```
