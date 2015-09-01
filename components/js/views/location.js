@@ -7,7 +7,7 @@ var LocationView = Backbone.View.extend({
 
     el: $('#location'),
     
-    twitterTypeahead: function() {
+    autocomplete: function() {
 
         var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
             'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
@@ -53,7 +53,7 @@ var LocationView = Backbone.View.extend({
     },
 
     render: function() {
-        this.twitterTypeahead();
+        this.autocomplete();
     },
 
     initialize: function() {

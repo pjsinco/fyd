@@ -306,3 +306,5 @@ locations table
 #####Mon Aug 31 05:46:39 2015 CDT
 * Gist: [bootstrap-typeahead-backbone.js](https://gist.github.com/anonymous/1745614)
 * StackExchange: [Simple registration form with Backbone](http://codereview.stackexchange.com/questions/41192/simple-registration-form-with-backbone)
+* StackOverflow: [“No 'Access-Control-Allow-Origin' header is present on the requested resource”](http://stackoverflow.com/questions/20035101/no-access-control-allow-origin-header-is-present-on-the-requested-resource)
+* StackOverflow: [Laravel 5 + AngularJS Cross Domain CORS](http://stackoverflow.com/questions/29045413/laravel-5-angularjs-cross-domain-cors)

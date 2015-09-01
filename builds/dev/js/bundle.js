@@ -28,7 +28,7 @@ var Location = Backbone.Model.extend({
 
 module.exports = Location;
 
-},{"backbone":6}],2:[function(require,module,exports){
+},{"backbone":7}],2:[function(require,module,exports){
 var $ = require('jquery');
 
 //https://github.com/twitter/typeahead.js/issues/872
@@ -1817,7 +1817,7 @@ module.exports = (function($) {
     })();
 })(window.jQuery);
 
-},{"jquery":7}],3:[function(require,module,exports){
+},{"jquery":8}],3:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery');
@@ -1872,7 +1872,7 @@ var LocationForm = Backbone.View.extend({
 
 module.exports = LocationForm;
 
-},{"backbone":6,"jquery":7,"underscore":8}],4:[function(require,module,exports){
+},{"backbone":7,"jquery":8,"underscore":9}],4:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -1882,7 +1882,7 @@ var LocationView = Backbone.View.extend({
 
     el: $('#location'),
     
-    twitterTypeahead: function() {
+    autocomplete: function() {
 
         var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
             'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
@@ -1928,7 +1928,7 @@ var LocationView = Backbone.View.extend({
     },
 
     render: function() {
-        this.twitterTypeahead();
+        this.autocomplete();
     },
 
     initialize: function() {
@@ -1940,7 +1940,7 @@ var LocationView = Backbone.View.extend({
 
 module.exports = LocationView;
 
-},{"backbone":6,"jquery":7,"typeahead.0.10.5":2,"underscore":8}],5:[function(require,module,exports){
+},{"backbone":7,"jquery":8,"typeahead.0.10.5":2,"underscore":9}],5:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery');
 
@@ -1961,7 +1961,65 @@ var SampleView = Backbone.View.extend({
 
 module.exports = SampleView;
 
-},{"backbone":6,"jquery":7}],6:[function(require,module,exports){
+},{"backbone":7,"jquery":8}],6:[function(require,module,exports){
+var Backbone = require('backbone'),
+    $ = require('jquery'),
+    _ = require('underscore'),
+    typeahead = require('typeahead.0.10.5');
+
+var SpecialtyView = Backbone.View.extend({
+
+    el: $('#specialty'),
+
+    autocomplete: function() {
+        
+        var specialties = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            limit: 7,
+            prefetch: {
+                url: 'http://lookup.dev/api/v1/specialties',
+                filter: function(obj) {
+                    console.log(obj['data']);
+                    return _.map(obj['data'], function(specialty) {
+                        return specialty;
+                    });
+                }
+            }
+        });
+
+        specialties.initialize();
+
+        this.$el.typeahead({
+            hint: false,
+            highlight: true,
+            minLength: 2,
+            limit: 7,
+        }, {
+            name: 'specialties',
+            source: specialties.ttAdapter(),
+            display: 'name',
+            templates: {
+                header: '<h5 class="typeahead-subhead">Specialties</h5>',
+                suggestion: function(suggestion) {
+                    // TODO
+                    // remove hard-coded url
+                    return '<div><a href="#">' + suggestion.name + "</a></div>";
+                }
+            }
+        });
+        
+    },
+
+    render: function() {
+        this.autocomplete();
+    }
+
+});
+
+module.exports = SpecialtyView;
+
+},{"backbone":7,"jquery":8,"typeahead.0.10.5":2,"underscore":9}],7:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.2
 
@@ -3858,7 +3916,7 @@ module.exports = SampleView;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":7,"underscore":8}],7:[function(require,module,exports){
+},{"jquery":8,"underscore":9}],8:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -13070,7 +13128,7 @@ return jQuery;
 
 }));
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -14626,6 +14684,7 @@ var Backbone = require('backbone'),
     Location = require('models/location'),
     SampleView = require('views/sample'),
     LocationView = require('views/location'),
+    SpecialtyView = require('views/specialty'),
     LocationFormView = require('views/location-form');
 
 Backbone.$ = $;
@@ -14636,9 +14695,10 @@ module.exports = {
 
     location: Location,
     LocationView: LocationView,
+    SpecialtyView: SpecialtyView,
     LocationFormView: LocationFormView,
     SampleView: SampleView
 
 };
 
-},{"backbone":6,"jquery":7,"models/location":1,"views/location":4,"views/location-form":3,"views/sample":5}]},{},["app"]);
+},{"backbone":7,"jquery":8,"models/location":1,"views/location":4,"views/location-form":3,"views/sample":5,"views/specialty":6}]},{},["app"]);
