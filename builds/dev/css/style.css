@@ -513,7 +513,7 @@ img {
     color: #333; }
     /* line 67, ../../../components/sass/modules/_find-your-do.scss */
     .find-your-do input[type='submit'], .find-your-do textarea[type='submit'] {
-      width: 3em;
+      width: 6.5em;
       margin-right: 0;
       text-transform: uppercase;
       font-weight: 600;
