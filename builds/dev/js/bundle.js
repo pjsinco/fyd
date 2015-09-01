@@ -2077,7 +2077,7 @@ var SpecialtyView = Backbone.View.extend({
                 suggestion: function(suggestion) {
                     // TODO
                     // remove hard-coded url
-                    return '<div><a href="#">' + suggestion.name + "</a></div>";
+                    return '<div>' + suggestion.name + "</div>";
                 }
             }
         });

@@ -2,6 +2,17 @@
     line-height: 3.5;
 }
 
+.typeahead-subhead {
+    margin-bottom: 0;
+    padding: 3px 20px;
+    font-size: .75em;
+    line-height: 24px;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $fontcolorlighter;
+}
+
 .tt {
 
     &-input { /* UPDATE: newer versions use tt-input instead of tt-query */
