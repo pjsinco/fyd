@@ -1,34 +1,13 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    Location = require('models/location');
 
 var LocationForm = Backbone.View.extend({
 
     el: $('#location'),
 
     autocomplete: function() {
-
-//        var stateList = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-//            'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-//            'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-//            'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-//            'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-//            'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-//            'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-//            'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-//            'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-//        ];
-//
-//        var states = new Bloodhound({
-//            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('val'),
-//            queryTokenizer: Bloodhound.tokenizers.whitespace,
-//            local: _.map(stateList, function(state) { 
-//                return { val: state };
-//            })
-//        });
-//
-//        states.initialize();
-
         var locationInput = this.$el;
     
         var locations = new Bloodhound({
@@ -42,16 +21,16 @@ var LocationForm = Backbone.View.extend({
                 },
                 filter: function(locations) {
                     var userTyped = locationInput.typeahead('val');
-                    return $.map(locations, function(d) {
+                    return $.map(locations, function(location) {
                         // user typed a city
                         if (isNaN(userTyped)) {
                             
                             // Keep the city, state list unique
-                            var unique = _.uniq(d, false, function(item) {
+                            var uniqueLocations = _.uniq(location, false, function(item) {
                                 return [item.city, item.state].join();
                             });
     
-                            return $.map(unique, function(e) {
+                            return $.map(uniqueLocations, function(e) {
                                 return {
                                     city: e.city,
                                     state: e.state,
@@ -102,23 +81,56 @@ var LocationForm = Backbone.View.extend({
             }
         });
     
-//        this.$el.typeahead({
-//            hint: true,
-//            highlight: true,
-//            minLength: 1
-//        }, {
-//            displayKey: 'val',
-//            source: states.ttAdapter()
-//        });
 
-        this.$el.on('typeahead:opened', function() {
-            console.log('opened autocomplete');
-        })
+        //this.$el.on('typeahead:opened', function() {
+            //console.log('opened autocomplete');
+        //})
+    },
+
+    events: {
+        'click': 'clickHandler',
+        'typeahead:opened': 'opened',
+        'focus': 'focused',
+        'typeahead:selected': 'setLocation',
+        'typeahead:autocompleted': 'setLocation',
+        'typeahead:closed': 'closed',
+    },
+    
+    closed: function(e) {
+        console.log(e.type);
+        console.log('val: ' + this.$el.typeahead('val'));
+    },
+
+    setLocation: function(evt, suggestion, name) {
+        console.log(evt.type);
+        this.model = new Location(suggestion);
+        console.log('location set');
+        console.dir(this.model.toJSON());
+        //console.log(this.model.toJSON());
+    },
+
+    focused: function(e) {
+        console.log('focused');
+    },
+
+    setNewLocation: {
         
+    },
+
+    opened: function(e) {
+        console.log('we have an opened event');
+    },
+
+    clickHandler: function(e) {
+        console.log('click');
     },
 
     render: function() {
         this.autocomplete();
+    },
+
+    isZipCode: function(query) {
+        return new RegExp(/^\d{5}$/).test(query);
     }
 
 });

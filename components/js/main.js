@@ -10,7 +10,9 @@ Backbone.$ = $;
 
 $(function () {
 
-    var locationFormView = new LocationFormView();
+    var location = new Location();
+
+    var locationFormView = new LocationFormView({ model: location });
     locationFormView.render();
 
     var specialtyView = new SpecialtyView();
