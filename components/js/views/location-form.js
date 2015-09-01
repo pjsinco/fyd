@@ -42,7 +42,7 @@ var LocationForm = Backbone.View.extend({
                             });
                         } else {
                         // user typed a zip, so let's include zips
-                            return $.map(d, function(e) {
+                            return $.map(location, function(e) {
                                 return {
                                     city: e.city,
                                     state: e.state,
