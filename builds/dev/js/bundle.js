@@ -2045,7 +2045,43 @@ var SpecialtyView = Backbone.View.extend({
     el: $('#specialty'),
 
     autocomplete: function() {
-        
+
+        var physicians = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            //limit: 7,
+            remote: {
+                url: 'api/v1/physicians/search',
+                replace: function(url, uriEncodedQuery) {
+                    // Grab the location from the hidden form fields
+                    var loc = {
+                        city: $('#city').val(),
+                        state: $('#state').val(),
+                        zip: $('#zip').val(),
+                        lat: $('#lat').val(),
+                        lon: $('#lon').val()
+                    };
+                    var params = $.param(loc);
+                    return url + '?name=' + uriEncodedQuery + '&' + params;
+                },
+                filter: function(physicians) {
+                    return $.map(physicians, function(d) {
+                        return $.map(d, function(e) {
+                            return {
+                                first_name: e.first_name,
+                                last_name: e.last_name,
+                                designation: e.designation,
+                                city: e.city,
+                                state: e.state,
+                                id: e.id,
+                                value: e.full_name
+                            };
+                        });
+                    });
+                }
+            }
+        });
+    
         var specialties = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -2061,6 +2097,7 @@ var SpecialtyView = Backbone.View.extend({
             }
         });
 
+        physicians.initialize();
         specialties.initialize();
 
         this.$el.typeahead({
@@ -2080,8 +2117,24 @@ var SpecialtyView = Backbone.View.extend({
                     return '<div>' + suggestion.name + "</div>";
                 }
             }
+        }, {
+            name: 'physicians',
+            //limit: 7,
+            display: 'value',
+            source: physicians.ttAdapter(),
+            templates: {
+                header: '<h5 class="typeahead-subhead">Physicians near [city, state]</h5>',
+                suggestion: function(data) {
+                    // TODO
+                    // remove hard-coded url
+                    return '<div><a href="http://lookup.dev/physicians/' + 
+                        data.id + '">' + data.first_name + ' ' + data.last_name + ', ' +
+                        data.designation + '; ' + data.city + ', ' + data.state +
+                        '</a></div>';
+                }
+            }
         });
-        
+
     },
 
     render: function() {
