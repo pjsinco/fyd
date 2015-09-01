@@ -48,6 +48,12 @@ locations table
 * Service: [Geocodio](http://geocod.io/)
     * for looking up longitude, latitude based on address
 
+#Typeahead
+* 0.10.5:
+    * [Bloodhound docs](https://github.com/twitter/typeahead.js/blob/f835e162ec4551479114fd245c907ae032de692a/doc/bloodhound.md)
+    * [Typeahead docs](https://github.com/twitter/typeahead.js/blob/a9ac72afffdc88496700f7b26342b77b191f9a0a/doc/jquery_typeahead.md)
+    * Blog: [Several 0.10.5 examples](http://www.omicronsolution.com/blog_details?bid=create-an-autocomplete-input-box-with-twitter-bootstrap-typeahead)
+
 #Autocomplete
 * jsfiddle: [example in vanilla js](http://jsfiddle.net/e6220t92/2/)
     * Stack: [Implementing a AutoComplete dropdown in plain JavaScript](http://stackoverflow.com/questions/28842355/implementing-a-autocomplete-dropdown-in-plain-javascript)
@@ -308,3 +314,5 @@ locations table
 * StackExchange: [Simple registration form with Backbone](http://codereview.stackexchange.com/questions/41192/simple-registration-form-with-backbone)
 * StackOverflow: [“No 'Access-Control-Allow-Origin' header is present on the requested resource”](http://stackoverflow.com/questions/20035101/no-access-control-allow-origin-header-is-present-on-the-requested-resource)
 * StackOverflow: [Laravel 5 + AngularJS Cross Domain CORS](http://stackoverflow.com/questions/29045413/laravel-5-angularjs-cross-domain-cors)
+* StackOverflow: [Backbone JS: can one view trigger updates in other views?](http://stackoverflow.com/questions/9984859/backbone-js-can-one-view-trigger-updates-in-other-views)
+* Blog: [High Level Steps to Setting Up Twitter Typeahead.js to Work With Backbone.js](http://blog.jasonkim.ca/blog/2014/08/02/high-level-steps-to-setting-up-twitter-typeahead-dot-js/)
