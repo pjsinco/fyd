@@ -6,25 +6,19 @@ var Location = Backbone.Model.extend({
     urlRoot: 'http://lookup.dev/api/v1/locations',
 
     defaults: {
-        city: '',
-        state: '', 
-        zip: '',
-        lat: 0.0,
-        lon: 0.0
-    },
-
-    includeZip: function(attributes, options) {
-        
+        city: undefined,
+        state: undefined, 
+        zip: undefined,
+        lat: undefined,
+        lon: undefined
     },
 
     initialize: function(attributes, options) {
 
-        console.log('location init\'d');
-        console.log(this.toJSON());
-
-        if (options) {
+        if (options && options.url) {
             this.urlRoot = options.url;
         }
+
     },
 
     validate: function(fields) {
@@ -1908,8 +1902,16 @@ var LocationForm = Backbone.View.extend({
     },
     
     setLocation: function(evt, suggestion) {
-        //this.model = new Location(suggestion);
-        this.model.set(suggestion);
+        console.log('suggestion has zip: ' + 
+            (suggestion.hasOwnProperty('zip') ? 'Yes' : 'No'));
+
+        if (!suggestion.hasOwnProperty('zip')) {
+            _.defaults(suggestion, { zip: undefined })
+        }
+
+        this.model.set(suggestion, { 
+            includeZip: suggestion.hasOwnProperty('zip') 
+        });
     },
 
     /**
@@ -1955,9 +1957,17 @@ var LocationForm = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.typeahead('val', this.model.get('city') + ', ' + 
-            this.model.get('state') + ' ' + this.model.get('zip')); 
+        this.$el.typeahead('val', this.template(this.model.toJSON()));
+        
+        //this.$el.typeahead('val', this.model.get('city') + ', ' + 
+            //this.model.get('state') + ' ' + this.model.get('zip')); 
     },
+
+    template: _.template(
+        '<%= city %>, <%= state %><% if (typeof zip !== "undefined") { %>' +
+            ' <%= zip %>' +
+        '<% } %>'
+    ),
 
     isZipCode: function(query) {
         return new RegExp(/^\d{5}$/).test(query);

@@ -5,25 +5,19 @@ var Location = Backbone.Model.extend({
     urlRoot: 'http://lookup.dev/api/v1/locations',
 
     defaults: {
-        city: '',
-        state: '', 
-        zip: '',
-        lat: 0.0,
-        lon: 0.0
-    },
-
-    includeZip: function(attributes, options) {
-        
+        city: undefined,
+        state: undefined, 
+        zip: undefined,
+        lat: undefined,
+        lon: undefined
     },
 
     initialize: function(attributes, options) {
 
-        console.log('location init\'d');
-        console.log(this.toJSON());
-
-        if (options) {
+        if (options && options.url) {
             this.urlRoot = options.url;
         }
+
     },
 
     validate: function(fields) {

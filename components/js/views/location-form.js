@@ -8,7 +8,6 @@ var LocationForm = Backbone.View.extend({
 
     el: '#location',
     engine: {},
-    includeZip: false, // Whether we need to render the zip
 
     initialize: function() {
         this.initAutocomplete();
@@ -17,7 +16,6 @@ var LocationForm = Backbone.View.extend({
 
         var options = {
             url: 'http://lookup.dev/api/v1/locations/random', 
-            includeZip: true
         };
 
         this.model = new Location({}, options);
@@ -64,7 +62,13 @@ var LocationForm = Backbone.View.extend({
     },
     
     setLocation: function(evt, suggestion) {
-        //this.model = new Location(suggestion);
+
+        // User didn't include the zip, so we're tossing out
+        // that level of precision
+        if (!suggestion.hasOwnProperty('zip')) {
+            _.defaults(suggestion, { zip: undefined })
+        }
+
         this.model.set(suggestion);
     },
 
@@ -111,9 +115,17 @@ var LocationForm = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.typeahead('val', this.model.get('city') + ', ' + 
-            this.model.get('state') + ' ' + this.model.get('zip')); 
+        this.$el.typeahead('val', this.template(this.model.toJSON()));
+        
+        //this.$el.typeahead('val', this.model.get('city') + ', ' + 
+            //this.model.get('state') + ' ' + this.model.get('zip')); 
     },
+
+    template: _.template(
+        '<%= city %>, <%= state %><% if (typeof zip !== "undefined") { %>' +
+            ' <%= zip %>' +
+        '<% } %>'
+    ),
 
     isZipCode: function(query) {
         return new RegExp(/^\d{5}$/).test(query);

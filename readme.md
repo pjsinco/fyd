@@ -355,4 +355,11 @@ var groupPrincipals = new Bloodhound({
 });
 ```
 > And it works fine (so far) in stock 0.9! I agree it would be nice if bloodhound emitted its own events, but as right now it doesn't emit any events, adding events just for this seems like overkill, if the above facility to hook into the jQuery ajax object's callbacks works fine. Or if there's something I'm missing with the above solution, do please mention it!
+
+#####Wed Sep  2 06:10:13 2015 CDT
+* StackOverflow: [How to use if statements in underscore.js templates?](http://stackoverflow.com/questions/7230470/how-to-use-if-statements-in-underscore-js-templates)
+    ```js
+    <% if (typeof(date) !== "undefined") { %>
+        <span class="date"><%= date %></span>
+    <% } %>}>
     ```
