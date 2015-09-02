@@ -3,14 +3,17 @@
 }
 
 .typeahead-subhead {
+    margin-top: 0;
     margin-bottom: 0;
-    padding: 3px 20px;
+    padding: .125em 1.25em;
     font-size: .75em;
     line-height: 24px;
     text-align: left;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: $fontcolorlighter;
+    color: $white;
+    /*color: $fontcolorlighter;*/
+    background-color: $primarycolor;
 }
 
 .tt {
@@ -39,8 +42,9 @@
     
     &-suggestion {
         padding: 3px 20px;
-        font-size: 18px;
-        line-height: 24px;
+        font-size: .875em;
+        font-weight: 600;
+        line-height: 1.5;
         text-align: left;
     }
     
@@ -48,6 +52,10 @@
         color: #fff;
         background-color: $secondarycolor;
     
+    }
+
+    &-suggestion a {
+        color: inherit;
     }
     
     &-suggestion p {
