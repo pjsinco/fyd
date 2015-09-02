@@ -12,6 +12,10 @@ var Location = Backbone.Model.extend({
         lon: 0.0
     },
 
+    includeZip: function(attributes, options) {
+        
+    },
+
     initialize: function(attributes, options) {
 
         console.log('location init\'d');

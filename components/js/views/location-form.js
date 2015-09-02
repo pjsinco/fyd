@@ -7,16 +7,21 @@ var Backbone = require('backbone'),
 var LocationForm = Backbone.View.extend({
 
     el: '#location',
+    engine: {},
+    includeZip: false, // Whether we need to render the zip
 
     initialize: function() {
+        this.initAutocomplete();
+
         var self = this;
-        this.autocomplete();
 
         var options = {
             url: 'http://lookup.dev/api/v1/locations/random', 
+            includeZip: true
         };
 
         this.model = new Location({}, options);
+
         this.model.fetch({
             success: function(response) {
                 self.$el.typeahead('val', self.model.get('city') + ', ' + 
@@ -25,12 +30,18 @@ var LocationForm = Backbone.View.extend({
         });
 
         this.listenTo(this.model, 'change', this.logChangeEvent);
+        this.listenTo(this.model, 'change', this.logEvent);
+    },
+
+    logEvent: function(model, options) {
+        alert('Model changed to ' + this.model.get('city') + ', ' + 
+            this.model.get('state'));
     },
 
     logChangeEvent: function(model, options) {
         console.log('change fired');
-        console.debug(model);
-        console.debug(options);
+        //console.debug(model);
+        //console.debug(options);
     },
 
     events: {
@@ -48,66 +59,70 @@ var LocationForm = Backbone.View.extend({
     },
 
     validateLocation: function() {
-
-        var val = this.$el.typeahead('val');
-        console.log('val grabbed in parse input: ' + val);
+        console.log('closed');
+        this._resolve();
     },
     
     setLocation: function(evt, suggestion) {
-        this.model = new Location(suggestion);
+        //this.model = new Location(suggestion);
+        this.model.set(suggestion);
     },
 
-    modelChanged: function() {
-        console.log('model changed');
-    },
-
-    resolve: function() {
+    /**
+     * Attempts to resolve a location that was not autocompleted.
+     *
+     */
+    _resolve: function() {
+        var self = this;
         var value = this.$el.typeahead('val');
-        console.log('in resolve: ' + value);
+
+        console.log('Trying to resolve: ' + value);
+
+        // value is a string of an unautocompleted location, like 'king, w'
+        this.engine.get(value, function(suggestions) {
+
+            var uniqueLocations = _.uniq(suggestions, false, function(item) {
+                return [item.city, item.state].join();
+            });
+
+            if (uniqueLocations.length == 1) {
+                console.log('resolved');
+                self.setLocation(null, uniqueLocations[0]);
+                self.render();
+                
+            } else {
+                 console.log('unresolved');
+            }
+            _.each(uniqueLocations, function(loc) { 
+                console.log(loc); 
+            });
+        });
     },
     
     closed: function(e) {
-        console.log(e.type);
-        console.dir(this.location.toJSON());
+        // TODO 
+        // do a check before calling resolve()
+        // has the input changed since it's been set?
         this.resolve();
     },
-
-//    setLocation: function(evt, suggestion, name) {
-//        console.log(evt.type);
-//        this.model = new Location(suggestion);
-//        console.log('location set');
-//        console.dir(this.model.toJSON());
-//        //console.log(this.model.toJSON());
-//    },
 
     focused: function(e) {
         console.log('focused');
     },
 
-    setNewLocation: {
-        
-    },
-
-    opened: function(e) {
-        console.log('we have an opened event');
-    },
-
-    clickHandler: function(e) {
-        console.log('click');
-    },
-
     render: function() {
-        //this.$el.
+        this.$el.typeahead('val', this.model.get('city') + ', ' + 
+            this.model.get('state') + ' ' + this.model.get('zip')); 
     },
 
     isZipCode: function(query) {
         return new RegExp(/^\d{5}$/).test(query);
     },
 
-    autocomplete: function() {
+    _initBloodhound: function() {
         var locationInput = this.$el;
     
-        var locations = new Bloodhound({
+        this.engine = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             limit: 10,
@@ -153,8 +168,10 @@ var LocationForm = Backbone.View.extend({
                 }
             }
         }); 
-
-        locations.initialize();
+    },
+    
+    _initTypeahead: function() {
+        var locationInput = this.$el;
 
         this.$el.typeahead({
             hint: true,
@@ -163,7 +180,7 @@ var LocationForm = Backbone.View.extend({
         }, {
             name: 'engine',
             display: 'value',
-            source: locations.ttAdapter(),
+            source: this.engine.ttAdapter(),
             templates: {
                 suggestion: function(data) {
                     var userTyped = locationInput.typeahead('val');
@@ -177,12 +194,14 @@ var LocationForm = Backbone.View.extend({
                 //engine: Hogan
             }
         });
+    },
     
-
-        //this.$el.on('typeahead:opened', function() {
-            //console.log('opened autocomplete');
-        //})
+    initAutocomplete() {
+        this._initBloodhound();
+        this.engine.initialize();
+        this._initTypeahead();
     }
+
 });
 
 module.exports = LocationForm;
