@@ -8,6 +8,7 @@ var LocationForm = Backbone.View.extend({
 
     el: '#location',
     engine: {},
+    isSet: false,
 
     initialize: function() {
         this.initAutocomplete();
@@ -19,19 +20,18 @@ var LocationForm = Backbone.View.extend({
         };
 
         this.model = new Location({}, options);
+        this.listenTo(this.model, 'change', this.logChangeEvent);
 
         this.model.fetch({
             success: function(response) {
-                self.$el.typeahead('val', self.model.get('city') + ', ' + 
-                    self.model.get('state') + ' ' + self.model.get('zip')); 
+                self.render();
+                self.triggerChangeEvent();
             }
         });
 
-        this.listenTo(this.model, 'change', this.logChangeEvent);
-        this.listenTo(this.model, 'change', this.logEvent);
     },
 
-    logEvent: function(model, options) {
+    logModelChange: function(model, options) {
         alert('Model changed to ' + this.model.get('city') + ', ' + 
             this.model.get('state'));
     },
@@ -42,13 +42,36 @@ var LocationForm = Backbone.View.extend({
         //console.debug(options);
     },
 
+    logError: function() {
+        console.log('error');
+    },
+
     events: {
-        //'click': 'clickHandler',
-        //'typeahead:opened': 'opened',
-        //'focus': 'focused',
+        'focus': 'focusHandler',
+        'click': 'clickHandler',
+        'typeahead:opened': 'opened',
+        'error': 'logError',
         'typeahead:selected': 'setLocation',
         'typeahead:autocompleted': 'setLocation',
-        'typeahead:closed': 'validateLocation',
+        'typeahead:closed': 'closed',
+        'input': 'inputHandler'
+    },
+
+    focusHandler: function() {
+        console.log('focus');
+    },
+
+    clickHandler: function() {
+        console.log('click');
+    },
+
+    inputHandler: function() {
+        console.log('input changed');
+        this.isSet = false;
+    },
+
+    opened: function() {
+        console.log('typehaead opened');
     },
 
     parseInput: function() {
@@ -56,11 +79,10 @@ var LocationForm = Backbone.View.extend({
         console.log('val grabbed in parse input: ' + val);
     },
 
-    validateLocation: function() {
-        console.log('closed');
-        this._resolve();
+    triggerChangeEvent: function() {
+        this.trigger('change', this.model);
     },
-    
+
     setLocation: function(evt, suggestion) {
 
         // User didn't include the zip, so we're tossing out
@@ -69,7 +91,9 @@ var LocationForm = Backbone.View.extend({
             _.defaults(suggestion, { zip: undefined })
         }
 
+        this.isSet = true;
         this.model.set(suggestion);
+        this.triggerChangeEvent();
     },
 
     /**
@@ -96,6 +120,8 @@ var LocationForm = Backbone.View.extend({
                 
             } else {
                  console.log('unresolved');
+                 self.model.clear()
+                 self.trigger('error', self.model);
             }
             _.each(uniqueLocations, function(loc) { 
                 console.log(loc); 
@@ -104,10 +130,13 @@ var LocationForm = Backbone.View.extend({
     },
     
     closed: function(e) {
+        console.log('resolving');
         // TODO 
         // do a check before calling resolve()
         // has the input changed since it's been set?
-        this.resolve();
+        //if (this.model.hasChanged()) {
+        this._resolve();
+        //}
     },
 
     focused: function(e) {
@@ -116,9 +145,8 @@ var LocationForm = Backbone.View.extend({
 
     render: function() {
         this.$el.typeahead('val', this.template(this.model.toJSON()));
-        
-        //this.$el.typeahead('val', this.model.get('city') + ', ' + 
-            //this.model.get('state') + ' ' + this.model.get('zip')); 
+
+        return this;
     },
 
     template: _.template(

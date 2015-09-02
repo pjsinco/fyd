@@ -21,7 +21,7 @@ var Location = Backbone.Model.extend({
     },
 
     validate: function(fields) {
-
+        
     },
     
     // http://stackoverflow.com/questions/18383205/

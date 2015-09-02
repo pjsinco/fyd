@@ -14,7 +14,7 @@ var SpecialtyView = Backbone.View.extend({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             //limit: 7,
             remote: {
-                url: 'api/v1/physicians/search',
+                url: 'http://lookup.dev/api/v1/physicians/search',
                 replace: function(url, uriEncodedQuery) {
                     // Grab the location from the hidden form fields
                     var loc = {
@@ -63,11 +63,28 @@ var SpecialtyView = Backbone.View.extend({
         physicians.initialize();
         specialties.initialize();
 
+        var compiledSuggestion = _.template(
+            '<div><a href="#"><strong><%= first_name %> <%= last_name %>' +
+            '</strong>, <%= designation %>; <%= city %>, ' +
+            '<%= state %></a></div>'
+        );
+
         this.$el.typeahead({
             hint: false,
             highlight: true,
             minLength: 2,
             limit: 7,
+        }, {
+            name: 'physicians',
+            //limit: 7,
+            display: 'value',
+            source: physicians.ttAdapter(),
+            templates: {
+                header: '<h5 class="typeahead-subhead">Physicians near ' +
+                    '[city, state]</h5>',
+                suggestion: compiledSuggestion,
+                engine: _
+            },
         }, {
             name: 'specialties',
             source: specialties.ttAdapter(),
@@ -78,22 +95,6 @@ var SpecialtyView = Backbone.View.extend({
                     // TODO
                     // remove hard-coded url
                     return '<div>' + suggestion.name + "</div>";
-                }
-            }
-        }, {
-            name: 'physicians',
-            //limit: 7,
-            display: 'value',
-            source: physicians.ttAdapter(),
-            templates: {
-                header: '<h5 class="typeahead-subhead">Physicians near [city, state]</h5>',
-                suggestion: function(data) {
-                    // TODO
-                    // remove hard-coded url
-                    return '<div><a href="http://lookup.dev/physicians/' + 
-                        data.id + '">' + data.first_name + ' ' + data.last_name + ', ' +
-                        data.designation + '; ' + data.city + ', ' + data.state +
-                        '</a></div>';
                 }
             }
         });

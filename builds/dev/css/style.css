@@ -604,23 +604,26 @@ img {
 
 /* line 5, ../../../components/sass/modules/_typeahead.scss */
 .typeahead-subhead {
+  margin-top: 0;
   margin-bottom: 0;
-  padding: 3px 20px;
+  padding: .125em 1.25em;
   font-size: .75em;
   line-height: 24px;
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #808080; }
+  color: #fff;
+  /*color: $fontcolorlighter;*/
+  background-color: #ffaa00; }
 
-/* line 18, ../../../components/sass/modules/_typeahead.scss */
+/* line 21, ../../../components/sass/modules/_typeahead.scss */
 .tt-input {
   /* UPDATE: newer versions use tt-input instead of tt-query */
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
-/* line 22, ../../../components/sass/modules/_typeahead.scss */
+/* line 25, ../../../components/sass/modules/_typeahead.scss */
 .tt-hint {
   color: #999; }
-/* line 26, ../../../components/sass/modules/_typeahead.scss */
+/* line 29, ../../../components/sass/modules/_typeahead.scss */
 .tt-dropdown-menu {
   /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
   /*width: 422px;*/
@@ -634,17 +637,21 @@ img {
   border: 1px solid rgba(0, 0, 0, 0.2);
   /*border-radius: 8px;*/
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
-/* line 40, ../../../components/sass/modules/_typeahead.scss */
+/* line 43, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion {
   padding: 3px 20px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: .875em;
+  font-weight: 600;
+  line-height: 1.5;
   text-align: left; }
-/* line 47, ../../../components/sass/modules/_typeahead.scss */
+/* line 51, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion.tt-cursor {
   /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
   color: #fff;
   background-color: #00eaff; }
-/* line 53, ../../../components/sass/modules/_typeahead.scss */
+/* line 57, ../../../components/sass/modules/_typeahead.scss */
+.tt-suggestion a {
+  color: inherit; }
+/* line 61, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion p {
   margin: 0; }

@@ -363,3 +363,5 @@ var groupPrincipals = new Bloodhound({
         <span class="date"><%= date %></span>
     <% } %>}>
     ```
+
+* SO: [Simple Backbone search page - how would you do it?](http://stackoverflow.com/questions/10671435/simple-backbone-search-page-how-would-you-do-it?lq=1)

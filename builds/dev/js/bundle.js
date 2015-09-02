@@ -22,7 +22,7 @@ var Location = Backbone.Model.extend({
     },
 
     validate: function(fields) {
-
+        
     },
     
     // http://stackoverflow.com/questions/18383205/
@@ -1846,6 +1846,7 @@ var LocationForm = Backbone.View.extend({
 
     el: '#location',
     engine: {},
+    isSet: false,
 
     initialize: function() {
         this.initAutocomplete();
@@ -1857,19 +1858,18 @@ var LocationForm = Backbone.View.extend({
         };
 
         this.model = new Location({}, options);
+        this.listenTo(this.model, 'change', this.logChangeEvent);
 
         this.model.fetch({
             success: function(response) {
-                self.$el.typeahead('val', self.model.get('city') + ', ' + 
-                    self.model.get('state') + ' ' + self.model.get('zip')); 
+                self.render();
+                self.triggerChangeEvent();
             }
         });
 
-        this.listenTo(this.model, 'change', this.logChangeEvent);
-        this.listenTo(this.model, 'change', this.logEvent);
     },
 
-    logEvent: function(model, options) {
+    logModelChange: function(model, options) {
         alert('Model changed to ' + this.model.get('city') + ', ' + 
             this.model.get('state'));
     },
@@ -1880,13 +1880,36 @@ var LocationForm = Backbone.View.extend({
         //console.debug(options);
     },
 
+    logError: function() {
+        console.log('error');
+    },
+
     events: {
-        //'click': 'clickHandler',
-        //'typeahead:opened': 'opened',
-        //'focus': 'focused',
+        'focus': 'focusHandler',
+        'click': 'clickHandler',
+        'typeahead:opened': 'opened',
+        'error': 'logError',
         'typeahead:selected': 'setLocation',
         'typeahead:autocompleted': 'setLocation',
-        'typeahead:closed': 'validateLocation',
+        'typeahead:closed': 'closed',
+        'input': 'inputHandler'
+    },
+
+    focusHandler: function() {
+        console.log('focus');
+    },
+
+    clickHandler: function() {
+        console.log('click');
+    },
+
+    inputHandler: function() {
+        console.log('input changed');
+        this.isSet = false;
+    },
+
+    opened: function() {
+        console.log('typehaead opened');
     },
 
     parseInput: function() {
@@ -1894,11 +1917,10 @@ var LocationForm = Backbone.View.extend({
         console.log('val grabbed in parse input: ' + val);
     },
 
-    validateLocation: function() {
-        console.log('closed');
-        this._resolve();
+    triggerChangeEvent: function() {
+        this.trigger('change', this.model);
     },
-    
+
     setLocation: function(evt, suggestion) {
 
         // User didn't include the zip, so we're tossing out
@@ -1907,7 +1929,9 @@ var LocationForm = Backbone.View.extend({
             _.defaults(suggestion, { zip: undefined })
         }
 
+        this.isSet = true;
         this.model.set(suggestion);
+        this.triggerChangeEvent();
     },
 
     /**
@@ -1934,6 +1958,8 @@ var LocationForm = Backbone.View.extend({
                 
             } else {
                  console.log('unresolved');
+                 self.model.clear()
+                 self.trigger('error', self.model);
             }
             _.each(uniqueLocations, function(loc) { 
                 console.log(loc); 
@@ -1942,10 +1968,13 @@ var LocationForm = Backbone.View.extend({
     },
     
     closed: function(e) {
+        console.log('resolving');
         // TODO 
         // do a check before calling resolve()
         // has the input changed since it's been set?
-        this.resolve();
+        //if (this.model.hasChanged()) {
+        this._resolve();
+        //}
     },
 
     focused: function(e) {
@@ -1954,9 +1983,8 @@ var LocationForm = Backbone.View.extend({
 
     render: function() {
         this.$el.typeahead('val', this.template(this.model.toJSON()));
-        
-        //this.$el.typeahead('val', this.model.get('city') + ', ' + 
-            //this.model.get('state') + ' ' + this.model.get('zip')); 
+
+        return this;
     },
 
     template: _.template(
@@ -2120,14 +2148,29 @@ var SearchForm = Backbone.View.extend({
 
     initialize: function() {
 
+        // Initialize the search form's two inputs
         var locationFormView = new LocationFormView();
-
         var specialtyView = new SpecialtyView();
         specialtyView.render();
+
+        // Listen for change events emitted by the location input and
+        // rerender on a change
+        this.listenTo(locationFormView, 'change', function(model) {
+            console.log('heard a change event in SearchForm');
+            this.render(model);
+        });
+
+        this.listenTo(locationFormView, 'error', function(model) {
+            console.log('heard an error event in Searchform');
+            this.render(model);
+        });
     },
 
-    render: function() {
-        console.log('rendering search form');
+    render: function(data) {
+        this.$el.find('#city').val(data.get('city'));
+        this.$el.find('#state').val(data.get('state'));
+        this.$el.find('#lat').val(data.get('lat'));
+        this.$el.find('#lon').val(data.get('lon'));
     },
 
     events: {
@@ -2136,7 +2179,15 @@ var SearchForm = Backbone.View.extend({
 
     formSubmit: function(evt) {
         evt.preventDefault();
-        console.log('form submitted');
+        
+        // Validate the form by checking if values in hidden inputs
+        // #city and #state are set
+        var $hiddens = $(evt.currentTarget).find('#city, #state');
+        var valid = $hiddens.filter(function(i, elem) {
+            return $(elem).val() != false;
+        });
+
+        console.log('form submitted: ' + (valid.length > 0 ? 'valid' : 'invalid' ));
     }
 
 });
@@ -2161,7 +2212,7 @@ var SpecialtyView = Backbone.View.extend({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             //limit: 7,
             remote: {
-                url: 'api/v1/physicians/search',
+                url: 'http://lookup.dev/api/v1/physicians/search',
                 replace: function(url, uriEncodedQuery) {
                     // Grab the location from the hidden form fields
                     var loc = {
@@ -2210,11 +2261,28 @@ var SpecialtyView = Backbone.View.extend({
         physicians.initialize();
         specialties.initialize();
 
+        var compiledSuggestion = _.template(
+            '<div><a href="#"><strong><%= first_name %> <%= last_name %>' +
+            '</strong>, <%= designation %>; <%= city %>, ' +
+            '<%= state %></a></div>'
+        );
+
         this.$el.typeahead({
             hint: false,
             highlight: true,
             minLength: 2,
             limit: 7,
+        }, {
+            name: 'physicians',
+            //limit: 7,
+            display: 'value',
+            source: physicians.ttAdapter(),
+            templates: {
+                header: '<h5 class="typeahead-subhead">Physicians near ' +
+                    '[city, state]</h5>',
+                suggestion: compiledSuggestion,
+                engine: _
+            },
         }, {
             name: 'specialties',
             source: specialties.ttAdapter(),
@@ -2225,22 +2293,6 @@ var SpecialtyView = Backbone.View.extend({
                     // TODO
                     // remove hard-coded url
                     return '<div>' + suggestion.name + "</div>";
-                }
-            }
-        }, {
-            name: 'physicians',
-            //limit: 7,
-            display: 'value',
-            source: physicians.ttAdapter(),
-            templates: {
-                header: '<h5 class="typeahead-subhead">Physicians near [city, state]</h5>',
-                suggestion: function(data) {
-                    // TODO
-                    // remove hard-coded url
-                    return '<div><a href="http://lookup.dev/physicians/' + 
-                        data.id + '">' + data.first_name + ' ' + data.last_name + ', ' +
-                        data.designation + '; ' + data.city + ', ' + data.state +
-                        '</a></div>';
                 }
             }
         });
@@ -14933,7 +14985,7 @@ Backbone.$ = $;
 $(function () {
 
     var searchForm = new SearchForm({ el: '#findYourDo' });
-    searchForm.render();
+    //searchForm.render();
 
 });
 

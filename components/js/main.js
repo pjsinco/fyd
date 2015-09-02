@@ -16,7 +16,7 @@ Backbone.$ = $;
 $(function () {
 
     var searchForm = new SearchForm({ el: '#findYourDo' });
-    searchForm.render();
+    //searchForm.render();
 
 });
 
