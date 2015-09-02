@@ -11,9 +11,7 @@ var SearchForm = Backbone.View.extend({
 
     initialize: function() {
 
-        var location = new Location();
-        var locationFormView = new LocationFormView({ model: location });
-        locationFormView.render();
+        var locationFormView = new LocationFormView();
 
         var specialtyView = new SpecialtyView();
         specialtyView.render();

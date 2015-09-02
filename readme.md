@@ -326,3 +326,33 @@ locations table
     jQuery("#location").eq(0).val("M").trigger("input");
     ```
 * Github: [Example Sites with Tutorials](https://github.com/jashkenas/backbone/wiki/Tutorials%2C-blog-posts-and-example-sites)
+
+* Blog: [Observations on Front-end Routing & WordPress](http://trevan.co/front-end-routing-with-wordpress/)
+
+* StackOverflow: [Understand Backbone.js REST calls](http://stackoverflow.com/questions/18504235/understand-backbone-js-rest-calls)
+
+* Blog: [Getting Started with Backbone.js](https://miguelmota.com/blog/getting-started-with-backbonejs/)
+
+* StackOverflow: [Backbone.js with a custom fetch URL](http://stackoverflow.com/questions/18383205/backbone-js-with-a-custom-fetch-url)
+
+* Typeahead issue: Get notified when server request is made
+> Since the remote configuration object allows you to pass parameters through to the jQuery ajax object, all you have to do is pass a beforeSend and a complete callback, and you find out whenever the AJAX call begins and ends. I'm doing this, for example, which is slightly different from what he did:
+    
+```js
+var groupPrincipals = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+        url: '/api/groupprincipals?search=%QUERY',
+        filter: function(parsedResponse){
+            return parsedResponse['groupPrincipals'];
+        },
+        ajax: {
+            beforeSend: function(){ Ember.Logger.info("beforeSend callback called!"); },
+            complete: function(){ Ember.Logger.info("complete callback called!"); }
+        }
+    }
+});
+```
+> And it works fine (so far) in stock 0.9! I agree it would be nice if bloodhound emitted its own events, but as right now it doesn't emit any events, adding events just for this seems like overkill, if the above facility to hook into the jQuery ajax object's callbacks works fine. Or if there's something I'm missing with the above solution, do please mention it!
+    ```

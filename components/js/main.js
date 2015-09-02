@@ -1,3 +1,5 @@
+'use strict'
+
 var Backbone = require('backbone'),
     $ = require('jquery'),
     SearchForm = require('views/search-form');
@@ -6,7 +8,7 @@ var Backbone = require('backbone'),
 var Location = require('models/location'),
     SampleView = require('views/sample'),
     LocationView = require('views/location'),
-    SpecialtyView = require('views/specialty');
+    SpecialtyView = require('views/specialty'),
     LocationFormView = require('views/location-form');
 
 Backbone.$ = $;
@@ -22,7 +24,7 @@ $(function () {
 
 module.exports = {
 
-    location: Location,
+    Location: Location,
     LocationView: LocationView,
     SpecialtyView: SpecialtyView,
     LocationFormView: LocationFormView,
