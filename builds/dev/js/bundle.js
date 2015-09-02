@@ -1846,7 +1846,6 @@ var LocationForm = Backbone.View.extend({
 
     el: '#location',
     engine: {},
-    includeZip: false, // Whether we need to render the zip
 
     initialize: function() {
         this.initAutocomplete();
@@ -1855,7 +1854,6 @@ var LocationForm = Backbone.View.extend({
 
         var options = {
             url: 'http://lookup.dev/api/v1/locations/random', 
-            includeZip: true
         };
 
         this.model = new Location({}, options);
@@ -1902,16 +1900,14 @@ var LocationForm = Backbone.View.extend({
     },
     
     setLocation: function(evt, suggestion) {
-        console.log('suggestion has zip: ' + 
-            (suggestion.hasOwnProperty('zip') ? 'Yes' : 'No'));
 
+        // User didn't include the zip, so we're tossing out
+        // that level of precision
         if (!suggestion.hasOwnProperty('zip')) {
             _.defaults(suggestion, { zip: undefined })
         }
 
-        this.model.set(suggestion, { 
-            includeZip: suggestion.hasOwnProperty('zip') 
-        });
+        this.model.set(suggestion);
     },
 
     /**
