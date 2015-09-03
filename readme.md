@@ -374,3 +374,8 @@ var groupPrincipals = new Bloodhound({
 
 * Blog: [Autocomplete with jQuery plugin for backbone.js on remote api](http://blog.physalix.com/autocomplete-with-jquery-plugin-for-backbone-js-on-remote-api/)
     * See ~/Sites/backbone-minimalist-autocomplete/
+
+* Blog: [Integrating Backbone with jQuery UI Autocomplete to Provide Search Functionality](http://www.benknowscode.com/2013/02/integrating-backbone-with-jquery-ui_7949.html)
+    > One of my first tests was to figure out how to wire up a jQuery UI Autocomplete widget to source its search data from a backbone collection.
+
+
