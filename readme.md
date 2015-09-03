@@ -365,3 +365,12 @@ var groupPrincipals = new Bloodhound({
     ```
 
 * SO: [Simple Backbone search page - how would you do it?](http://stackoverflow.com/questions/10671435/simple-backbone-search-page-how-would-you-do-it?lq=1)
+
+#####Thu Sep  3 07:49:54 2015 CDT
+* Blog: [Subviews in Backbone](http://ricostacruz.com/backbone-patterns/#sub_views)
+    > The problem: Your view code is starting to bloat as it tries to do too many things in one class.
+
+    > The solution: Break it apart into smaller sub-views.
+
+* Blog: [Autocomplete with jQuery plugin for backbone.js on remote api](http://blog.physalix.com/autocomplete-with-jquery-plugin-for-backbone-js-on-remote-api/)
+    * See ~/Sites/backbone-minimalist-autocomplete/
