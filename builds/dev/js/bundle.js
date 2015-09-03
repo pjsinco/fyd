@@ -46,7 +46,29 @@ var Location = Backbone.Model.extend({
 
 module.exports = Location;
 
-},{"backbone":8}],2:[function(require,module,exports){
+},{"backbone":9}],2:[function(require,module,exports){
+var Backbone = require('backbone');
+
+var PhysicianSimple = Backbone.Model.extend({
+
+    defaults: {
+        firstName: '',
+        lastName: '',
+        designation: '',
+        city: '',
+        state: '',
+        zip: '',
+    },
+
+    initialize: function() {
+        
+    }
+
+});
+
+module.exports = PhysicianSimple;
+
+},{"backbone":9}],3:[function(require,module,exports){
 var $ = require('jquery');
 
 //https://github.com/twitter/typeahead.js/issues/872
@@ -1835,7 +1857,7 @@ module.exports = (function($) {
     })();
 })(window.jQuery);
 
-},{"jquery":9}],3:[function(require,module,exports){
+},{"jquery":10}],4:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2084,7 +2106,7 @@ var LocationForm = Backbone.View.extend({
 
 module.exports = LocationForm;
 
-},{"backbone":8,"jquery":9,"models/location":1,"typeahead.0.10.5":2,"underscore":10}],4:[function(require,module,exports){
+},{"backbone":9,"jquery":10,"models/location":1,"typeahead.0.10.5":3,"underscore":11}],5:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -2113,7 +2135,7 @@ var LocationView = Backbone.View.extend({
 
 module.exports = LocationView;
 
-},{"backbone":8,"jquery":9,"typeahead.0.10.5":2,"underscore":10}],5:[function(require,module,exports){
+},{"backbone":9,"jquery":10,"typeahead.0.10.5":3,"underscore":11}],6:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery');
 
@@ -2134,7 +2156,7 @@ var SampleView = Backbone.View.extend({
 
 module.exports = SampleView;
 
-},{"backbone":8,"jquery":9}],6:[function(require,module,exports){
+},{"backbone":9,"jquery":10}],7:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2195,7 +2217,7 @@ var SearchForm = Backbone.View.extend({
 module.exports = SearchForm;
 
 
-},{"backbone":8,"jquery":9,"models/location":1,"underscore":10,"views/location-form":3,"views/specialty":7}],7:[function(require,module,exports){
+},{"backbone":9,"jquery":10,"models/location":1,"underscore":11,"views/location-form":4,"views/specialty":8}],8:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -2307,7 +2329,7 @@ var SpecialtyView = Backbone.View.extend({
 
 module.exports = SpecialtyView;
 
-},{"backbone":8,"jquery":9,"typeahead.0.10.5":2,"underscore":10}],8:[function(require,module,exports){
+},{"backbone":9,"jquery":10,"typeahead.0.10.5":3,"underscore":11}],9:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.2
 
@@ -4204,7 +4226,7 @@ module.exports = SpecialtyView;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":9,"underscore":10}],9:[function(require,module,exports){
+},{"jquery":10,"underscore":11}],10:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -13416,7 +13438,7 @@ return jQuery;
 
 }));
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -14978,6 +15000,7 @@ var Location = require('models/location'),
     SampleView = require('views/sample'),
     LocationView = require('views/location'),
     SpecialtyView = require('views/specialty'),
+    PhysicianSimple = require('models/physician-simple')
     LocationFormView = require('views/location-form');
 
 Backbone.$ = $;
@@ -14998,8 +15021,9 @@ module.exports = {
     SpecialtyView: SpecialtyView,
     LocationFormView: LocationFormView,
     SampleView: SampleView,
+    PhysicianSimple: PhysicianSimple,
     SearchForm: SearchForm
 
 };
 
-},{"backbone":8,"jquery":9,"models/location":1,"views/location":4,"views/location-form":3,"views/sample":5,"views/search-form":6,"views/specialty":7}]},{},["app"]);
+},{"backbone":9,"jquery":10,"models/location":1,"models/physician-simple":2,"views/location":5,"views/location-form":4,"views/sample":6,"views/search-form":7,"views/specialty":8}]},{},["app"]);

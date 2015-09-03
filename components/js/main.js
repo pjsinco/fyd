@@ -9,6 +9,7 @@ var Location = require('models/location'),
     SampleView = require('views/sample'),
     LocationView = require('views/location'),
     SpecialtyView = require('views/specialty'),
+    PhysicianSimple = require('models/physician-simple')
     LocationFormView = require('views/location-form');
 
 Backbone.$ = $;
@@ -29,6 +30,7 @@ module.exports = {
     SpecialtyView: SpecialtyView,
     LocationFormView: LocationFormView,
     SampleView: SampleView,
+    PhysicianSimple: PhysicianSimple,
     SearchForm: SearchForm
 
 };
