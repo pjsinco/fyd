@@ -130,13 +130,14 @@ var LocationForm = Backbone.View.extend({
     },
     
     closed: function(e) {
-        console.log('resolving');
-        // TODO 
-        // do a check before calling resolve()
-        // has the input changed since it's been set?
-        //if (this.model.hasChanged()) {
-        this._resolve();
-        //}
+
+        // we shouldn't call _resolve() on an empty field
+        if (this.$el.val() != '') {
+            console.log('resolving');
+            this._resolve();
+        } else {
+            console.info('not resolving');
+        }
     },
 
     focused: function(e) {

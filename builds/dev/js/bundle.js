@@ -29,33 +29,28 @@ var Location = Backbone.Model.extend({
     },
 
     initialize: function(attributes, options) {
-
         if (options && options.url) {
             this.urlRoot = options.url;
         }
-
     },
-
-    validate: function(fields) {
-        
-    },
-    
-    // http://stackoverflow.com/questions/18383205/
-    //     backbone-js-with-a-custom-fetch-url
-//    getRandom: function(options) {
-//        options = options || {};
-//    
-//        if (options.url === undefined) {
-//            //options.url = this.urlRoot + '/random';
-//            options.url = this.urlRoot;
-//        }
-//
-//        return Backbone.Model.prototype.fetch.call(this, options);
-//    },
 
     parse: function(response) {
         return response.data;
     }
+
+    // http://stackoverflow.com/questions/18383205/
+    //     backbone-js-with-a-custom-fetch-url
+    //  getRandom: function(options) {
+    //      options = options || {};
+    //  
+    //      if (options.url === undefined) {
+    //          //options.url = this.urlRoot + '/random';
+    //          options.url = this.urlRoot;
+    //      }
+    //
+    //      return Backbone.Model.prototype.fetch.call(this, options);
+    //  },
+
 
 });
 
@@ -84,6 +79,36 @@ module.exports = Physician;
 
 
 },{"backbone":13}],4:[function(require,module,exports){
+var Backbone = require('backbone');
+
+var Search = Backbone.Model.extend({
+    
+    locationModel: undefined,
+
+    initialize: function () {
+        this.listenTo(this.locationModel, 'change', 'From inside Search model, heard a change to Location model');
+    }
+
+});
+
+module.exports = Search;
+
+
+},{"backbone":13}],5:[function(require,module,exports){
+var Backbone = require('backbone');
+
+var Specialty = Backbone.Model.extend({
+
+    initialize: function () {
+
+    }
+
+});
+
+module.exports = Specialty;
+
+
+},{"backbone":13}],6:[function(require,module,exports){
 var $ = require('jquery');
 
 //https://github.com/twitter/typeahead.js/issues/872
@@ -1872,7 +1897,7 @@ module.exports = (function($) {
     })();
 })(window.jQuery);
 
-},{"jquery":14}],5:[function(require,module,exports){
+},{"jquery":14}],7:[function(require,module,exports){
 var Backbone = require('backbone');
 var PhysicianSimpleView = require('views/physician-simple');
 
@@ -1900,7 +1925,7 @@ var Workspace = Backbone.Router.extend({
 
 module.exports = Workspace;
 
-},{"backbone":13,"views/physician-simple":8}],6:[function(require,module,exports){
+},{"backbone":13,"views/physician-simple":9}],8:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2033,13 +2058,14 @@ var LocationForm = Backbone.View.extend({
     },
     
     closed: function(e) {
-        console.log('resolving');
-        // TODO 
-        // do a check before calling resolve()
-        // has the input changed since it's been set?
-        //if (this.model.hasChanged()) {
-        this._resolve();
-        //}
+
+        // we shouldn't call _resolve() on an empty field
+        if (this.$el.val() != '') {
+            console.log('resolving');
+            this._resolve();
+        } else {
+            console.info('not resolving');
+        }
     },
 
     focused: function(e) {
@@ -2149,36 +2175,7 @@ var LocationForm = Backbone.View.extend({
 
 module.exports = LocationForm;
 
-},{"backbone":13,"jquery":14,"models/location":2,"typeahead.0.10.5":4,"underscore":15}],7:[function(require,module,exports){
-var Backbone = require('backbone'),
-    $ = require('jquery'),
-    _ = require('underscore'),
-    typeahead = require('typeahead.0.10.5');
-
-var LocationView = Backbone.View.extend({
-
-    el: $('#location'),
-    
-    hiya: function() {
-        console.log('hiyafunction');
-    },
-
-    render: function() {
-
-        // render this view in the hidden location inputs?
-
-    },
-
-    initialize: function() {
-        console.log('new view');
-    }
-
-});
-
-
-module.exports = LocationView;
-
-},{"backbone":13,"jquery":14,"typeahead.0.10.5":4,"underscore":15}],8:[function(require,module,exports){
+},{"backbone":13,"jquery":14,"models/location":2,"typeahead.0.10.5":6,"underscore":15}],9:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var PhysicianSimpleView = Backbone.View.extend({
@@ -2189,7 +2186,7 @@ var PhysicianSimpleView = Backbone.View.extend({
 
 module.exports = PhysicianSimpleView;
 
-},{"backbone":13}],9:[function(require,module,exports){
+},{"backbone":13}],10:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 
@@ -2226,55 +2223,37 @@ var PhysicianListItemView = Backbone.View.extend({
 module.exports = PhysicianListItemView;
 
 
-},{"backbone":13,"underscore":15}],10:[function(require,module,exports){
-var Backbone = require('backbone'),
-    $ = require('jquery');
-
-var SampleView = Backbone.View.extend({
-
-    //el: '.sample',
-    el: $('.sample'),
-    render: function() {
-
-        this.$el.text('hiyajq');
-
-    }
-
-
-});
-
-
-
-module.exports = SampleView;
-
-},{"backbone":13,"jquery":14}],11:[function(require,module,exports){
+},{"backbone":13,"underscore":15}],11:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
     Location = require('models/location'),
     LocationFormView = require('views/location-form'),
-    SpecialtyView = require('views/specialty');
+    SpecialtyFormView = require('views/specialty-form');
 
-var SearchForm = Backbone.View.extend({
+var SearchView = Backbone.View.extend({
 
     el: '#findYourDO',
+
+    locationFormView: undefined,
+    specialtyFormView: undefined,
 
     initialize: function() {
 
         // Initialize the search form's two inputs
-        var locationFormView = new LocationFormView();
-        var specialtyView = new SpecialtyView();
-        specialtyView.render();
+        this.locationFormView = new LocationFormView();
+        this.specialtyFormView = new SpecialtyFormView();
+        this.specialtyFormView.render();
 
         // Listen for change events emitted by the location input and
         // rerender on a change
-        this.listenTo(locationFormView, 'change', function(model) {
-            console.log('heard a change event in SearchForm');
+        this.listenTo(this.locationFormView, 'change', function(model) {
+            console.log('here in SearchView, we heard a change event in locationFormView');
             this.render(model);
         });
 
-        this.listenTo(locationFormView, 'error', function(model) {
-            console.log('heard an error event in Searchform');
+        this.listenTo(this.locationFormView, 'error', function(model) {
+            console.log('here in SearchView, we heard an error event in locationFormView');
             this.render(model);
         });
     },
@@ -2305,10 +2284,10 @@ var SearchForm = Backbone.View.extend({
 
 });
 
-module.exports = SearchForm;
+module.exports = SearchView;
 
 
-},{"backbone":13,"jquery":14,"models/location":2,"underscore":15,"views/location-form":6,"views/specialty":12}],12:[function(require,module,exports){
+},{"backbone":13,"jquery":14,"models/location":2,"underscore":15,"views/location-form":8,"views/specialty-form":12}],12:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -2420,7 +2399,7 @@ var SpecialtyView = Backbone.View.extend({
 
 module.exports = SpecialtyView;
 
-},{"backbone":13,"jquery":14,"typeahead.0.10.5":4,"underscore":15}],13:[function(require,module,exports){
+},{"backbone":13,"jquery":14,"typeahead.0.10.5":6,"underscore":15}],13:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.2
 
@@ -15082,28 +15061,51 @@ return jQuery;
 },{}],"app":[function(require,module,exports){
 'use strict'
 
-var Backbone = require('backbone'),
-    $ = require('jquery'),
-    SearchForm = require('views/search-form');
+var Backbone = require('backbone');
+var $ = require('jquery');
 
-// TODO delete - for debugging only
-var Location = require('models/location'),
-    SampleView = require('views/sample'),
-    LocationView = require('views/location'),
-    SpecialtyView = require('views/specialty'),
-    Workspace = require('./router.js'),
-    Physician = require('models/physician'),
-    PhysicianListItemView = require('views/physician'),
-    PhysicianList = require('collections/physician-list'),
-    LocationFormView = require('views/location-form');
-    
+
+/**
+ * Models
+ *
+ */
+var Physician = require('models/physician');
+var Specialty = require('models/specialty');
+var Location = require('models/location');
+var Search = require('models/search');
+
+/**
+ * Views
+ *
+ */
+var PhysicianListItemView = require('views/physician');
+var SpecialtyFormView = require('views/specialty-form');
+var LocationFormView = require('views/location-form');
+var SearchView = require('views/search');
+
+/**
+ * Collections
+ *
+ */
+var PhysicianList = require('collections/physician-list');
+
+/**
+ * Router
+ *
+ */
+var Workspace = require('./router.js');
 
 Backbone.$ = $;
 
 $(function () {
 
-    var searchForm = new SearchForm({ el: '#findYourDo' });
-    //searchForm.render();
+    var searchLocation = new Location();
+
+    var search = new Search({ 
+        locationModel: searchLocation
+    });
+
+    var searchView = new SearchView({ el: '#findYourDo' });
     
     var router = new Workspace();
     Backbone.history.start({
@@ -15116,17 +15118,16 @@ $(function () {
 
 module.exports = {
 
-    Location: Location,
-    LocationView: LocationView,
-    SpecialtyView: SpecialtyView,
-    LocationFormView: LocationFormView,
-    SampleView: SampleView,
-    Workspace: Workspace,
-    SearchForm: SearchForm,
     Physician: Physician,
+    Specialty: Specialty,
+    Location: Location,
+    Search: Search,
     PhysicianListItemView: PhysicianListItemView,
-    PhysicianList: PhysicianList
+    LocationFormView: LocationFormView,
+    SearchView: SearchView,
+    PhysicianList: PhysicianList,
+    Workspace: Workspace
 
 };
 
-},{"./router.js":5,"backbone":13,"collections/physician-list":1,"jquery":14,"models/location":2,"models/physician":3,"views/location":7,"views/location-form":6,"views/physician":9,"views/sample":10,"views/search-form":11,"views/specialty":12}]},{},["app"]);
+},{"./router.js":7,"backbone":13,"collections/physician-list":1,"jquery":14,"models/location":2,"models/physician":3,"models/search":4,"models/specialty":5,"views/location-form":8,"views/physician":10,"views/search":11,"views/specialty-form":12}]},{},["app"]);

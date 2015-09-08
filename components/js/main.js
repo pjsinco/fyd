@@ -1,27 +1,50 @@
 'use strict'
 
-var Backbone = require('backbone'),
-    $ = require('jquery'),
-    SearchForm = require('views/search-form');
+var Backbone = require('backbone');
+var $ = require('jquery');
 
-// TODO delete - for debugging only
-var Location = require('models/location'),
-    SampleView = require('views/sample'),
-    LocationView = require('views/location'),
-    SpecialtyView = require('views/specialty'),
-    Workspace = require('./router.js'),
-    Physician = require('models/physician'),
-    PhysicianListItemView = require('views/physician'),
-    PhysicianList = require('collections/physician-list'),
-    LocationFormView = require('views/location-form');
-    
+
+/**
+ * Models
+ *
+ */
+var Physician = require('models/physician');
+var Specialty = require('models/specialty');
+var Location = require('models/location');
+var Search = require('models/search');
+
+/**
+ * Views
+ *
+ */
+var PhysicianListItemView = require('views/physician');
+var SpecialtyFormView = require('views/specialty-form');
+var LocationFormView = require('views/location-form');
+var SearchView = require('views/search');
+
+/**
+ * Collections
+ *
+ */
+var PhysicianList = require('collections/physician-list');
+
+/**
+ * Router
+ *
+ */
+var Workspace = require('./router.js');
 
 Backbone.$ = $;
 
 $(function () {
 
-    var searchForm = new SearchForm({ el: '#findYourDo' });
-    //searchForm.render();
+    var searchLocation = new Location();
+
+    var search = new Search({ 
+        locationModel: searchLocation
+    });
+
+    var searchView = new SearchView({ el: '#findYourDo' });
     
     var router = new Workspace();
     Backbone.history.start({
@@ -34,15 +57,14 @@ $(function () {
 
 module.exports = {
 
-    Location: Location,
-    LocationView: LocationView,
-    SpecialtyView: SpecialtyView,
-    LocationFormView: LocationFormView,
-    SampleView: SampleView,
-    Workspace: Workspace,
-    SearchForm: SearchForm,
     Physician: Physician,
+    Specialty: Specialty,
+    Location: Location,
+    Search: Search,
     PhysicianListItemView: PhysicianListItemView,
-    PhysicianList: PhysicianList
+    LocationFormView: LocationFormView,
+    SearchView: SearchView,
+    PhysicianList: PhysicianList,
+    Workspace: Workspace
 
 };
