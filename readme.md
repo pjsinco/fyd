@@ -395,3 +395,18 @@ var groupPrincipals = new Bloodhound({
     view.render()
     view.el
     ```
+
+* StackO: [How to replace Backbone.sync with nothing, not even localStorage?](http://stackoverflow.com/questions/7749424/how-to-replace-backbone-sync-with-nothing-not-even-localstorage)
+    > The easiest and probably best way to do this is not to replace Backbone.Sync, but simply to ignore it. Here are the methods you don't want to call:
+
+    > ...
+    > Models:
+    > fetch()
+    > save()
+    > destroy()
+
+    > If you avoid calling any of these methods, you will effectively ignore Backbone.Sync and be able to write your own code to do your AJAX calls.
+
+    > I wrote a lot of Backbone code without ever having a server call involved, when I started. There are no rules to say that you have to use all of Backbone's capabilities. In fact, I would say the opposite is true. Backbone is written in such a modular manner with each area of functionality and specialization roped off so well, that you should only use what you actually need.
+
+    > Create your models in memory, call set and get on them to store data. Stuff them into collections with add and remove them as needed. Pass your models and collections to your views and render them out to the HTML DOM. Just avoid calling the methods I listed above and you won't have to worry about Backbone.Sync.
