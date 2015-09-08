@@ -385,3 +385,13 @@ var groupPrincipals = new Bloodhound({
 #####Sun Sep  6 05:50:17 2015 CDT
 * Smashing: [Backbone.js Tips And Patterns](http://www.smashingmagazine.com/2013/08/backbone-js-tips-patterns/)
 
+#####Tue Sep  8 12:51:17 2015 CDT
+* Tinkering in console with a model and a view. Example sequence to see how a view is rendering a model:
+    ```js
+    app = require('app')
+    phys = new app.Physician({ id: 9690 })
+    phys.fetch()
+    view = new app.PhysicianListItemView({model: phys})
+    view.render()
+    view.el
+    ```
