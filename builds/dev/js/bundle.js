@@ -2025,6 +2025,16 @@ var LocationForm = Backbone.View.extend({
     },
 
     /**
+     * Announce that the location is unresolved.
+     *
+     */
+    _unresolve: function() {
+         console.log('unresolved');
+         this.model.clear();
+         this.trigger('error', this.model);
+    },
+
+    /**
      * Attempts to resolve a location that was not autocompleted.
      *
      */
@@ -2047,9 +2057,7 @@ var LocationForm = Backbone.View.extend({
                 self.render();
                 
             } else {
-                 console.log('unresolved');
-                 self.model.clear()
-                 self.trigger('error', self.model);
+                self._unresolve();
             }
             _.each(uniqueLocations, function(loc) { 
                 console.log(loc); 
@@ -2060,11 +2068,11 @@ var LocationForm = Backbone.View.extend({
     closed: function(e) {
 
         // we shouldn't call _resolve() on an empty field
-        if (this.$el.val() != '') {
+        if (this.$el.typeahead('val') != '') {
             console.log('resolving');
             this._resolve();
         } else {
-            console.info('not resolving');
+            this._unresolve();
         }
     },
 
