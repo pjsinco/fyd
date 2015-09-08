@@ -64,7 +64,7 @@ var SpecialtyView = Backbone.View.extend({
         specialties.initialize();
 
         var compiledSuggestion = _.template(
-            '<div><a href="#"><strong><%= first_name %> <%= last_name %>' +
+            '<div><a href="/physicians/#<%= id %>"><strong><%= first_name %> <%= last_name %>' +
             '</strong>, <%= designation %>; <%= city %>, ' +
             '<%= state %></a></div>'
         );

@@ -259,7 +259,7 @@ locations table
             ```
         * Command to test connection:
             ```
-            tsql -H imis -p 1433 -U psinco_ro -P Read5Only -D imis
+            tsql -H imis -p 1433 -U psinco_ro -P passwordHere -D imis
             ```
     * Laracasts forum: [sqlsrv driver on Linux?](https://laracasts.com/discuss/channels/general-discussion/sqlsrv-driver-on-linux)
     * Disable SELinux:
@@ -378,4 +378,10 @@ var groupPrincipals = new Bloodhound({
 * Blog: [Integrating Backbone with jQuery UI Autocomplete to Provide Search Functionality](http://www.benknowscode.com/2013/02/integrating-backbone-with-jquery-ui_7949.html)
     > One of my first tests was to figure out how to wire up a jQuery UI Autocomplete widget to source its search data from a backbone collection.
 
+
+#####Sat Sep  5 08:37:58 2015 CDT
+* Blog: [Using Backbone.js models with cookies and localStorage instead of REST](http://www.100percentjs.com/using-backbone-js-models-with-cookies-and-localstorage-instead-of-rest/)
+
+#####Sun Sep  6 05:50:17 2015 CDT
+* Smashing: [Backbone.js Tips And Patterns](http://www.smashingmagazine.com/2013/08/backbone-js-tips-patterns/)
 

@@ -1,5 +1,20 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Backbone = require('backbone');
+var Physician = require('models/physician');
+
+var PhysicianList = Backbone.Collection.extend({
+
+    model: Physician,
+
+    url: ""
+
+});
+
+module.exports = PhysicianList;
+
+
+},{"backbone":13,"models/physician":3}],2:[function(require,module,exports){
+var Backbone = require('backbone');
 
 var Location = Backbone.Model.extend({
 
@@ -46,29 +61,29 @@ var Location = Backbone.Model.extend({
 
 module.exports = Location;
 
-},{"backbone":9}],2:[function(require,module,exports){
+},{"backbone":13}],3:[function(require,module,exports){
 var Backbone = require('backbone');
 
-var PhysicianSimple = Backbone.Model.extend({
+var Physician = Backbone.Model.extend({
 
-    defaults: {
-        firstName: '',
-        lastName: '',
-        designation: '',
-        city: '',
-        state: '',
-        zip: '',
+    url: function() {
+        return 'http://lookup.dev/api/v1/physicians/' + this.id;
     },
 
-    initialize: function() {
-        
+    initialize: function () {
+
+    },
+
+    parse: function (response) {
+        return response.data;
     }
 
 });
 
-module.exports = PhysicianSimple;
+module.exports = Physician;
 
-},{"backbone":9}],3:[function(require,module,exports){
+
+},{"backbone":13}],4:[function(require,module,exports){
 var $ = require('jquery');
 
 //https://github.com/twitter/typeahead.js/issues/872
@@ -1857,7 +1872,35 @@ module.exports = (function($) {
     })();
 })(window.jQuery);
 
-},{"jquery":10}],4:[function(require,module,exports){
+},{"jquery":14}],5:[function(require,module,exports){
+var Backbone = require('backbone');
+var PhysicianSimpleView = require('views/physician-simple');
+
+var Workspace = Backbone.Router.extend({
+
+    routes: {
+    
+        'help': 'help',
+        'physicians/:id': 'getPhysicianById'
+    },
+
+    help: function() {
+        alert('help route called');
+    },
+
+    getPhysicianById: function(id) {
+        console.log('physicians/:id route called');
+        console.log(id);
+        new PhysicianSimpleView(id);
+    }
+    
+    
+    
+});
+
+module.exports = Workspace;
+
+},{"backbone":13,"views/physician-simple":8}],6:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2106,7 +2149,7 @@ var LocationForm = Backbone.View.extend({
 
 module.exports = LocationForm;
 
-},{"backbone":9,"jquery":10,"models/location":1,"typeahead.0.10.5":3,"underscore":11}],5:[function(require,module,exports){
+},{"backbone":13,"jquery":14,"models/location":2,"typeahead.0.10.5":4,"underscore":15}],7:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -2135,7 +2178,55 @@ var LocationView = Backbone.View.extend({
 
 module.exports = LocationView;
 
-},{"backbone":9,"jquery":10,"typeahead.0.10.5":3,"underscore":11}],6:[function(require,module,exports){
+},{"backbone":13,"jquery":14,"typeahead.0.10.5":4,"underscore":15}],8:[function(require,module,exports){
+var Backbone = require('backbone');
+
+var PhysicianSimpleView = Backbone.View.extend({
+
+    
+
+});
+
+module.exports = PhysicianSimpleView;
+
+},{"backbone":13}],9:[function(require,module,exports){
+var Backbone = require('backbone');
+var _ = require('underscore');
+
+var PhysicianListItemView = Backbone.View.extend({
+
+    tagName: 'li',
+    className: 'find-your-do__list-item',
+
+    events: {
+        
+    },
+
+    template: _.template(
+        '<h2><%= full_name %></h2>' +
+        '<h3><%= specialty %></h3>' +
+        '<div><p data-lat=<%= lat %> data-lon=<%= lon %>>' +
+        '<%= addr_1 %><br/ >' +
+        '<%= city %>, <%= state %> <%= zip %>' +
+        '</p></div>'
+    ),
+
+    initialize: function () {
+        
+    },
+
+    render: function () {
+        var markup = this.template(this.model.toJSON());
+        this.$el.html(markup);
+        return this;
+    }
+
+});
+
+module.exports = PhysicianListItemView;
+
+
+},{"backbone":13,"underscore":15}],10:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery');
 
@@ -2156,7 +2247,7 @@ var SampleView = Backbone.View.extend({
 
 module.exports = SampleView;
 
-},{"backbone":9,"jquery":10}],7:[function(require,module,exports){
+},{"backbone":13,"jquery":14}],11:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2217,7 +2308,7 @@ var SearchForm = Backbone.View.extend({
 module.exports = SearchForm;
 
 
-},{"backbone":9,"jquery":10,"models/location":1,"underscore":11,"views/location-form":4,"views/specialty":8}],8:[function(require,module,exports){
+},{"backbone":13,"jquery":14,"models/location":2,"underscore":15,"views/location-form":6,"views/specialty":12}],12:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -2284,7 +2375,7 @@ var SpecialtyView = Backbone.View.extend({
         specialties.initialize();
 
         var compiledSuggestion = _.template(
-            '<div><a href="#"><strong><%= first_name %> <%= last_name %>' +
+            '<div><a href="/physicians/#<%= id %>"><strong><%= first_name %> <%= last_name %>' +
             '</strong>, <%= designation %>; <%= city %>, ' +
             '<%= state %></a></div>'
         );
@@ -2329,7 +2420,7 @@ var SpecialtyView = Backbone.View.extend({
 
 module.exports = SpecialtyView;
 
-},{"backbone":9,"jquery":10,"typeahead.0.10.5":3,"underscore":11}],9:[function(require,module,exports){
+},{"backbone":13,"jquery":14,"typeahead.0.10.5":4,"underscore":15}],13:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.2
 
@@ -4226,7 +4317,7 @@ module.exports = SpecialtyView;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":10,"underscore":11}],10:[function(require,module,exports){
+},{"jquery":14,"underscore":15}],14:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -13438,7 +13529,7 @@ return jQuery;
 
 }));
 
-},{}],11:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -15000,8 +15091,12 @@ var Location = require('models/location'),
     SampleView = require('views/sample'),
     LocationView = require('views/location'),
     SpecialtyView = require('views/specialty'),
-    PhysicianSimple = require('models/physician-simple')
+    Workspace = require('./router.js'),
+    Physician = require('models/physician'),
+    PhysicianListItemView = require('views/physician'),
+    PhysicianList = require('collections/physician-list'),
     LocationFormView = require('views/location-form');
+    
 
 Backbone.$ = $;
 
@@ -15009,6 +15104,11 @@ $(function () {
 
     var searchForm = new SearchForm({ el: '#findYourDo' });
     //searchForm.render();
+    
+    var router = new Workspace();
+    Backbone.history.start({
+
+    });
 
 });
 
@@ -15021,9 +15121,12 @@ module.exports = {
     SpecialtyView: SpecialtyView,
     LocationFormView: LocationFormView,
     SampleView: SampleView,
-    PhysicianSimple: PhysicianSimple,
-    SearchForm: SearchForm
+    Workspace: Workspace,
+    SearchForm: SearchForm,
+    Physician: Physician,
+    PhysicianListItemView: PhysicianListItemView,
+    PhysicianList: PhysicianList
 
 };
 
-},{"backbone":9,"jquery":10,"models/location":1,"models/physician-simple":2,"views/location":5,"views/location-form":4,"views/sample":6,"views/search-form":7,"views/specialty":8}]},{},["app"]);
+},{"./router.js":5,"backbone":13,"collections/physician-list":1,"jquery":14,"models/location":2,"models/physician":3,"views/location":7,"views/location-form":6,"views/physician":9,"views/sample":10,"views/search-form":11,"views/specialty":12}]},{},["app"]);

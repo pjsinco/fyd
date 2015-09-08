@@ -9,8 +9,12 @@ var Location = require('models/location'),
     SampleView = require('views/sample'),
     LocationView = require('views/location'),
     SpecialtyView = require('views/specialty'),
-    PhysicianSimple = require('models/physician-simple')
+    Workspace = require('./router.js'),
+    Physician = require('models/physician'),
+    PhysicianListItemView = require('views/physician'),
+    PhysicianList = require('collections/physician-list'),
     LocationFormView = require('views/location-form');
+    
 
 Backbone.$ = $;
 
@@ -18,6 +22,11 @@ $(function () {
 
     var searchForm = new SearchForm({ el: '#findYourDo' });
     //searchForm.render();
+    
+    var router = new Workspace();
+    Backbone.history.start({
+
+    });
 
 });
 
@@ -30,7 +39,10 @@ module.exports = {
     SpecialtyView: SpecialtyView,
     LocationFormView: LocationFormView,
     SampleView: SampleView,
-    PhysicianSimple: PhysicianSimple,
-    SearchForm: SearchForm
+    Workspace: Workspace,
+    SearchForm: SearchForm,
+    Physician: Physician,
+    PhysicianListItemView: PhysicianListItemView,
+    PhysicianList: PhysicianList
 
 };
