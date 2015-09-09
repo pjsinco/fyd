@@ -3,6 +3,7 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 
+Backbone.$ = $;
 
 /**
  * Models
@@ -34,7 +35,43 @@ var PhysicianList = require('collections/physician-list');
  */
 var Workspace = require('./router.js');
 
-Backbone.$ = $;
+
+var FindADoApp = new Backbone.Router.extend({
+
+    routes: {
+        '': 'index',
+        '/physicians': 'physicianIndex',
+        '/physicians/:id': 'physicianDetail'
+    },
+
+    physicianIndex: function() {
+        console.log();
+    },
+
+    physicianDetail: function(id) {
+        var physician = new Physician({ id: id });
+        physician.fetch({
+            success: function() {
+                var physicianView = new PhysicianView({ model: physician });
+                physicianView.render();
+                $('body').html(physicianView.el);
+            }
+        });
+    },
+
+    index: function() {
+        var searchView = new SearchView({ el: '#findYourDo' });
+    },
+
+    initialize: function() {
+    },
+
+    start: function() {
+        Backbone.history.start();
+    }
+
+});
+
 
 $(function () {
 
@@ -44,12 +81,11 @@ $(function () {
         locationModel: searchLocation
     });
 
-    var searchView = new SearchView({ el: '#findYourDo' });
-    
-    var router = new Workspace();
-    Backbone.history.start({
 
-    });
+    var app = new Workspace();
+    app.start();
+    
+
 
 });
 
@@ -65,6 +101,7 @@ module.exports = {
     LocationFormView: LocationFormView,
     SearchView: SearchView,
     PhysicianList: PhysicianList,
-    Workspace: Workspace
+    Workspace: Workspace,
+    FindADoApp: FindADoApp
 
 };
