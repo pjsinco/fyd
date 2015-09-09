@@ -36,41 +36,41 @@ var PhysicianList = require('collections/physician-list');
 var Workspace = require('./router.js');
 
 
-var FindADoApp = new Backbone.Router.extend({
-
-    routes: {
-        '': 'index',
-        '/physicians': 'physicianIndex',
-        '/physicians/:id': 'physicianDetail'
-    },
-
-    physicianIndex: function() {
-        console.log();
-    },
-
-    physicianDetail: function(id) {
-        var physician = new Physician({ id: id });
-        physician.fetch({
-            success: function() {
-                var physicianView = new PhysicianView({ model: physician });
-                physicianView.render();
-                $('body').html(physicianView.el);
-            }
-        });
-    },
-
-    index: function() {
-        var searchView = new SearchView({ el: '#findYourDo' });
-    },
-
-    initialize: function() {
-    },
-
-    start: function() {
-        Backbone.history.start();
-    }
-
-});
+//var FindADoApp = new Backbone.Router.extend({
+//
+//    routes: {
+//        '': 'index',
+//        '/physicians': 'physicianIndex',
+//        '/physicians/:id': 'physicianDetail'
+//    },
+//
+//    physicianIndex: function() {
+//        console.log();
+//    },
+//
+//    physicianDetail: function(id) {
+//        var physician = new Physician({ id: id });
+//        physician.fetch({
+//            success: function() {
+//                var physicianView = new PhysicianView({ model: physician });
+//                physicianView.render();
+//                $('body').html(physicianView.el);
+//            }
+//        });
+//    },
+//
+//    index: function() {
+//        var searchView = new SearchView({ el: '#findYourDo' });
+//    },
+//
+//    initialize: function() {
+//    },
+//
+//    start: function() {
+//        Backbone.history.start();
+//    }
+//
+//});
 
 
 $(function () {
@@ -102,6 +102,6 @@ module.exports = {
     SearchView: SearchView,
     PhysicianList: PhysicianList,
     Workspace: Workspace,
-    FindADoApp: FindADoApp
+    //FindADoApp: FindADoApp
 
 };
