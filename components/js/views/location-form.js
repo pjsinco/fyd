@@ -15,19 +15,19 @@ var LocationForm = Backbone.View.extend({
 
         var self = this;
 
-        var options = {
-            url: 'http://lookup.dev/api/v1/locations/random', 
-        };
-
-        this.model = new Location({}, options);
+//        var options = {
+//            url: 'http://lookup.dev/api/v1/locations/random', 
+//        };
+//
+//        this.model = new Location({}, options);
         this.listenTo(this.model, 'change', this.logChangeEvent);
 
-        this.model.fetch({
-            success: function(response) {
+        //this.model.fetch({
+            //success: function(response) {
                 self.render();
                 self.triggerChangeEvent();
-            }
-        });
+            //}
+        //});
 
     },
 

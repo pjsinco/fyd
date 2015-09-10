@@ -9,6 +9,7 @@ var SearchView = Backbone.View.extend({
 
     el: '#findYourDO',
 
+
     locationFormView: undefined,
     specialtyFormView: undefined,
 

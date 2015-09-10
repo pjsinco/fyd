@@ -2,6 +2,7 @@
 
 var Backbone = require('backbone');
 var $ = require('jquery');
+var _ = require('underscore');
 
 Backbone.$ = $;
 
@@ -13,6 +14,7 @@ var Physician = require('models/physician');
 var Specialty = require('models/specialty');
 var Location = require('models/location');
 var Search = require('models/search');
+var UserLocation = require('models/user-location');
 
 /**
  * Views
@@ -91,6 +93,8 @@ module.exports = {
     SearchView: SearchView,
     PhysicianList: PhysicianList,
     Workspace: Workspace,
+    UserLocation: UserLocation,
+    _: _
     //FindADoApp: FindADoApp
 
 };
