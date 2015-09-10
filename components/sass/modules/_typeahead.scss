@@ -46,6 +46,26 @@
         font-weight: 600;
         line-height: 1.5;
         text-align: left;
+
+        /**
+         * Target only physician suggestions 
+         */
+        .tt-dataset-physicians & {
+
+            padding: 0;
+
+            & a {
+            display: block;
+            padding-top: .25em;
+            padding-right: 1.25em;
+            padding-bottom: .25em;
+            padding-left: 1.25em;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
     }
     
     &-suggestion.tt-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
