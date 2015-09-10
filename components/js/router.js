@@ -12,7 +12,6 @@ var Workspace = Backbone.Router.extend({
     routes: {
     
         '' : 'home',
-        'help': 'help',
         'physicians/:id': 'physicianDetail'
     },
 

@@ -643,15 +643,31 @@ img {
   font-size: .875em;
   font-weight: 600;
   line-height: 1.5;
-  text-align: left; }
-/* line 51, ../../../components/sass/modules/_typeahead.scss */
+  text-align: left;
+  /**
+   * Target only physician suggestions 
+   */ }
+  /* line 53, ../../../components/sass/modules/_typeahead.scss */
+  .tt-dataset-physicians .tt-suggestion {
+    padding: 0; }
+    /* line 57, ../../../components/sass/modules/_typeahead.scss */
+    .tt-dataset-physicians .tt-suggestion a {
+      display: block;
+      padding-top: .25em;
+      padding-right: 1.25em;
+      padding-bottom: .25em;
+      padding-left: 1.25em; }
+      /* line 64, ../../../components/sass/modules/_typeahead.scss */
+      .tt-dataset-physicians .tt-suggestion a:hover {
+        text-decoration: none; }
+/* line 71, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion.tt-cursor {
   /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
   color: #fff;
   background-color: #00eaff; }
-/* line 57, ../../../components/sass/modules/_typeahead.scss */
+/* line 77, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion a {
   color: inherit; }
-/* line 61, ../../../components/sass/modules/_typeahead.scss */
+/* line 81, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion p {
   margin: 0; }

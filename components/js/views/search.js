@@ -30,6 +30,7 @@ var SearchView = Backbone.View.extend({
             console.log('here in SearchView, we heard an error event in locationFormView');
             this.render(model);
         });
+
     },
 
     render: function(data) {

@@ -7,9 +7,46 @@ var SpecialtyView = Backbone.View.extend({
 
     el: $('#specialty'),
 
-    autocomplete: function() {
+    events: {
+        'typeahead:closed': 'closed'
+    },
 
-        var physicians = new Bloodhound({
+    initialize: function () {
+        this.initAutocomplete();
+    },
+
+    initAutocomplete: function () {
+        this._initSpecialtyBloodhound();
+        this.specialtyEngine.initialize();
+
+        this._initPhysicianBloodhound();
+        this.physicianEngine.initialize();
+
+        this._initTypeahead();
+    },
+
+    specialtyEngine: undefined,
+    physicianEngine: undefined,
+
+    _initSpecialtyBloodhound: function() {
+        this.specialtyEngine = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            limit: 7,
+            prefetch: {
+                url: 'http://lookup.dev/api/v1/specialties',
+                filter: function(obj) {
+                    //console.log(obj['data']);
+                    return _.map(obj['data'], function(specialty) {
+                        return specialty;
+                    });
+                }
+            }
+        });
+    },
+
+    _initPhysicianBloodhound: function() {
+        this.physicianEngine = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             //limit: 7,
@@ -44,30 +81,17 @@ var SpecialtyView = Backbone.View.extend({
                 }
             }
         });
-    
-        var specialties = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            limit: 7,
-            prefetch: {
-                url: 'http://lookup.dev/api/v1/specialties',
-                filter: function(obj) {
-                    console.log(obj['data']);
-                    return _.map(obj['data'], function(specialty) {
-                        return specialty;
-                    });
-                }
-            }
-        });
 
-        physicians.initialize();
-        specialties.initialize();
+    },
 
-        var compiledSuggestion = _.template(
-            '<div><a href="/#physicians/<%= id %>"><strong><%= first_name %> <%= last_name %>' +
-            '</strong>, <%= designation %>; <%= city %>, ' +
-            '<%= state %></a></div>'
-        );
+    physicianSuggestionTemplate: _.template(
+        '<div><a href="/#physicians/<%= id %>" id="#physicianLink">' +
+        '<strong><%= first_name %> <%= last_name %></strong>, ' +
+        '<%= designation %>; <%= city %>, <%= state %></a></div>'
+    ),
+
+    _initTypeahead: function () {
+        var self = this;
 
         this.$el.typeahead({
             hint: false,
@@ -78,31 +102,33 @@ var SpecialtyView = Backbone.View.extend({
             name: 'physicians',
             //limit: 7,
             display: 'value',
-            source: physicians.ttAdapter(),
+            source: self.physicianEngine.ttAdapter(),
             templates: {
                 header: '<h5 class="typeahead-subhead">Physicians near ' +
                     '[city, state]</h5>',
-                suggestion: compiledSuggestion,
+                suggestion: self.physicianSuggestionTemplate,
                 engine: _
             },
         }, {
             name: 'specialties',
-            source: specialties.ttAdapter(),
+            source: self.specialtyEngine.ttAdapter(),
             display: 'name',
             templates: {
                 header: '<h5 class="typeahead-subhead">Specialties</h5>',
                 suggestion: function(suggestion) {
-                    // TODO
-                    // remove hard-coded url
                     return '<div>' + suggestion.name + "</div>";
                 }
             }
         });
-
+        
     },
 
     render: function() {
-        this.autocomplete();
+
+    },
+
+    closed: function(e) {
+        console.log('#specialty closed');
     }
 
 });

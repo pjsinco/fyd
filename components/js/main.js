@@ -74,19 +74,8 @@ var Workspace = require('./router.js');
 
 
 $(function () {
-
-    var searchLocation = new Location();
-
-    var search = new Search({ 
-        locationModel: searchLocation
-    });
-
-
     var app = new Workspace();
     app.start();
-    
-
-
 });
 
 
