@@ -46,6 +46,7 @@ Object {city: "Bronxville", state: "NY", lat: 40.940639, lon: -73.822578, value:
         * there are no other ZIPs that begin with "0050"
         * "4882" *doesn't* resolve
             * because there are multiple zips that begin with "4882"
+        * *but* "6061" *does* resolve, even tho there several zips begin with "6061"
 
 
 #dboFindaDO
