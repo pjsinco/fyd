@@ -23,7 +23,7 @@ var UserLocation = require('models/user-location');
 var PhysicianListItemView = require('views/physician');
 var SpecialtyFormView = require('views/specialty-form');
 var LocationFormView = require('views/location-form');
-var SearchView = require('views/search');
+var SearchFormView = require('views/search');
 
 /**
  * Collections
@@ -90,7 +90,7 @@ module.exports = {
     Search: Search,
     PhysicianListItemView: PhysicianListItemView,
     LocationFormView: LocationFormView,
-    SearchView: SearchView,
+    SearchFormView: SearchFormView,
     PhysicianList: PhysicianList,
     Workspace: Workspace,
     UserLocation: UserLocation,

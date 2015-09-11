@@ -88,7 +88,7 @@ module.exports = Physician;
 },{"backbone":16}],4:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
-var SearchView = require('views/search');
+var SearchFormView = require('views/search');
 var Location = require('models/location');
 var Specialty = require('models/specialty');
 
@@ -103,16 +103,15 @@ var SearchForm = Backbone.Model.extend({
 
         this.userLocation = options.userLocation;
         options.userLocation.unset('id');
-
         this.searchLocation = new Location(_.clone(this.userLocation.attributes));
-    
         this.specialty = new Specialty();
+        this.searchFormView = new SearchFormView({ 
+            model: this ,
+            el: '#findYourDo'
+        });
 
-        this.searchFormView = new SearchView({ model: this });
-
-        this.listenTo(this, 'all', this.reportEvent)
-
-        this.listenTo(this.searchLocation, 'change', this.updateLocations)
+        this.listenTo(this, 'all', this.reportEvent);
+        this.listenTo(this.searchLocation, 'change', this.updateLocations);
     },
 
     /**
@@ -2020,7 +2019,7 @@ var PhysicianView = require('views/physician');
 var PhysicianSimpleView = require('views/physician-simple');
 var Location = require('models/location');
 var SearchForm = require('models/search-form');
-var SearchView = require('views/search');
+
 var UserLocation = require('models/user-location');
 
 var Workspace = Backbone.Router.extend({
@@ -2105,7 +2104,7 @@ var Workspace = Backbone.Router.extend({
 
 module.exports = Workspace;
 
-},{"backbone":16,"jquery":17,"models/location":2,"models/physician":3,"models/search-form":4,"models/user-location":7,"underscore":18,"views/physician":12,"views/physician-simple":11,"views/search":13}],10:[function(require,module,exports){
+},{"backbone":16,"jquery":17,"models/location":2,"models/physician":3,"models/search-form":4,"models/user-location":7,"underscore":18,"views/physician":12,"views/physician-simple":11}],10:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2128,7 +2127,7 @@ var LocationForm = Backbone.View.extend({
 //        };
 //
 //        this.model = new Location({}, options);
-        this.listenTo(this.model, 'change', this.logChangeEvent);
+        this.listenTo(this.model, 'change', this.render);
 
         //this.model.fetch({
             //success: function(response) {
@@ -2139,44 +2138,23 @@ var LocationForm = Backbone.View.extend({
 
     },
 
-    logModelChange: function(model, options) {
-        alert('Model changed to ' + this.model.get('city') + ', ' + 
-            this.model.get('state'));
-    },
-
-    logChangeEvent: function(model, options) {
-        console.log('change fired on location model');
-        //console.debug(model);
-        //console.debug(options);
-    },
-
     logError: function() {
         console.log('error');
     },
 
     events: {
-        'focus': 'focusHandler',
-        'click': 'clickHandler',
         'typeahead:opened': 'opened',
         'error': 'logError',
         'typeahead:selected': 'setLocation',
         'typeahead:autocompleted': 'setLocation',
         'typeahead:closed': 'closed',
-        'input': 'inputHandler'
+        'input': 'inputHandler',
     },
 
-    focusHandler: function() {
-        console.log('focus');
+    holla: function(model, options)  {
+        console.log('holla');
     },
 
-    clickHandler: function() {
-        console.log('click');
-    },
-
-    inputHandler: function() {
-        console.log('input changed');
-        this.isSet = false;
-    },
 
     opened: function() {
         console.log('typehaead opened');
@@ -2261,12 +2239,33 @@ var LocationForm = Backbone.View.extend({
     },
 
     render: function() {
+        this.renderTypeaheadInput();
+        this.renderHiddens();
+        return this;
+    },
+
+    renderHiddens: function() {
+        console.log('rendering hiddens');
+        var $form = $('#findYourDo');
+        $form.find('input[type=hidden]').remove();
+
+        if (!this.model.isEmpty()) {
+            $form.prepend(this.hiddensTemplate(this.model.toJSON()));
+        }
+    },
+
+    renderTypeaheadInput: function() {
         if (!this.model.isEmpty()) {
             this.$el.typeahead('val', this.template(this.model.toJSON()));
         }
-
-        return this;
     },
+
+    hiddensTemplate: _.template(
+        '<input id="city" name="city" type="hidden" value="<%= city %>">' +
+        '<input id="state" name="state" type="hidden" value="<%= state %>">' +
+        '<input id="lat" name="lat" type="hidden" value="<%= lat %>">' +
+        '<input id="lon" name="lon" type="hidden" value="<%= lon %>">'
+    ),
 
     template: _.template(
         '<%= city %>, <%= state %><% if (typeof zip !== "undefined") { %>' +
@@ -2421,15 +2420,13 @@ var Backbone = require('backbone'),
     LocationFormView = require('views/location-form'),
     SpecialtyFormView = require('views/specialty-form');
 
-var SearchView = Backbone.View.extend({
+var SearchFormView = Backbone.View.extend({
 
-    el: '#findYourDO',
-
+    model: undefined,  // model: SearchForm; not persisted
     locationFormView: undefined,
     specialtyFormView: undefined,
 
     initialize: function() {
-
         // Initialize the search form's two inputs
         this.locationFormView = new LocationFormView({
             model: this.model.searchLocation
@@ -2439,6 +2436,7 @@ var SearchView = Backbone.View.extend({
             model: this.model.specialty
         });
 
+        this.listenTo(this.model.searchLocation, 'change', this.render);
 
         // Listen for change events emitted by the location input and
         // rerender on a change
@@ -2455,10 +2453,7 @@ var SearchView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.find('#city').val(data.get('city'));
-        this.$el.find('#state').val(data.get('state'));
-        this.$el.find('#lat').val(data.get('lat'));
-        this.$el.find('#lon').val(data.get('lon'));
+        return this;
     },
 
     events: {
@@ -2480,7 +2475,7 @@ var SearchView = Backbone.View.extend({
 
 });
 
-module.exports = SearchView;
+module.exports = SearchFormView;
 
 
 },{"backbone":16,"jquery":17,"models/location":2,"underscore":18,"views/location-form":10,"views/specialty-form":14}],14:[function(require,module,exports){
@@ -15567,7 +15562,7 @@ var UserLocation = require('models/user-location');
 var PhysicianListItemView = require('views/physician');
 var SpecialtyFormView = require('views/specialty-form');
 var LocationFormView = require('views/location-form');
-var SearchView = require('views/search');
+var SearchFormView = require('views/search');
 
 /**
  * Collections
@@ -15634,7 +15629,7 @@ module.exports = {
     Search: Search,
     PhysicianListItemView: PhysicianListItemView,
     LocationFormView: LocationFormView,
-    SearchView: SearchView,
+    SearchFormView: SearchFormView,
     PhysicianList: PhysicianList,
     Workspace: Workspace,
     UserLocation: UserLocation,

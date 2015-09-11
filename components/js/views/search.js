@@ -5,15 +5,13 @@ var Backbone = require('backbone'),
     LocationFormView = require('views/location-form'),
     SpecialtyFormView = require('views/specialty-form');
 
-var SearchView = Backbone.View.extend({
+var SearchFormView = Backbone.View.extend({
 
-    el: '#findYourDO',
-
+    model: undefined,  // model: SearchForm; not persisted
     locationFormView: undefined,
     specialtyFormView: undefined,
 
     initialize: function() {
-
         // Initialize the search form's two inputs
         this.locationFormView = new LocationFormView({
             model: this.model.searchLocation
@@ -23,6 +21,7 @@ var SearchView = Backbone.View.extend({
             model: this.model.specialty
         });
 
+        this.listenTo(this.model.searchLocation, 'change', this.render);
 
         // Listen for change events emitted by the location input and
         // rerender on a change
@@ -39,10 +38,7 @@ var SearchView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.find('#city').val(data.get('city'));
-        this.$el.find('#state').val(data.get('state'));
-        this.$el.find('#lat').val(data.get('lat'));
-        this.$el.find('#lon').val(data.get('lon'));
+        return this;
     },
 
     events: {
@@ -64,5 +60,5 @@ var SearchView = Backbone.View.extend({
 
 });
 
-module.exports = SearchView;
+module.exports = SearchFormView;
 

@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
-var SearchView = require('views/search');
+var SearchFormView = require('views/search');
 var Location = require('models/location');
 var Specialty = require('models/specialty');
 
@@ -15,16 +15,15 @@ var SearchForm = Backbone.Model.extend({
 
         this.userLocation = options.userLocation;
         options.userLocation.unset('id');
-
         this.searchLocation = new Location(_.clone(this.userLocation.attributes));
-    
         this.specialty = new Specialty();
+        this.searchFormView = new SearchFormView({ 
+            model: this ,
+            el: '#findYourDo'
+        });
 
-        this.searchFormView = new SearchView({ model: this });
-
-        this.listenTo(this, 'all', this.reportEvent)
-
-        this.listenTo(this.searchLocation, 'change', this.updateLocations)
+        this.listenTo(this, 'all', this.reportEvent);
+        this.listenTo(this.searchLocation, 'change', this.updateLocations);
     },
 
     /**

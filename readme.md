@@ -35,11 +35,18 @@ locations table
 * In the FindADO query, can we not concatenate fellow designations onto the `designation` field?
         * See Dr. Hubka: "DO, FACOOG, FACOG,CS"
 
+###Bad resolves
 * "Bronx" should resolve to "Bronx, NY"
 ```
 Object {city: "Bronx", state: "NY", lat: 40.820195, lon: -73.920218, value: "Bronx, NY"}
 Object {city: "Bronxville", state: "NY", lat: 40.940639, lon: -73.822578, value: "Bronxville, NY"}
 ```
+* "0050" resolves to "Holtsville, NY 00501"
+    * should it?
+        * there are no other ZIPs that begin with "0050"
+        * "4882" *doesn't* resolve
+            * because there are multiple zips that begin with "4882"
+
 
 #dboFindaDO
 * Fri Jul 31 11:50:51 2015 CDT 

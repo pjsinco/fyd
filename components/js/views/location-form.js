@@ -20,7 +20,7 @@ var LocationForm = Backbone.View.extend({
 //        };
 //
 //        this.model = new Location({}, options);
-        this.listenTo(this.model, 'change', this.logChangeEvent);
+        this.listenTo(this.model, 'change', this.render);
 
         //this.model.fetch({
             //success: function(response) {
@@ -31,44 +31,23 @@ var LocationForm = Backbone.View.extend({
 
     },
 
-    logModelChange: function(model, options) {
-        alert('Model changed to ' + this.model.get('city') + ', ' + 
-            this.model.get('state'));
-    },
-
-    logChangeEvent: function(model, options) {
-        console.log('change fired on location model');
-        //console.debug(model);
-        //console.debug(options);
-    },
-
     logError: function() {
         console.log('error');
     },
 
     events: {
-        'focus': 'focusHandler',
-        'click': 'clickHandler',
         'typeahead:opened': 'opened',
         'error': 'logError',
         'typeahead:selected': 'setLocation',
         'typeahead:autocompleted': 'setLocation',
         'typeahead:closed': 'closed',
-        'input': 'inputHandler'
+        'input': 'inputHandler',
     },
 
-    focusHandler: function() {
-        console.log('focus');
+    holla: function(model, options)  {
+        console.log('holla');
     },
 
-    clickHandler: function() {
-        console.log('click');
-    },
-
-    inputHandler: function() {
-        console.log('input changed');
-        this.isSet = false;
-    },
 
     opened: function() {
         console.log('typehaead opened');
@@ -153,12 +132,33 @@ var LocationForm = Backbone.View.extend({
     },
 
     render: function() {
+        this.renderTypeaheadInput();
+        this.renderHiddens();
+        return this;
+    },
+
+    renderHiddens: function() {
+        console.log('rendering hiddens');
+        var $form = $('#findYourDo');
+        $form.find('input[type=hidden]').remove();
+
+        if (!this.model.isEmpty()) {
+            $form.prepend(this.hiddensTemplate(this.model.toJSON()));
+        }
+    },
+
+    renderTypeaheadInput: function() {
         if (!this.model.isEmpty()) {
             this.$el.typeahead('val', this.template(this.model.toJSON()));
         }
-
-        return this;
     },
+
+    hiddensTemplate: _.template(
+        '<input id="city" name="city" type="hidden" value="<%= city %>">' +
+        '<input id="state" name="state" type="hidden" value="<%= state %>">' +
+        '<input id="lat" name="lat" type="hidden" value="<%= lat %>">' +
+        '<input id="lon" name="lon" type="hidden" value="<%= lon %>">'
+    ),
 
     template: _.template(
         '<%= city %>, <%= state %><% if (typeof zip !== "undefined") { %>' +

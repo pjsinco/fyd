@@ -6,7 +6,7 @@ var PhysicianView = require('views/physician');
 var PhysicianSimpleView = require('views/physician-simple');
 var Location = require('models/location');
 var SearchForm = require('models/search-form');
-var SearchView = require('views/search');
+
 var UserLocation = require('models/user-location');
 
 var Workspace = Backbone.Router.extend({
