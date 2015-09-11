@@ -47,15 +47,26 @@ var SearchFormView = Backbone.View.extend({
 
     formSubmit: function(evt) {
         evt.preventDefault();
-        
-        // Validate the form by checking if values in hidden inputs
-        // #city and #state are set
-        var $hiddens = $(evt.currentTarget).find('#city, #state');
-        var valid = $hiddens.filter(function(i, elem) {
-            return $(elem).val() != false;
-        });
+        console.log('form submitted: ' + (this.isValid() ? 'valid' : 'invalid' ));
+        if (this.isValid()) {
+            
+        } else {
+            this.indicateInvalid();
+        }
+    },
+    
+    isValid: function() {
+        return !this.model.searchLocation.isEmpty();
+    },
 
-        console.log('form submitted: ' + (valid.length > 0 ? 'valid' : 'invalid' ));
+    indicateInvalid: function() {
+        var $loc = $('#location');
+        $('#location')
+            .addClass('animated swing required')
+            .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
+                    'oanimationend animationend', function() { 
+                $(this).removeClass('animated swing required');
+            });
     }
 
 });
