@@ -427,3 +427,6 @@ var groupPrincipals = new Bloodhound({
 
 #####Fri Sep 11 10:02:41 2015 CDT
 * Blog: [Determining if an object is empty with Underscore / Lo-dash](http://www.ericfeminella.com/blog/2012/08/18/determining-if-an-object-is-empty-with-underscore-lo-dash/)
+
+* Github: [Animate.css](https://github.com/daneden/animate.css)
+    > A cross-browser library of CSS animations. As easy to use as an easy thing. http://daneden.github.io/animate.css
