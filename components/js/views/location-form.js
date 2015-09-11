@@ -137,6 +137,10 @@ var LocationForm = Backbone.View.extend({
         return this;
     },
 
+    /**
+     * Render hidden form inputs
+     *
+     */
     renderHiddens: function() {
         console.log('rendering hiddens');
         var $form = $('#findYourDo');

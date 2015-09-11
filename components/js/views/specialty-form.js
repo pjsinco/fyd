@@ -7,12 +7,19 @@ var SpecialtyView = Backbone.View.extend({
 
     el: $('#specialty'),
 
+
     events: {
-        'typeahead:closed': 'closed'
+        'typeahead:closed': 'closed',
+        'typeahead:selected': 'setSpecialty'
     },
 
     initialize: function () {
         this.initAutocomplete();
+        this.render();
+    },
+
+    setSpecialty: function(evt, suggestion) {
+        this.model.set(suggestion);
         this.render();
     },
 
@@ -125,7 +132,22 @@ var SpecialtyView = Backbone.View.extend({
     },
 
     render: function() {
+        this.renderHidden();
 
+    },
+
+    hiddenTemplate: _.template(
+        '<input id="sCode" name="s_code" type="hidden" value="<%= code %>">'
+    ),
+
+    renderHidden: function() {
+        var $form = $('#findYourDo');
+        $form.find('#sCode').remove();
+
+        if (!this.model.isEmpty()) {
+            $form.prepend(this.hiddenTemplate(this.model.toJSON()));
+        }
+        
     },
 
     closed: function(e) {

@@ -24,6 +24,11 @@ var SearchForm = Backbone.Model.extend({
 
         this.listenTo(this, 'all', this.reportEvent);
         this.listenTo(this.searchLocation, 'change', this.updateLocations);
+        this.listenTo(this.specialty, 'change', this.updateSpecialty);
+    },
+
+    updateSpecialty: function (model, options) {
+ console.log('way up in SearchForm model, heard change to specialty');
     },
 
     /**
