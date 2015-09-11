@@ -3,8 +3,7 @@ var _ = require('underscore');
 var Location = require('models/location');
 var LocalStorage = require('backbone.localstorage');
 
-var UserLocation = Location.extend({
-
+var UserLocation = Backbone.Model.extend({
    
     localStorage: new LocalStorage('user-location'),
 
@@ -17,8 +16,20 @@ var UserLocation = Location.extend({
     },
 
     initialize: function() {
-        this.fetch();
-        this.listenTo(this, 'change', this.save)
+        this.listenTo(this, 'all', this.reportEvent);
+        this.listenTo(this, 'change', this.setNewLocation);
+    },
+
+    update: function(attributes) {
+        this.save(attributes);
+    },
+
+    setNewLocation: function (model) {
+    },
+    
+
+    reportEvent: function (eventName) {
+        console.log(eventName + ' fired on UserLocation');
     },
 
     isEmpty: function() {

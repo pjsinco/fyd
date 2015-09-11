@@ -13,6 +13,7 @@ var SpecialtyView = Backbone.View.extend({
 
     initialize: function () {
         this.initAutocomplete();
+        this.render();
     },
 
     initAutocomplete: function () {

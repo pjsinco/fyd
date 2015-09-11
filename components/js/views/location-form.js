@@ -37,7 +37,7 @@ var LocationForm = Backbone.View.extend({
     },
 
     logChangeEvent: function(model, options) {
-        console.log('change fired');
+        console.log('change fired on location model');
         //console.debug(model);
         //console.debug(options);
     },
@@ -91,9 +91,9 @@ var LocationForm = Backbone.View.extend({
             _.defaults(suggestion, { zip: undefined })
         }
 
-        this.isSet = true;
+        //this.isSet = true;
         this.model.set(suggestion);
-        this.triggerChangeEvent();
+        //this.triggerChangeEvent();
     },
 
     /**

@@ -5,7 +5,7 @@ var Physician = require('models/physician');
 var PhysicianView = require('views/physician');
 var PhysicianSimpleView = require('views/physician-simple');
 var Location = require('models/location');
-var Search = require('models/search');
+var SearchForm = require('models/search-form');
 var SearchView = require('views/search');
 var UserLocation = require('models/user-location');
 
@@ -17,60 +17,47 @@ var Workspace = Backbone.Router.extend({
         'physicians/:id': 'physicianDetail'
     },
 
-    userLocation: undefined,
+    userLocation: undefined,   // UserLocation model; persisted in local storage
+    searchForm: undefined,     // SearchForm model; throwaway
 
     initialize: function() {
+        this.userLocation = new UserLocation({ id: 1 });
+    },
+
+    home: function() {
 
         var self = this;
-
-        this.userLocation = new UserLocation({ id: 1 });
-
         this.userLocation.fetch({
 
-            // TODO
-            // refactor these callbacks
-
-            success: function(model, response, options) {
-
-                self.searchLocation = new Location()
-                self.searchLocation.set(response);
-                self.searchView = new SearchView({
-                    userLocation: self.userLocation,
-                });
-                
+            success: function() {
+                self.initSearch();
             },
-            error: function(model, response, options) {
 
-                // we don't have a location for this user.
-                // let's set one up.
-                // this is where we'll geolocate by IP.
+            error: function() {
+
+                // So we don't have a location for this user.
+                // Let's set one up.
+                // This is where we'll geolocate by IP.
+                // For now we'll spoof.
                 var modelOptions = {
                     url: 'http://lookup.dev/api/v1/locations/random', 
                 };
                 var randomLocation = new Location({}, modelOptions);
                 var that = self;
                 randomLocation.fetch({
-                    success: function(model, response, options) {
-                        that.userLocation = 
-                            new UserLocation(_.extend({id: 1}, response.data));
-                        that.userLocation.save();
+                    success: function(model, response) {
+                        self.userLocation.save(_.extend({ id: 1 }, response.data));
+                        self.initSearch();
                     }
                 })
             }
         });
-
-//        var search = new Search({ 
-//            locationModel: searchLocation
-//        });
-
     },
 
-    initSearchForm: function () {
-
-    },
-
-    start: function() {
-       
+    initSearch: function (locationAttributes) {
+        this.searchForm = new SearchForm({
+            userLocation: this.userLocation
+        });
     },
 
     physicianDetail: function(id) {

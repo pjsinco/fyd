@@ -13,7 +13,7 @@ var PhysicianList = Backbone.Collection.extend({
 module.exports = PhysicianList;
 
 
-},{"backbone":13,"models/physician":3}],2:[function(require,module,exports){
+},{"backbone":16,"models/physician":3}],2:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var Location = Backbone.Model.extend({
@@ -56,7 +56,7 @@ var Location = Backbone.Model.extend({
 
 module.exports = Location;
 
-},{"backbone":13}],3:[function(require,module,exports){
+},{"backbone":16}],3:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var Physician = Backbone.Model.extend({
@@ -78,14 +78,67 @@ var Physician = Backbone.Model.extend({
 module.exports = Physician;
 
 
-},{"backbone":13}],4:[function(require,module,exports){
+},{"backbone":16}],4:[function(require,module,exports){
 var Backbone = require('backbone');
+var _ = require('underscore');
+var SearchView = require('views/search');
+var Location = require('models/location');
+var Specialty = require('models/specialty');
+
+var SearchForm = Backbone.Model.extend({
+
+    searchLocation: undefined, // model; not persisted
+    userLocation: undefined,   // model; persisted in localstorage
+    specialty: undefined,      // model; TODO make it
+    searchFormView: undefined, // view; backed by this model
+
+    initialize: function (options) {
+
+        this.userLocation = options.userLocation;
+        options.userLocation.unset('id');
+
+        this.searchLocation = new Location(_.clone(this.userLocation.attributes));
+    
+        this.specialty = new Specialty();
+
+        this.searchFormView = new SearchView({ model: this });
+
+        //this.listenTo(this, 'all', this.reportEvent)
+
+
+        this.listenTo(this.searchLocation, 'change', this.updateLocations)
+    },
+
+    updateLocations: function(model, options) {
+        var attributes = _.clone(model.attributes);
+        this.userLocation.update(_.extend({ id: 1 }, attributes));
+        this.searchLocation.set(attributes);
+    },
+
+
+    reportEvent: function (eventName) {
+        console.log(eventName + ' event on SearchForm model');
+    },
+
+    
+
+
+});
+
+module.exports = SearchForm;
+
+
+},{"backbone":16,"models/location":2,"models/specialty":6,"underscore":18,"views/search":13}],5:[function(require,module,exports){
+var Backbone = require('backbone');
+var SearchView = require('views/search');
 
 var Search = Backbone.Model.extend({
     
     locationModel: undefined,
 
-    initialize: function () {
+    initialize: function (options) {
+debugger;
+        this.searchView = new SearchView({ el: '#findYourDo' });
         this.listenTo(this.locationModel, 'change', 'From inside Search model, heard a change to Location model');
     }
 
@@ -94,7 +147,7 @@ var Search = Backbone.Model.extend({
 module.exports = Search;
 
 
-},{"backbone":13}],5:[function(require,module,exports){
+},{"backbone":16,"views/search":13}],6:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var Specialty = Backbone.Model.extend({
@@ -108,7 +161,52 @@ var Specialty = Backbone.Model.extend({
 module.exports = Specialty;
 
 
-},{"backbone":13}],6:[function(require,module,exports){
+},{"backbone":16}],7:[function(require,module,exports){
+var Backbone = require('backbone');
+var _ = require('underscore');
+var Location = require('models/location');
+var LocalStorage = require('backbone.localstorage');
+
+var UserLocation = Backbone.Model.extend({
+   
+    localStorage: new LocalStorage('user-location'),
+
+    defaults: {
+        city: undefined,
+        state: undefined, 
+        zip: undefined,
+        lat: undefined,
+        lon: undefined
+    },
+
+    initialize: function() {
+        this.listenTo(this, 'all', this.reportEvent);
+        this.listenTo(this, 'change', this.setNewLocation);
+    },
+
+    update: function(attributes) {
+        this.save(attributes);
+    },
+
+    setNewLocation: function (model) {
+    },
+    
+
+    reportEvent: function (eventName) {
+        console.log(eventName + ' fired on UserLocation');
+    },
+
+    isEmpty: function() {
+        return (_.size(this.attributes) <= 1) ; // just id
+    }
+
+
+});
+
+module.exports = UserLocation;
+
+
+},{"backbone":16,"backbone.localstorage":15,"models/location":2,"underscore":18}],8:[function(require,module,exports){
 var $ = require('jquery');
 
 //https://github.com/twitter/typeahead.js/issues/872
@@ -1897,15 +1995,17 @@ module.exports = (function($) {
     })();
 })(window.jQuery);
 
-},{"jquery":14}],7:[function(require,module,exports){
+},{"jquery":17}],9:[function(require,module,exports){
 var Backbone = require('backbone');
 var $ = require('jquery');
+var _ = require('underscore');
 var Physician = require('models/physician');
 var PhysicianView = require('views/physician');
 var PhysicianSimpleView = require('views/physician-simple');
 var Location = require('models/location');
-var Search = require('models/search');
+var SearchForm = require('models/search-form');
 var SearchView = require('views/search');
+var UserLocation = require('models/user-location');
 
 var Workspace = Backbone.Router.extend({
 
@@ -1915,18 +2015,47 @@ var Workspace = Backbone.Router.extend({
         'physicians/:id': 'physicianDetail'
     },
 
+    userLocation: undefined,   // UserLocation model; persisted in local storage
+    searchForm: undefined,     // SearchForm model; throwaway
+
     initialize: function() {
-        var searchLocation = new Location();
-
-        var search = new Search({ 
-            locationModel: searchLocation
-        });
-
-        this.searchView = new SearchView({ el: '#findYourDo' });
+        this.userLocation = new UserLocation({ id: 1 });
     },
 
     home: function() {
-        console.log('home route');
+
+        var self = this;
+        this.userLocation.fetch({
+
+            success: function() {
+                self.initSearch();
+            },
+
+            error: function() {
+
+                // So we don't have a location for this user.
+                // Let's set one up.
+                // This is where we'll geolocate by IP.
+                // For now we'll spoof.
+                var modelOptions = {
+                    url: 'http://lookup.dev/api/v1/locations/random', 
+                };
+                var randomLocation = new Location({}, modelOptions);
+                var that = self;
+                randomLocation.fetch({
+                    success: function(model, response) {
+                        self.userLocation.save(_.extend({ id: 1 }, response.data));
+                        self.initSearch();
+                    }
+                })
+            }
+        });
+    },
+
+    initSearch: function (locationAttributes) {
+        this.searchForm = new SearchForm({
+            userLocation: this.userLocation
+        });
     },
 
     physicianDetail: function(id) {
@@ -1950,7 +2079,7 @@ var Workspace = Backbone.Router.extend({
 
 module.exports = Workspace;
 
-},{"backbone":13,"jquery":14,"models/location":2,"models/physician":3,"models/search":4,"views/physician":10,"views/physician-simple":9,"views/search":11}],8:[function(require,module,exports){
+},{"backbone":16,"jquery":17,"models/location":2,"models/physician":3,"models/search-form":4,"models/user-location":7,"underscore":18,"views/physician":12,"views/physician-simple":11,"views/search":13}],10:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -1968,19 +2097,19 @@ var LocationForm = Backbone.View.extend({
 
         var self = this;
 
-        var options = {
-            url: 'http://lookup.dev/api/v1/locations/random', 
-        };
-
-        this.model = new Location({}, options);
+//        var options = {
+//            url: 'http://lookup.dev/api/v1/locations/random', 
+//        };
+//
+//        this.model = new Location({}, options);
         this.listenTo(this.model, 'change', this.logChangeEvent);
 
-        this.model.fetch({
-            success: function(response) {
+        //this.model.fetch({
+            //success: function(response) {
                 self.render();
                 self.triggerChangeEvent();
-            }
-        });
+            //}
+        //});
 
     },
 
@@ -1990,7 +2119,7 @@ var LocationForm = Backbone.View.extend({
     },
 
     logChangeEvent: function(model, options) {
-        console.log('change fired');
+        console.log('change fired on location model');
         //console.debug(model);
         //console.debug(options);
     },
@@ -2044,9 +2173,9 @@ var LocationForm = Backbone.View.extend({
             _.defaults(suggestion, { zip: undefined })
         }
 
-        this.isSet = true;
+        //this.isSet = true;
         this.model.set(suggestion);
-        this.triggerChangeEvent();
+        //this.triggerChangeEvent();
     },
 
     /**
@@ -2208,7 +2337,7 @@ var LocationForm = Backbone.View.extend({
 
 module.exports = LocationForm;
 
-},{"backbone":13,"jquery":14,"models/location":2,"typeahead.0.10.5":6,"underscore":15}],9:[function(require,module,exports){
+},{"backbone":16,"jquery":17,"models/location":2,"typeahead.0.10.5":8,"underscore":18}],11:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var PhysicianSimpleView = Backbone.View.extend({
@@ -2219,7 +2348,7 @@ var PhysicianSimpleView = Backbone.View.extend({
 
 module.exports = PhysicianSimpleView;
 
-},{"backbone":13}],10:[function(require,module,exports){
+},{"backbone":16}],12:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 
@@ -2256,7 +2385,7 @@ var PhysicianListItemView = Backbone.View.extend({
 module.exports = PhysicianListItemView;
 
 
-},{"backbone":13,"underscore":15}],11:[function(require,module,exports){
+},{"backbone":16,"underscore":18}],13:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2274,25 +2403,30 @@ var SearchView = Backbone.View.extend({
     initialize: function() {
 
         // Initialize the search form's two inputs
-        this.locationFormView = new LocationFormView();
-        this.specialtyFormView = new SpecialtyFormView();
-        this.specialtyFormView.render();
+        this.locationFormView = new LocationFormView({
+            model: this.model.searchLocation
+        });
+
+        this.specialtyFormView = new SpecialtyFormView({
+            model: this.model.specialty
+        });
+
 
         // Listen for change events emitted by the location input and
         // rerender on a change
-        this.listenTo(this.locationFormView, 'change', function(model) {
-            console.log('here in SearchView, we heard a change event in locationFormView');
-            this.render(model);
-        });
-
-        this.listenTo(this.locationFormView, 'error', function(model) {
-            console.log('here in SearchView, we heard an error event in locationFormView');
-            this.render(model);
-        });
+//        this.listenTo(this.locationFormView, 'change', function(model) {
+//            console.log('here in SearchView, we heard a change event in locationFormView');
+//            this.render();
+//        });
+//
+//        this.listenTo(this.locationFormView, 'error', function(model) {
+//            console.log('here in SearchView, we heard an error event in locationFormView');
+//            this.render();
+//        });
 
     },
 
-    render: function(data) {
+    render: function() {
         this.$el.find('#city').val(data.get('city'));
         this.$el.find('#state').val(data.get('state'));
         this.$el.find('#lat').val(data.get('lat'));
@@ -2321,7 +2455,7 @@ var SearchView = Backbone.View.extend({
 module.exports = SearchView;
 
 
-},{"backbone":13,"jquery":14,"models/location":2,"underscore":15,"views/location-form":8,"views/specialty-form":12}],12:[function(require,module,exports){
+},{"backbone":16,"jquery":17,"models/location":2,"underscore":18,"views/location-form":10,"views/specialty-form":14}],14:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -2337,6 +2471,7 @@ var SpecialtyView = Backbone.View.extend({
 
     initialize: function () {
         this.initAutocomplete();
+        this.render();
     },
 
     initAutocomplete: function () {
@@ -2459,7 +2594,267 @@ var SpecialtyView = Backbone.View.extend({
 
 module.exports = SpecialtyView;
 
-},{"backbone":13,"jquery":14,"typeahead.0.10.5":6,"underscore":15}],13:[function(require,module,exports){
+},{"backbone":16,"jquery":17,"typeahead.0.10.5":8,"underscore":18}],15:[function(require,module,exports){
+/**
+ * Backbone localStorage Adapter
+ * Version 1.1.16
+ *
+ * https://github.com/jeromegn/Backbone.localStorage
+ */
+(function (root, factory) {
+  if (typeof exports === 'object' && typeof require === 'function') {
+    module.exports = factory(require("backbone"));
+  } else if (typeof define === "function" && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(["backbone"], function(Backbone) {
+      // Use global variables if the locals are undefined.
+      return factory(Backbone || root.Backbone);
+    });
+  } else {
+    factory(Backbone);
+  }
+}(this, function(Backbone) {
+// A simple module to replace `Backbone.sync` with *localStorage*-based
+// persistence. Models are given GUIDS, and saved into a JSON object. Simple
+// as that.
+
+// Generate four random hex digits.
+function S4() {
+   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+};
+
+// Generate a pseudo-GUID by concatenating random hexadecimal.
+function guid() {
+   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+};
+
+function isObject(item) {
+  return item === Object(item);
+}
+
+function contains(array, item) {
+  var i = array.length;
+  while (i--) if (array[i] === item) return true;
+  return false;
+}
+
+function extend(obj, props) {
+  for (var key in props) obj[key] = props[key]
+  return obj;
+}
+
+function result(object, property) {
+    if (object == null) return void 0;
+    var value = object[property];
+    return (typeof value === 'function') ? object[property]() : value;
+}
+
+// Our Store is represented by a single JS object in *localStorage*. Create it
+// with a meaningful name, like the name you'd give a table.
+// window.Store is deprectated, use Backbone.LocalStorage instead
+Backbone.LocalStorage = window.Store = function(name, serializer) {
+  if( !this.localStorage ) {
+    throw "Backbone.localStorage: Environment does not support localStorage."
+  }
+  this.name = name;
+  this.serializer = serializer || {
+    serialize: function(item) {
+      return isObject(item) ? JSON.stringify(item) : item;
+    },
+    // fix for "illegal access" error on Android when JSON.parse is passed null
+    deserialize: function (data) {
+      return data && JSON.parse(data);
+    }
+  };
+  var store = this.localStorage().getItem(this.name);
+  this.records = (store && store.split(",")) || [];
+};
+
+extend(Backbone.LocalStorage.prototype, {
+
+  // Save the current state of the **Store** to *localStorage*.
+  save: function() {
+    this.localStorage().setItem(this.name, this.records.join(","));
+  },
+
+  // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
+  // have an id of it's own.
+  create: function(model) {
+    if (!model.id && model.id !== 0) {
+      model.id = guid();
+      model.set(model.idAttribute, model.id);
+    }
+    this.localStorage().setItem(this._itemName(model.id), this.serializer.serialize(model));
+    this.records.push(model.id.toString());
+    this.save();
+    return this.find(model);
+  },
+
+  // Update a model by replacing its copy in `this.data`.
+  update: function(model) {
+    this.localStorage().setItem(this._itemName(model.id), this.serializer.serialize(model));
+    var modelId = model.id.toString();
+    if (!contains(this.records, modelId)) {
+      this.records.push(modelId);
+      this.save();
+    }
+    return this.find(model);
+  },
+
+  // Retrieve a model from `this.data` by id.
+  find: function(model) {
+    return this.serializer.deserialize(this.localStorage().getItem(this._itemName(model.id)));
+  },
+
+  // Return the array of all models currently in storage.
+  findAll: function() {
+    var result = [];
+    for (var i = 0, id, data; i < this.records.length; i++) {
+      id = this.records[i];
+      data = this.serializer.deserialize(this.localStorage().getItem(this._itemName(id)));
+      if (data != null) result.push(data);
+    }
+    return result;
+  },
+
+  // Delete a model from `this.data`, returning it.
+  destroy: function(model) {
+    this.localStorage().removeItem(this._itemName(model.id));
+    var modelId = model.id.toString();
+    for (var i = 0, id; i < this.records.length; i++) {
+      if (this.records[i] === modelId) {
+        this.records.splice(i, 1);
+      }
+    }
+    this.save();
+    return model;
+  },
+
+  localStorage: function() {
+    return localStorage;
+  },
+
+  // Clear localStorage for specific collection.
+  _clear: function() {
+    var local = this.localStorage(),
+      itemRe = new RegExp("^" + this.name + "-");
+
+    // Remove id-tracking item (e.g., "foo").
+    local.removeItem(this.name);
+
+    // Match all data items (e.g., "foo-ID") and remove.
+    for (var k in local) {
+      if (itemRe.test(k)) {
+        local.removeItem(k);
+      }
+    }
+
+    this.records.length = 0;
+  },
+
+  // Size of localStorage.
+  _storageSize: function() {
+    return this.localStorage().length;
+  },
+
+  _itemName: function(id) {
+    return this.name+"-"+id;
+  }
+
+});
+
+// localSync delegate to the model or collection's
+// *localStorage* property, which should be an instance of `Store`.
+// window.Store.sync and Backbone.localSync is deprecated, use Backbone.LocalStorage.sync instead
+Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
+  var store = result(model, 'localStorage') || result(model.collection, 'localStorage');
+
+  var resp, errorMessage;
+  //If $ is having Deferred - use it.
+  var syncDfd = Backbone.$ ?
+    (Backbone.$.Deferred && Backbone.$.Deferred()) :
+    (Backbone.Deferred && Backbone.Deferred());
+
+  try {
+
+    switch (method) {
+      case "read":
+        resp = model.id != undefined ? store.find(model) : store.findAll();
+        break;
+      case "create":
+        resp = store.create(model);
+        break;
+      case "update":
+        resp = store.update(model);
+        break;
+      case "delete":
+        resp = store.destroy(model);
+        break;
+    }
+
+  } catch(error) {
+    if (error.code === 22 && store._storageSize() === 0)
+      errorMessage = "Private browsing is unsupported";
+    else
+      errorMessage = error.message;
+  }
+
+  if (resp) {
+    if (options && options.success) {
+      if (Backbone.VERSION === "0.9.10") {
+        options.success(model, resp, options);
+      } else {
+        options.success(resp);
+      }
+    }
+    if (syncDfd) {
+      syncDfd.resolve(resp);
+    }
+
+  } else {
+    errorMessage = errorMessage ? errorMessage
+                                : "Record Not Found";
+
+    if (options && options.error)
+      if (Backbone.VERSION === "0.9.10") {
+        options.error(model, errorMessage, options);
+      } else {
+        options.error(errorMessage);
+      }
+
+    if (syncDfd)
+      syncDfd.reject(errorMessage);
+  }
+
+  // add compatibility with $.ajax
+  // always execute callback for success and error
+  if (options && options.complete) options.complete(resp);
+
+  return syncDfd && syncDfd.promise();
+};
+
+Backbone.ajaxSync = Backbone.sync;
+
+Backbone.getSyncMethod = function(model, options) {
+  var forceAjaxSync = options && options.ajaxSync;
+
+  if(!forceAjaxSync && (result(model, 'localStorage') || result(model.collection, 'localStorage'))) {
+    return Backbone.localSync;
+  }
+
+  return Backbone.ajaxSync;
+};
+
+// Override 'Backbone.sync' to default to localSync,
+// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
+Backbone.sync = function(method, model, options) {
+  return Backbone.getSyncMethod(model, options).apply(this, [method, model, options]);
+};
+
+return Backbone.LocalStorage;
+}));
+
+},{"backbone":16}],16:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.2
 
@@ -4356,7 +4751,7 @@ module.exports = SpecialtyView;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":14,"underscore":15}],14:[function(require,module,exports){
+},{"jquery":17,"underscore":18}],17:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -13568,7 +13963,7 @@ return jQuery;
 
 }));
 
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -15123,6 +15518,7 @@ return jQuery;
 
 var Backbone = require('backbone');
 var $ = require('jquery');
+var _ = require('underscore');
 
 Backbone.$ = $;
 
@@ -15134,6 +15530,7 @@ var Physician = require('models/physician');
 var Specialty = require('models/specialty');
 var Location = require('models/location');
 var Search = require('models/search');
+var UserLocation = require('models/user-location');
 
 /**
  * Views
@@ -15212,8 +15609,10 @@ module.exports = {
     SearchView: SearchView,
     PhysicianList: PhysicianList,
     Workspace: Workspace,
+    UserLocation: UserLocation,
+    _: _
     //FindADoApp: FindADoApp
 
 };
 
-},{"./router.js":7,"backbone":13,"collections/physician-list":1,"jquery":14,"models/location":2,"models/physician":3,"models/search":4,"models/specialty":5,"views/location-form":8,"views/physician":10,"views/search":11,"views/specialty-form":12}]},{},["app"]);
+},{"./router.js":9,"backbone":16,"collections/physician-list":1,"jquery":17,"models/location":2,"models/physician":3,"models/search":5,"models/specialty":6,"models/user-location":7,"underscore":18,"views/location-form":10,"views/physician":12,"views/search":13,"views/specialty-form":14}]},{},["app"]);
