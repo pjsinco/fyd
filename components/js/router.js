@@ -27,24 +27,23 @@ var Workspace = Backbone.Router.extend({
 
         this.userLocation.fetch({
 
+            // TODO
+            // refactor these callbacks
+
             success: function(model, response, options) {
 
-                if (_.isEmpty(response)) {
-                    // No location in localstorage
-                    
-                    // geolocate; spoof for now
-                } else {
-                    self.searchLocation = new Location()
-                    self.searchLocation.set(response);
-                }
-
+                self.searchLocation = new Location()
+                self.searchLocation.set(response);
                 self.searchView = new SearchView({
                     userLocation: self.userLocation,
-                })
+                });
                 
             },
             error: function(model, response, options) {
 
+                // we don't have a location for this user.
+                // let's set one up.
+                // this is where we'll geolocate by IP.
                 var modelOptions = {
                     url: 'http://lookup.dev/api/v1/locations/random', 
                 };
@@ -52,15 +51,12 @@ var Workspace = Backbone.Router.extend({
                 var that = self;
                 randomLocation.fetch({
                     success: function(model, response, options) {
-                        that.userLocation = new UserLocation(_.extend({id: 1}, response.data));
+                        that.userLocation = 
+                            new UserLocation(_.extend({id: 1}, response.data));
                         that.userLocation.save();
-
                     }
                 })
-                
-                // TODO
             }
-
         });
 
 //        var search = new Search({ 
@@ -73,8 +69,8 @@ var Workspace = Backbone.Router.extend({
 
     },
 
-    home: function() {
-        console.log('home route');
+    start: function() {
+       
     },
 
     physicianDetail: function(id) {
