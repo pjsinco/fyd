@@ -34,24 +34,34 @@ var Workspace = Backbone.Router.extend({
             },
 
             error: function() {
-
                 // So we don't have a location for this user.
+
                 // Let's set one up.
                 // This is where we'll geolocate by IP.
                 // For now we'll spoof.
-                var modelOptions = {
-                    url: 'http://lookup.dev/api/v1/locations/random', 
-                };
-                var randomLocation = new Location({}, modelOptions);
-                var that = self;
-                randomLocation.fetch({
-                    success: function(model, response) {
-                        self.userLocation.save(_.extend({ id: 1 }, response.data));
-                        self.initSearch();
-                    }
-                })
+                //self.spoofGeoLocate();
+                self.userLocation.clear();
+                self.initSearch();
             }
         });
+    },
+
+    geoLocate: function () {
+        
+    },
+
+    spoofGeoLocate: function () {
+        var modelOptions = {
+            url: 'http://lookup.dev/api/v1/locations/random', 
+        };
+        var randomLocation = new Location({}, modelOptions);
+        var self = this;
+        randomLocation.fetch({
+            success: function(model, response) {
+                self.userLocation.save(_.extend({ id: 1 }, response.data));
+                self.initSearch();
+            }
+        })
     },
 
     initSearch: function (locationAttributes) {

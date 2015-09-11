@@ -15,6 +15,7 @@ module.exports = PhysicianList;
 
 },{"backbone":16,"models/physician":3}],2:[function(require,module,exports){
 var Backbone = require('backbone');
+var _ = require('underscore');
 
 var Location = Backbone.Model.extend({
 
@@ -36,6 +37,12 @@ var Location = Backbone.Model.extend({
 
     parse: function(response) {
         return response.data;
+    },
+
+    isEmpty: function() {
+        return !_.some(this.attributes, function(value, key) {
+            return value !== undefined;
+        });
     }
 
     // http://stackoverflow.com/questions/18383205/
@@ -56,7 +63,7 @@ var Location = Backbone.Model.extend({
 
 module.exports = Location;
 
-},{"backbone":16}],3:[function(require,module,exports){
+},{"backbone":16,"underscore":18}],3:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var Physician = Backbone.Model.extend({
@@ -103,15 +110,24 @@ var SearchForm = Backbone.Model.extend({
 
         this.searchFormView = new SearchView({ model: this });
 
-        //this.listenTo(this, 'all', this.reportEvent)
-
+        this.listenTo(this, 'all', this.reportEvent)
 
         this.listenTo(this.searchLocation, 'change', this.updateLocations)
     },
 
+    /**
+     * Update the UserLocation and SearchLocation models.
+     *
+     */
     updateLocations: function(model, options) {
         var attributes = _.clone(model.attributes);
-        this.userLocation.update(_.extend({ id: 1 }, attributes));
+
+        if (model.isEmpty()) {
+            this.userLocation.clearLocation();
+        } else {
+            this.userLocation.updateLocation(_.extend({ id: 1 }, attributes));
+        }
+
         this.searchLocation.set(attributes);
     },
 
@@ -120,10 +136,9 @@ var SearchForm = Backbone.Model.extend({
         console.log(eventName + ' event on SearchForm model');
     },
 
-    
-
-
 });
+
+//_.extend(SearchForm.prototype, IsEmptyMixin);
 
 module.exports = SearchForm;
 
@@ -181,16 +196,17 @@ var UserLocation = Backbone.Model.extend({
 
     initialize: function() {
         this.listenTo(this, 'all', this.reportEvent);
-        this.listenTo(this, 'change', this.setNewLocation);
     },
 
-    update: function(attributes) {
+    updateLocation: function(attributes) {
         this.save(attributes);
     },
 
-    setNewLocation: function (model) {
+    clearLocation: function () {
+        this.clear();
+        this.set({ id: 1 });
+        this.save();
     },
-    
 
     reportEvent: function (eventName) {
         console.log(eventName + ' fired on UserLocation');
@@ -2032,24 +2048,34 @@ var Workspace = Backbone.Router.extend({
             },
 
             error: function() {
-
                 // So we don't have a location for this user.
+
                 // Let's set one up.
                 // This is where we'll geolocate by IP.
                 // For now we'll spoof.
-                var modelOptions = {
-                    url: 'http://lookup.dev/api/v1/locations/random', 
-                };
-                var randomLocation = new Location({}, modelOptions);
-                var that = self;
-                randomLocation.fetch({
-                    success: function(model, response) {
-                        self.userLocation.save(_.extend({ id: 1 }, response.data));
-                        self.initSearch();
-                    }
-                })
+                //self.spoofGeoLocate();
+                self.userLocation.clear();
+                self.initSearch();
             }
         });
+    },
+
+    geoLocate: function () {
+        
+    },
+
+    spoofGeoLocate: function () {
+        var modelOptions = {
+            url: 'http://lookup.dev/api/v1/locations/random', 
+        };
+        var randomLocation = new Location({}, modelOptions);
+        var self = this;
+        randomLocation.fetch({
+            success: function(model, response) {
+                self.userLocation.save(_.extend({ id: 1 }, response.data));
+                self.initSearch();
+            }
+        })
     },
 
     initSearch: function (locationAttributes) {
@@ -2235,7 +2261,9 @@ var LocationForm = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.typeahead('val', this.template(this.model.toJSON()));
+        if (!this.model.isEmpty()) {
+            this.$el.typeahead('val', this.template(this.model.toJSON()));
+        }
 
         return this;
     },

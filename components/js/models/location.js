@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+var _ = require('underscore');
 
 var Location = Backbone.Model.extend({
 
@@ -20,6 +21,12 @@ var Location = Backbone.Model.extend({
 
     parse: function(response) {
         return response.data;
+    },
+
+    isEmpty: function() {
+        return !_.some(this.attributes, function(value, key) {
+            return value !== undefined;
+        });
     }
 
     // http://stackoverflow.com/questions/18383205/

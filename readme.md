@@ -35,6 +35,12 @@ locations table
 * In the FindADO query, can we not concatenate fellow designations onto the `designation` field?
         * See Dr. Hubka: "DO, FACOOG, FACOG,CS"
 
+* "Bronx" should resolve to "Bronx, NY"
+```
+Object {city: "Bronx", state: "NY", lat: 40.820195, lon: -73.920218, value: "Bronx, NY"}
+Object {city: "Bronxville", state: "NY", lat: 40.940639, lon: -73.822578, value: "Bronxville, NY"}
+```
+
 #dboFindaDO
 * Fri Jul 31 11:50:51 2015 CDT 
     * keeping field names the same but for one:
@@ -410,3 +416,6 @@ var groupPrincipals = new Bloodhound({
     > I wrote a lot of Backbone code without ever having a server call involved, when I started. There are no rules to say that you have to use all of Backbone's capabilities. In fact, I would say the opposite is true. Backbone is written in such a modular manner with each area of functionality and specialization roped off so well, that you should only use what you actually need.
 
     > Create your models in memory, call set and get on them to store data. Stuff them into collections with add and remove them as needed. Pass your models and collections to your views and render them out to the HTML DOM. Just avoid calling the methods I listed above and you won't have to worry about Backbone.Sync.
+
+#####Fri Sep 11 10:02:41 2015 CDT
+* Blog: [Determining if an object is empty with Underscore / Lo-dash](http://www.ericfeminella.com/blog/2012/08/18/determining-if-an-object-is-empty-with-underscore-lo-dash/)
