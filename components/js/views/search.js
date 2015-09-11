@@ -62,10 +62,10 @@ var SearchFormView = Backbone.View.extend({
     indicateInvalid: function() {
         var $loc = $('#location');
         $('#location')
-            .addClass('animated swing required')
+            .addClass('animated bounceIn required')
             .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
                     'oanimationend animationend', function() { 
-                $(this).removeClass('animated swing required');
+                $(this).removeClass('animated bounceIn required');
             });
     }
 
