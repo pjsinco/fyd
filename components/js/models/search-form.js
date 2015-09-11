@@ -22,15 +22,24 @@ var SearchForm = Backbone.Model.extend({
 
         this.searchFormView = new SearchView({ model: this });
 
-        //this.listenTo(this, 'all', this.reportEvent)
-
+        this.listenTo(this, 'all', this.reportEvent)
 
         this.listenTo(this.searchLocation, 'change', this.updateLocations)
     },
 
+    /**
+     * Update the UserLocation and SearchLocation models.
+     *
+     */
     updateLocations: function(model, options) {
         var attributes = _.clone(model.attributes);
-        this.userLocation.update(_.extend({ id: 1 }, attributes));
+
+        if (model.isEmpty()) {
+            this.userLocation.clearLocation();
+        } else {
+            this.userLocation.updateLocation(_.extend({ id: 1 }, attributes));
+        }
+
         this.searchLocation.set(attributes);
     },
 
@@ -39,10 +48,9 @@ var SearchForm = Backbone.Model.extend({
         console.log(eventName + ' event on SearchForm model');
     },
 
-    
-
-
 });
+
+//_.extend(SearchForm.prototype, IsEmptyMixin);
 
 module.exports = SearchForm;
 

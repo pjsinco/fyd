@@ -153,7 +153,9 @@ var LocationForm = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.typeahead('val', this.template(this.model.toJSON()));
+        if (!this.model.isEmpty()) {
+            this.$el.typeahead('val', this.template(this.model.toJSON()));
+        }
 
         return this;
     },

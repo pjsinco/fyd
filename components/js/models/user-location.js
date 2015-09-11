@@ -19,8 +19,14 @@ var UserLocation = Backbone.Model.extend({
         this.listenTo(this, 'all', this.reportEvent);
     },
 
-    update: function(attributes) {
+    updateLocation: function(attributes) {
         this.save(attributes);
+    },
+
+    clearLocation: function () {
+        this.clear();
+        this.set({ id: 1 });
+        this.save();
     },
 
     reportEvent: function (eventName) {
