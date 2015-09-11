@@ -2286,7 +2286,7 @@ var LocationForm = Backbone.View.extend({
     renderHiddens: function() {
         console.log('rendering hiddens');
         var $form = $('#findYourDo');
-        $form.find('input[type=hidden]').remove();
+        $form.find('.hidden-location').remove();
 
         if (!this.model.isEmpty()) {
             $form.prepend(this.hiddensTemplate(this.model.toJSON()));
@@ -2300,10 +2300,10 @@ var LocationForm = Backbone.View.extend({
     },
 
     hiddensTemplate: _.template(
-        '<input id="city" name="city" type="hidden" value="<%= city %>">' +
-        '<input id="state" name="state" type="hidden" value="<%= state %>">' +
-        '<input id="lat" name="lat" type="hidden" value="<%= lat %>">' +
-        '<input id="lon" name="lon" type="hidden" value="<%= lon %>">'
+        '<input class="hidden-location" id="city" name="city" type="hidden" value="<%= city %>">' +
+        '<input class="hidden-location" id="state" name="state" type="hidden" value="<%= state %>">' +
+        '<input class="hidden-location" id="lat" name="lat" type="hidden" value="<%= lat %>">' +
+        '<input class="hidden-location" id="lon" name="lon" type="hidden" value="<%= lon %>">'
     ),
 
     template: _.template(
@@ -2475,7 +2475,7 @@ var SearchFormView = Backbone.View.extend({
             model: this.model.specialty
         });
 
-        this.listenTo(this.model.searchLocation, 'change', this.render);
+        //this.listenTo(this.model.searchLocation, 'change', this.render);
 
         // Listen for change events emitted by the location input and
         // rerender on a change
@@ -2491,9 +2491,9 @@ var SearchFormView = Backbone.View.extend({
 
     },
 
-    render: function() {
-        return this;
-    },
+//    render: function() {
+//        return this;
+//    },
 
     events: {
         'submit': 'formSubmit'
@@ -2551,6 +2551,11 @@ var SpecialtyView = Backbone.View.extend({
 
     setSpecialty: function(evt, suggestion) {
         this.model.set(suggestion);
+        this.render();
+    },
+
+    clearSpecialty: function() {
+        this.model.clear();
         this.render();
     },
 
@@ -2682,7 +2687,9 @@ var SpecialtyView = Backbone.View.extend({
     },
 
     closed: function(e) {
-        console.log('#specialty closed');
+        if (this.$el.typeahead('val') == '') {
+            this.clearSpecialty();
+        }
     }
 
 });

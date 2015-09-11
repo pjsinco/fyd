@@ -23,6 +23,11 @@ var SpecialtyView = Backbone.View.extend({
         this.render();
     },
 
+    clearSpecialty: function() {
+        this.model.clear();
+        this.render();
+    },
+
     initAutocomplete: function () {
         this._initSpecialtyBloodhound();
         this.specialtyEngine.initialize();
@@ -151,7 +156,9 @@ var SpecialtyView = Backbone.View.extend({
     },
 
     closed: function(e) {
-        console.log('#specialty closed');
+        if (this.$el.typeahead('val') == '') {
+            this.clearSpecialty();
+        }
     }
 
 });

@@ -144,7 +144,7 @@ var LocationForm = Backbone.View.extend({
     renderHiddens: function() {
         console.log('rendering hiddens');
         var $form = $('#findYourDo');
-        $form.find('input[type=hidden]').remove();
+        $form.find('.hidden-location').remove();
 
         if (!this.model.isEmpty()) {
             $form.prepend(this.hiddensTemplate(this.model.toJSON()));
@@ -158,10 +158,10 @@ var LocationForm = Backbone.View.extend({
     },
 
     hiddensTemplate: _.template(
-        '<input id="city" name="city" type="hidden" value="<%= city %>">' +
-        '<input id="state" name="state" type="hidden" value="<%= state %>">' +
-        '<input id="lat" name="lat" type="hidden" value="<%= lat %>">' +
-        '<input id="lon" name="lon" type="hidden" value="<%= lon %>">'
+        '<input class="hidden-location" id="city" name="city" type="hidden" value="<%= city %>">' +
+        '<input class="hidden-location" id="state" name="state" type="hidden" value="<%= state %>">' +
+        '<input class="hidden-location" id="lat" name="lat" type="hidden" value="<%= lat %>">' +
+        '<input class="hidden-location" id="lon" name="lon" type="hidden" value="<%= lon %>">'
     ),
 
     template: _.template(

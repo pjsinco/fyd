@@ -21,7 +21,7 @@ var SearchFormView = Backbone.View.extend({
             model: this.model.specialty
         });
 
-        this.listenTo(this.model.searchLocation, 'change', this.render);
+        //this.listenTo(this.model.searchLocation, 'change', this.render);
 
         // Listen for change events emitted by the location input and
         // rerender on a change
@@ -37,9 +37,9 @@ var SearchFormView = Backbone.View.extend({
 
     },
 
-    render: function() {
-        return this;
-    },
+//    render: function() {
+//        return this;
+//    },
 
     events: {
         'submit': 'formSubmit'

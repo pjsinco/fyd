@@ -281,38 +281,38 @@ img {
   font-family: 'gothambold';
   src: url("../fonts/gotham-bold-webfont.eot");
   src: url("../fonts/gotham-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham-bold-webfont.woff2") format("woff2"), url("../fonts/gotham-bold-webfont.woff") format("woff"), url("../fonts/gotham-bold-webfont.ttf") format("truetype"), url("../fonts/gotham-bold-webfont.svg#gothambold") format("svg");
-  font-weight: normal;
+  font-weight: 600;
   font-style: normal; }
 @font-face {
   font-family: 'gothambold_italic';
   src: url("../fonts/gotham-bolditalic-webfont.eot");
   src: url("../fonts/gotham-bolditalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham-bolditalic-webfont.woff2") format("woff2"), url("../fonts/gotham-bolditalic-webfont.woff") format("woff"), url("../fonts/gotham-bolditalic-webfont.ttf") format("truetype"), url("../fonts/gotham-bolditalic-webfont.svg#gothambold_italic") format("svg");
-  font-weight: normal;
-  font-style: normal; }
+  font-weight: 600;
+  font-style: italic; }
 @font-face {
   font-family: 'gothambook';
   src: url("../fonts/gotham-book-webfont.eot");
   src: url("../fonts/gotham-book-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham-book-webfont.woff2") format("woff2"), url("../fonts/gotham-book-webfont.woff") format("woff"), url("../fonts/gotham-book-webfont.ttf") format("truetype"), url("../fonts/gotham-book-webfont.svg#gothambook") format("svg");
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal; }
 @font-face {
   font-family: 'gothambook_italic';
   src: url("../fonts/gotham-bookitalic-webfont.eot");
   src: url("../fonts/gotham-bookitalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham-bookitalic-webfont.woff2") format("woff2"), url("../fonts/gotham-bookitalic-webfont.woff") format("woff"), url("../fonts/gotham-bookitalic-webfont.ttf") format("truetype"), url("../fonts/gotham-bookitalic-webfont.svg#gothambook_italic") format("svg");
-  font-weight: normal;
-  font-style: normal; }
+  font-weight: 400;
+  font-style: italic; }
 @font-face {
   font-family: 'gothamlight';
   src: url("../fonts/gotham-light-webfont.eot");
   src: url("../fonts/gotham-light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham-light-webfont.woff2") format("woff2"), url("../fonts/gotham-light-webfont.woff") format("woff"), url("../fonts/gotham-light-webfont.ttf") format("truetype"), url("../fonts/gotham-light-webfont.svg#gothamlight") format("svg");
-  font-weight: normal;
+  font-weight: 200;
   font-style: normal; }
 @font-face {
   font-family: 'gothamlight_italic';
   src: url("../fonts/gotham-lightitalic-webfont.eot");
   src: url("../fonts/gotham-lightitalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham-lightitalic-webfont.woff2") format("woff2"), url("../fonts/gotham-lightitalic-webfont.woff") format("woff"), url("../fonts/gotham-lightitalic-webfont.ttf") format("truetype"), url("../fonts/gotham-lightitalic-webfont.svg#gothamlight_italic") format("svg");
-  font-weight: normal;
-  font-style: normal; }
+  font-weight: 200;
+  font-style: italic; }
 /* line 3, ../../../components/sass/layout/_wrap.scss */
 .wrap--inner {
   position: relative;
@@ -624,6 +624,9 @@ img {
 .tt-hint {
   color: #999; }
 /* line 29, ../../../components/sass/modules/_typeahead.scss */
+.tt-highlight {
+  font-weight: 800; }
+/* line 33, ../../../components/sass/modules/_typeahead.scss */
 .tt-dropdown-menu {
   /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
   /*width: 422px;*/
@@ -637,7 +640,7 @@ img {
   border: 1px solid rgba(0, 0, 0, 0.2);
   /*border-radius: 8px;*/
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
-/* line 43, ../../../components/sass/modules/_typeahead.scss */
+/* line 47, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: .875em;
@@ -647,28 +650,28 @@ img {
   /**
    * Target only physician suggestions 
    */ }
-  /* line 53, ../../../components/sass/modules/_typeahead.scss */
+  /* line 57, ../../../components/sass/modules/_typeahead.scss */
   .tt-dataset-physicians .tt-suggestion {
     padding: 0; }
-    /* line 57, ../../../components/sass/modules/_typeahead.scss */
+    /* line 61, ../../../components/sass/modules/_typeahead.scss */
     .tt-dataset-physicians .tt-suggestion a {
       display: block;
       padding-top: .25em;
       padding-right: 1.25em;
       padding-bottom: .25em;
       padding-left: 1.25em; }
-      /* line 64, ../../../components/sass/modules/_typeahead.scss */
+      /* line 68, ../../../components/sass/modules/_typeahead.scss */
       .tt-dataset-physicians .tt-suggestion a:hover {
         text-decoration: none; }
-/* line 71, ../../../components/sass/modules/_typeahead.scss */
+/* line 75, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion.tt-cursor {
   /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
   color: #fff;
   background-color: #00eaff; }
-/* line 77, ../../../components/sass/modules/_typeahead.scss */
+/* line 81, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion a {
   color: inherit; }
-/* line 81, ../../../components/sass/modules/_typeahead.scss */
+/* line 85, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion p {
   margin: 0; }
 
