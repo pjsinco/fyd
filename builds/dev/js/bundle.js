@@ -10,7 +10,12 @@ var PhysicianList = Backbone.Collection.extend({
     
     parse: function(response) {
         return response.data;
-    }
+    },
+
+    //setHeader: function(xhr) {
+        //xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    //}
+
 
 
 });
@@ -2087,6 +2092,7 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.physicianList.fetch({
             data: queryString,
+            //beforeSend: this.physicianList.setHeader,
             success: function() {
                 var physicianListView = new PhysicianListView({
                     collection: self.physicianList

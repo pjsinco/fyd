@@ -9,7 +9,12 @@ var PhysicianList = Backbone.Collection.extend({
     
     parse: function(response) {
         return response.data;
-    }
+    },
+
+    //setHeader: function(xhr) {
+        //xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    //}
+
 
 
 });

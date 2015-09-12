@@ -38,6 +38,7 @@ var AppRouter = Backbone.Router.extend({
         var self = this;
         this.physicianList.fetch({
             data: queryString,
+            //beforeSend: this.physicianList.setHeader,
             success: function() {
                 var physicianListView = new PhysicianListView({
                     collection: self.physicianList
