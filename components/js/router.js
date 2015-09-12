@@ -6,15 +6,16 @@ var PhysicianView = require('views/physician');
 var PhysicianSimpleView = require('views/physician-simple');
 var Location = require('models/location');
 var SearchForm = require('models/search-form');
+var ParseQueryString = require('util/mixin-parse-query-string');
 
 var UserLocation = require('models/user-location');
 
-var Workspace = Backbone.Router.extend({
+var AppRouter = Backbone.Router.extend({
 
     routes: {
-    
         '' : 'home',
-        'physicians/:id': 'physicianDetail'
+        'physicians?*queryString': 'searchResults',
+        'physicians/:id': 'show'
     },
 
     userLocation: undefined,   // UserLocation model; persisted in local storage
@@ -24,11 +25,16 @@ var Workspace = Backbone.Router.extend({
         this.userLocation = new UserLocation({ id: 1 });
     },
 
+    searchResults: function (queryString) {
+        
+        console.log('searchResults');
+        console.log(ParseQueryString.getQueryParams(queryString));
+    },
+
     home: function() {
 
         var self = this;
         this.userLocation.fetch({
-
             success: function() {
                 self.initSearch();
             },
@@ -70,7 +76,7 @@ var Workspace = Backbone.Router.extend({
         });
     },
 
-    physicianDetail: function(id) {
+    show: function(id) {
         var physician = new Physician({ id: id });
         physician.fetch({
             success: function() {
@@ -88,5 +94,6 @@ var Workspace = Backbone.Router.extend({
     
     
 });
+_.extend(AppRouter.prototype, ParseQueryString);
 
-module.exports = Workspace;
+module.exports = AppRouter;

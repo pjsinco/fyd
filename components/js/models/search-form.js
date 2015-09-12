@@ -6,6 +6,10 @@ var Specialty = require('models/specialty');
 
 var SearchForm = Backbone.Model.extend({
 
+    /**
+     * Models
+     *
+     */
     searchLocation: undefined, // model; not persisted
     userLocation: undefined,   // model; persisted in localstorage
     specialty: undefined,      // model; TODO make it

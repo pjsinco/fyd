@@ -7,7 +7,16 @@ var Backbone = require('backbone'),
 
 var SearchFormView = Backbone.View.extend({
 
+    /**
+     * Models
+     *
+     */
     model: undefined,  // model: SearchForm; not persisted
+
+    /**
+     * Subviews
+     *
+     */
     locationFormView: undefined,
     specialtyFormView: undefined,
 
@@ -21,35 +30,31 @@ var SearchFormView = Backbone.View.extend({
             model: this.model.specialty
         });
 
-        //this.listenTo(this.model.searchLocation, 'change', this.render);
-
-        // Listen for change events emitted by the location input and
-        // rerender on a change
-//        this.listenTo(this.locationFormView, 'change', function(model) {
-//            console.log('here in SearchView, we heard a change event in locationFormView');
-//            this.render();
-//        });
-//
-//        this.listenTo(this.locationFormView, 'error', function(model) {
-//            console.log('here in SearchView, we heard an error event in locationFormView');
-//            this.render();
-//        });
-
     },
 
-//    render: function() {
-//        return this;
-//    },
+    render: function() {
+        return this;
+    },
 
     events: {
         'submit': 'formSubmit'
     },
 
     formSubmit: function(evt) {
+
+        // ?city=Chicago
+        // &state=IL
+        // &lat=41.881027
+        // &lon=-87.62473
+        // &s_code=C
+        // &specialty=Cardiology
+        // &location=Chicago%2C+IL
+
         evt.preventDefault();
         console.log('form submitted: ' + (this.isValid() ? 'valid' : 'invalid' ));
         if (this.isValid()) {
-            
+            console.log(this.$el.serialize());    
+            router
         } else {
             this.indicateInvalid();
         }

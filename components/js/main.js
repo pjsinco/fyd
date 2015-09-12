@@ -35,7 +35,7 @@ var PhysicianList = require('collections/physician-list');
  * Router
  *
  */
-var Workspace = require('./router.js');
+var AppRouter = require('./router.js');
 
 
 //var FindADoApp = new Backbone.Router.extend({
@@ -76,7 +76,7 @@ var Workspace = require('./router.js');
 
 
 $(function () {
-    var app = new Workspace();
+    var app = new AppRouter();
     app.start();
 });
 
@@ -92,7 +92,7 @@ module.exports = {
     LocationFormView: LocationFormView,
     SearchFormView: SearchFormView,
     PhysicianList: PhysicianList,
-    Workspace: Workspace,
+    AppRouter: AppRouter,
     UserLocation: UserLocation,
     _: _
     //FindADoApp: FindADoApp
