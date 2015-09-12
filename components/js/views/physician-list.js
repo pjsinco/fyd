@@ -1,5 +1,7 @@
 var Backbone = require('backbone');
+var $ = require('jquery');
 var _ = require('underscore');
+var PhysicianListItemView = require('views/physician');
 
 
 var PhysicianListView = Backbone.View.extend({
@@ -16,8 +18,23 @@ var PhysicianListView = Backbone.View.extend({
         
     },
 
-    render: function () {
+    /**
+     * Create a physician view and append to the 
+     *
+     */
+    addOne: function (physician) {
+        var physicianListItemView = 
+            new PhysicianListItemView({ model: physician });
+        this.$el.append(physicianListItemView.render().el);
+    },
 
+    addAll: function () {
+        
+    },
+
+    render: function () {
+        this.collection.each(this.addOne, this);
+        $('body').html(this.$el);
     }
 
 });

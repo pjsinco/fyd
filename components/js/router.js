@@ -2,8 +2,9 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 var _ = require('underscore');
 var Physician = require('models/physician');
-var PhysicianList = require('models/physician');
-var PhysicianView = require('views/physician');
+var PhysicianList = require('collections/physician-list');
+var PhysicianListView = require('views/physician-list');
+var PhysicianListItemView = require('views/physician');
 var Location = require('models/location');
 var SearchForm = require('models/search-form');
 var ParseQueryString = require('util/mixin-parse-query-string');
@@ -30,15 +31,18 @@ var AppRouter = Backbone.Router.extend({
         //var query = ParseQueryString.getQueryParams(queryString);
         //console.dir(query);
 
-        var physicianList = new PhysicianList({
+        this.physicianList = new PhysicianList({
 
         });
 
-debugger;
-        physicianList.fetch({
+        var self = this;
+        this.physicianList.fetch({
             data: queryString,
-            success: function(collection, response, options) {
-                 console.log(collection);
+            success: function() {
+                var physicianListView = new PhysicianListView({
+                    collection: self.physicianList
+                });
+                physicianListView.render();
             }
         });
         
@@ -93,7 +97,8 @@ debugger;
         var physician = new Physician({ id: id });
         physician.fetch({
             success: function() {
-                var physicianView = new PhysicianView({ model: physician });
+                var physicianView = 
+                    new PhysicianListItemView({ model: physician });
                 physicianView.render();
                 $('body').html(physicianView.el);
             }

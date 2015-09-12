@@ -433,3 +433,21 @@ var groupPrincipals = new Bloodhound({
 
 #####Sat Sep 12 04:42:09 2015 CDT
 * Blog: [Clear input control with Bootstrap 3](http://www.michaelperrin.fr/2014/10/25/clear-input-control-bootstrap-3/)
+
+* SO: [Backbone - not parse each model in collection after fetch](http://stackoverflow.com/questions/18652437/backbone-not-parse-each-model-in-collection-after-fetch)
+> When creating models for insertion in a collection, Backbone passes the future collection as an option to the model constructor which in turns forwards this option to parse. You could check this property and abort the parsing as needed:
+```js
+var Task  = Backbone.Model.extend({
+    parse : function(response, options){
+        if (options.collection) return response;
+        return response.tasks[0];
+    }
+});
+var TaskList = Backbone.Collection.extend({
+    model: Task,
+    parse : function(response){
+        return response.tasks;
+    }
+});
+```
+

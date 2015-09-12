@@ -12,7 +12,12 @@ var Physician = Backbone.Model.extend({
 
     },
 
-    parse: function (response) {
+    parse: function (response, options) {
+        // if collection is newing up models and calling this method,
+        // don't parse
+        if (options.collection) {
+            return response;
+        }
         return response.data;
     }
 
