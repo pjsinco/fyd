@@ -5,8 +5,6 @@ var PhysicianList = Backbone.Collection.extend({
 
     model: Physician,
 
-    url: ""
-
 });
 
 module.exports = PhysicianList;

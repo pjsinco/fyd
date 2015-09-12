@@ -2,9 +2,11 @@ var Backbone = require('backbone');
 
 var Physician = Backbone.Model.extend({
 
-    url: function() {
-        return 'http://lookup.dev/api/v1/physicians/' + this.id;
-    },
+    // when we fetch outside a collection
+    urlRoot: 'http://lookup.dev/api/v1/physicians',
+
+    // when we fetch inside a collection
+    url: 'http://lookup.dev/api/v1/physicians/search',
 
     initialize: function () {
 

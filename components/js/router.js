@@ -2,8 +2,8 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 var _ = require('underscore');
 var Physician = require('models/physician');
+var PhysicianList = require('models/physician');
 var PhysicianView = require('views/physician');
-var PhysicianSimpleView = require('views/physician-simple');
 var Location = require('models/location');
 var SearchForm = require('models/search-form');
 var ParseQueryString = require('util/mixin-parse-query-string');
@@ -14,8 +14,8 @@ var AppRouter = Backbone.Router.extend({
 
     routes: {
         '' : 'home',
-        'physicians?*queryString': 'searchResults',
-        'physicians/:id': 'show'
+        'physicians/:id': 'show',
+        'physicians?*queryString': 'searchResults'
     },
 
     userLocation: undefined,   // UserLocation model; persisted in local storage
@@ -26,9 +26,22 @@ var AppRouter = Backbone.Router.extend({
     },
 
     searchResults: function (queryString) {
-        
         console.log('searchResults');
-        console.log(ParseQueryString.getQueryParams(queryString));
+        //var query = ParseQueryString.getQueryParams(queryString);
+        //console.dir(query);
+
+        var physicianList = new PhysicianList({
+
+        });
+
+debugger;
+        physicianList.fetch({
+            data: queryString,
+            success: function(collection, response, options) {
+                 console.log(collection);
+            }
+        });
+        
     },
 
     home: function() {
