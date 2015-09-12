@@ -430,3 +430,6 @@ var groupPrincipals = new Bloodhound({
 
 * Github: [Animate.css](https://github.com/daneden/animate.css)
     > A cross-browser library of CSS animations. As easy to use as an easy thing. http://daneden.github.io/animate.css
+
+#####Sat Sep 12 04:42:09 2015 CDT
+* Blog: [Clear input control with Bootstrap 3](http://www.michaelperrin.fr/2014/10/25/clear-input-control-bootstrap-3/)
