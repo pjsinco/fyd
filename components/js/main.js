@@ -77,7 +77,9 @@ var AppRouter = require('./router.js');
 
 $(function () {
     var app = new AppRouter();
-    app.start();
+    app.start({
+        //root: '/results/'
+    });
 });
 
 

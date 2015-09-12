@@ -1,0 +1,47 @@
+doctype html
+html
+    head
+        include head
+    body
+        include header
+
+div.container-fluid
+    div#fydResults
+        div.row
+            div.col-sm-12
+                div.text-center
+                    include find-your-do-inside-form
+        div.row
+            div.col-sm-12
+                div.fyd-results__title.text-center
+                    h2.fyd-results Osteopathic physicians near Chicago, IL
+        div.row
+            div.col-sm-8.col-md-8
+                ul.fyd-results__list
+                    li.fyd-results__list-item
+                        h3.fyd-results__name Teresa A. Hubka, DO
+                        h4 Internal medicine
+                        div
+                            p(data-lat="1.00" data-lon="1.00")
+                                | 142 E. Ontario St. <br />
+                                | Chicago, IL 60611
+                    li.fyd-results__list-item
+                        h3.fyd-results__name Teresa A. Hubka, DO, FACOOG, FACOG
+                        h4 Internal medicine
+                        div
+                            p(data-lat="1.00" data-lon="1.00")
+                                | 142 E. Ontario St. <br />
+                                | Chicago, IL 60611
+                    li.fyd-results__list-item
+                        h3.fyd-results__name Teresa Lorem Hubka, DO, 
+                        h4 Internal medicine
+                        div
+                            p(data-lat="1.00" data-lon="1.00")
+                                | 142 E. Ontario St. <br />
+                                | Chicago, IL 60611
+            div.col-sm-4.col-md-4
+                div.fyd-results__locator
+                    img(src="http://placekitten.com/318/300") 
+            div#sidebar
+
+        include footer

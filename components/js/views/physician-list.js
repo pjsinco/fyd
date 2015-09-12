@@ -14,8 +14,8 @@ var PhysicianListView = Backbone.View.extend({
         
     },
 
-    initialize: function () {
-        
+    initialize: function (options) {
+        this.router = options.router;
     },
 
     /**
@@ -32,9 +32,10 @@ var PhysicianListView = Backbone.View.extend({
         
     },
 
+
     render: function () {
         this.collection.each(this.addOne, this);
-        $('body').html(this.$el);
+        $('#findYourDoApp').html(this.$el);
     }
 
 });

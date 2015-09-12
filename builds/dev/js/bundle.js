@@ -2070,7 +2070,12 @@ var AppRouter = Backbone.Router.extend({
     routes: {
         '' : 'home',
         'physicians/:id': 'show',
-        'physicians?*queryString': 'searchResults'
+        //'results?*queryString': 'logResultsRoute',
+        'physicians?*queryString': 'searchResults',
+    },
+
+    logResultsRoute: function (queryString) {
+        console.log('on results route');
     },
 
     userLocation: undefined,   // UserLocation model; persisted in local storage
@@ -2095,7 +2100,8 @@ var AppRouter = Backbone.Router.extend({
             //beforeSend: this.physicianList.setHeader,
             success: function() {
                 var physicianListView = new PhysicianListView({
-                    collection: self.physicianList
+                    collection: self.physicianList,
+                    router: self
                 });
                 physicianListView.render();
             }
@@ -2504,8 +2510,8 @@ var PhysicianListView = Backbone.View.extend({
         
     },
 
-    initialize: function () {
-        
+    initialize: function (options) {
+        this.router = options.router;
     },
 
     /**
@@ -2522,9 +2528,10 @@ var PhysicianListView = Backbone.View.extend({
         
     },
 
+
     render: function () {
         this.collection.each(this.addOne, this);
-        $('body').html(this.$el);
+        $('#findYourDoApp').html(this.$el);
     }
 
 });
@@ -15818,7 +15825,9 @@ var AppRouter = require('./router.js');
 
 $(function () {
     var app = new AppRouter();
-    app.start();
+    app.start({
+        //root: '/results/'
+    });
 });
 
 

@@ -16,7 +16,12 @@ var AppRouter = Backbone.Router.extend({
     routes: {
         '' : 'home',
         'physicians/:id': 'show',
-        'physicians?*queryString': 'searchResults'
+        //'results?*queryString': 'logResultsRoute',
+        'physicians?*queryString': 'searchResults',
+    },
+
+    logResultsRoute: function (queryString) {
+        console.log('on results route');
     },
 
     userLocation: undefined,   // UserLocation model; persisted in local storage
@@ -41,7 +46,8 @@ var AppRouter = Backbone.Router.extend({
             //beforeSend: this.physicianList.setHeader,
             success: function() {
                 var physicianListView = new PhysicianListView({
-                    collection: self.physicianList
+                    collection: self.physicianList,
+                    router: self
                 });
                 physicianListView.render();
             }

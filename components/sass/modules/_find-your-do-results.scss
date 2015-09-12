@@ -1,0 +1,54 @@
+.fyd {
+
+    &__form {
+
+        &--inside {
+            background-color: #f5f5f5;
+        }
+
+    }
+
+}
+
+.fyd-results {
+
+    &__name {
+        margin-top: 0;
+        font-size: 1.142857143em;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $primarycolor;
+
+    }
+
+    &__title {
+        margin-bottom: 2em;
+    
+    }
+
+    &__list {
+        list-style-type: none;
+        padding: 0;
+    } 
+
+    &__list-item {
+        padding-top: 1em;
+        padding-right: 0;
+        padding-bottom: 1em;
+        padding-left: 0;
+        margin-bottom: 1em;
+        border-bottom: 1px solid $secondarycolor;
+        
+        
+    }
+
+    &__locator {
+        background: aliceblue;
+    }
+
+
+    #fydResults &__search #specialty {
+        background-color: fuchsia;
+    }
+
+}

@@ -242,6 +242,7 @@ th {
 /*
  * Layout
  */
+/*$sitewidth: 53.75em;*/
 /*
  * Misc
  */
@@ -338,7 +339,7 @@ img {
 
 /* line 1, ../../../components/sass/layout/_row.scss */
 .row {
-  max-width: 53.75em;
+  max-width: 860px;
   margin-left: auto;
   margin-right: auto; }
   /* line 12, ../../../../../.rvm/gems/ruby-2.1.2/gems/susy-2.2.5/sass/susy/output/support/_clearfix.scss */
@@ -386,7 +387,7 @@ img {
   float: left;
   margin-left: 0;
   margin-right: 0; }
-@media screen and (min-width: 53.75em) {
+@media screen and (min-width: 860px) {
   /* line 7, ../../../components/sass/layout/_size.scss */
   .size-1-of-3 {
     width: 32.20339%;
@@ -414,7 +415,7 @@ img {
   padding-right: 5.67797%;
   position: relative;
   margin: 0 auto;
-  max-width: 53.75em; }
+  max-width: 860px; }
   /* line 7, ../../../components/sass/layout/_block.scss */
   .block--padding {
     padding: 1.5em 1.25em; }
@@ -423,7 +424,7 @@ img {
 .container {
   overflow: hidden;
   *zoom: 1;
-  max-width: 53.75em;
+  max-width: 860px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1em; }
@@ -531,6 +532,39 @@ img {
     height: 0;
     border-top: 1px solid #ddd; }
 
+/* line 5, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd__form--inside {
+  background-color: #f5f5f5; }
+
+/* line 15, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__name {
+  margin-top: 0;
+  font-size: 1.142857143em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ffaa00; }
+/* line 24, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__title {
+  margin-bottom: 2em; }
+/* line 29, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__list {
+  list-style-type: none;
+  padding: 0; }
+/* line 34, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__list-item {
+  padding-top: 1em;
+  padding-right: 0;
+  padding-bottom: 1em;
+  padding-left: 0;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #00eaff; }
+/* line 45, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__locator {
+  background: aliceblue; }
+/* line 50, ../../../components/sass/modules/_find-your-do-results.scss */
+#fydResults .fyd-results__search #specialty {
+  background-color: fuchsia; }
+
 /* line 1, ../../../components/sass/modules/_hero.scss */
 .hero {
   position: relative;
@@ -570,7 +604,7 @@ img {
     /*text-align: center;*/
     margin-left: auto;
     margin-right: auto;
-    width: 53.75em; }
+    width: 860px; }
   /* line 48, ../../../components/sass/modules/_hero.scss */
   .hero__title {
     display: inline;
@@ -590,7 +624,7 @@ img {
   /*@include pad(.75 of $gridpage);*/
   overflow: hidden;
   *zoom: 1; }
-  @media screen and (min-width: 53.75em) {
+  @media screen and (min-width: 860px) {
     /* line 1, ../../../components/sass/modules/_promote.scss */
     .promote {
       padding-left: 5.67797%;

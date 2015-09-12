@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Find Your DO</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header role="banner" id="top" class="promote row"></header>
+  </body>
+</html>
+<div class="container-fluid">
+  <div id="fydResults">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="text-center">
+          <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="find-your-do">
+            <input id="specialty" placeholder="Name or specialty" name="specialty" type="text">
+            <input id="location" placeholder="City, state or zip" name="location" type="text">
+            <input type="submit" value="Go">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="fyd-results__title text-center">
+          <h2 class="fyd-results">Osteopathic physicians near Chicago, IL</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8 col-md-8">
+        <ul class="fyd-results__list">
+          <li class="fyd-results__list-item">
+            <h3 class="fyd-results__name">Teresa A. Hubka, DO</h3>
+            <h4>Internal medicine</h4>
+            <div>
+              <p data-lat="1.00" data-lon="1.00">
+                142 E. Ontario St. <br />
+                Chicago, IL 60611
+              </p>
+            </div>
+          </li>
+          <li class="fyd-results__list-item">
+            <h3 class="fyd-results__name">Teresa A. Hubka, DO, FACOOG, FACOG</h3>
+            <h4>Internal medicine</h4>
+            <div>
+              <p data-lat="1.00" data-lon="1.00">
+                142 E. Ontario St. <br />
+                Chicago, IL 60611
+              </p>
+            </div>
+          </li>
+          <li class="fyd-results__list-item">
+            <h3 class="fyd-results__name">Teresa Lorem Hubka, DO, </h3>
+            <h4>Internal medicine</h4>
+            <div>
+              <p data-lat="1.00" data-lon="1.00">
+                142 E. Ontario St. <br />
+                Chicago, IL 60611
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-4 col-md-4">
+        <div class="fyd-results__locator"><img src="http://placekitten.com/318/300"></div>
+      </div>
+      <div id="sidebar"></div>
+    </div>
+    <script src="js/bundle.js"></script>
+    <script src="http://localhost:35729/livereload.js"></script>
+  </div>
+</div>
