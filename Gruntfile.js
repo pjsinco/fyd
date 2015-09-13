@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 
     autoprefixer: {
         css: {
-            src: 'builds/dev/css/**/*.css',
+            src: 'builds/dev/css/fyd-style.css',
         }
     },
 

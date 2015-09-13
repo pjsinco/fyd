@@ -56,6 +56,7 @@ var AppRouter = Backbone.Router.extend({
     },
 
     home: function() {
+console.log('home');
 
         var self = this;
         this.userLocation.fetch({
