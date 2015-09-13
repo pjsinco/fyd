@@ -40,7 +40,7 @@ $bodylineheight-bigger: 1.65;
  * Layout
  */
 /*$sitewidth: 53.75em;*/
-$sitewidth: 860px;
+/*$sitewidth: 860px;*/
 $outside-gutter-small: .5em;
 $outside-gutter-medium: 1.25em;
 $outside-gutter-large: 2em;
@@ -63,10 +63,16 @@ $slowduration: .5s;
  * BREAKPOINTS
  * 
  */
-$all            : 'all';
-$screen         : 'screen';
-$smallstart    : 20em;        // 320px
-$mediumstart   : 30em;        // 480px
-$largestart    : 48em;        // 768px
-$desktopstart : $sitewidth; // 992px
+$all          : 'all';
+$screen       : 'screen';
+$smallstart   : 320px;
+$mediumstart  : 480px;
+$largestart   : 768px;
+$desktopstart : 992px;
 
+/**
+ * Bootstrap equivalents
+ * 
+ */
+$screen-sm-min: $largestart;
+$screen-md-min: $desktopstart;

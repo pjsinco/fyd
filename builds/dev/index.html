@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <title>Doctors That DO</title>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/default.css" type="text/css">
     <link href="css/fyd-style.css" rel="stylesheet">
   </head>
-  <body>
+  <body class="page home">
     <header class="outer-row">
       <nav class="navbar">
         <div class="container-fluid">
@@ -51,21 +51,129 @@
         </div>
       </nav>
     </header>
-    <div class="hero">
-      <div class="hero__image">
-        <div class="hero__image--placeholder"></div>
-      </div>
-      <div class="hero__overlay">
-        <div class="hero__content">
-          <div class="hero__body"> 
-            <p> </p>Doctors of Osteopathic Medicine are complete physicians and practice in every medical specialty. A D.O. is trained to always first consider the person within the patient.
+    <div class="outer-row">
+      <div class="hero">
+        <div class="hero__overlay">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="hero__content">
+                  <div class="hero__body"> 
+                    <p> </p>Doctors of Osteopathic Medicine are complete physicians and practice in every medical specialty. A D.O. is trained to always first consider the person within the patient.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="hero__title">Find Your DO</div>
+                <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="find-your-do">
+                  <div class="row">
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <input id="specialty" placeholder="Name or specialty" name="specialty" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <input id="location" placeholder="City, state or zip" name="location" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <input type="submit" value="Go">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              
+            </div>
           </div>
-          <div class="hero__title">Find Your DO</div>
-          <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="find-your-do">
-            <input id="specialty" placeholder="Name or specialty" name="specialty" type="text">
-            <input id="location" placeholder="City, state or zip" name="location" type="text">
-            <input type="submit" value="Go">
-          </form>
+        </div>
+      </div>
+    </div>
+    <div id="pageBlocks">
+      <div class="page-block two_column_block"> 
+        <div class="container-fluid"> 
+          <div class="row">
+            <div class="inner"></div>
+            <div class="block image">
+              <div class="wrapper table">
+                <div class="cell">
+                  <div class="img-wrapper circle"><img src="http://placekitten.com/600/360"></div>
+                  <div class="media-caption"></div>
+                </div>
+              </div>
+            </div>
+            <div class="block text">
+              <div class="wrapper table">
+                <h2>Ullamcorper sem pellentesque </h2>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui.</p><a href="#">Learn more.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-block two_column_block reverse">
+        <div class="container-fluid"> 
+          <div class="row">
+            <div class="inner"></div>
+            <div class="block image">
+              <div class="wrapper table">
+                <div class="cell">
+                  <div class="img-wrapper circle"><img src="http://placekitten.com/600/360"></div>
+                  <div class="media-caption"></div>
+                </div>
+              </div>
+            </div>
+            <div class="block text">
+              <div class="wrapper table">
+                <h2>Integer posuere erat a ante</h2>
+                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Etiam porta sem malesuada magna mollis euismod.</p><a href="#">Learn more.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="outer-row feeds">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-8 col-md-6 feed blog">
+            <header class="feed--title"><a href="#">The Health Library&nbsp;›</a></header>
+            <section class="feed--output">
+              <div class="post row post-266 type-post status-publish format-standard hentry category-uncategorized">
+                <div class="col-sm-3"><a href="#"><img src="http://placehold.it/300x200" alt="4 Degrees of Integration"></a></div>
+                <div class="col-sm-9">
+                  <div class="meta"><span class="categories"><a href="#">Amet Pharetra</a></span></div><span class="post--title"><a href="#">Integer posuere erat a ante venenatis dapibus posuere velit aliquet</a></span>
+                  <div class="meta"><span class="author"><i class="fa fa-user"><i>
+                           
+                          orbiteers</i></i></span></div>
+                </div>
+              </div>
+              <div class="post row post-266 type-post status-publish format-standard hentry category-uncategorized">
+                <div class="col-sm-3"><a href="#"><img src="http://placehold.it/300x200" alt="4 Degrees of Integration"></a></div>
+                <div class="col-sm-9">
+                  <div class="meta"><span class="categories"><a href="#">Amet Pharetra</a></span></div><span class="post--title"><a href="#">Integer posuere erat a ante venenatis dapibus posuere velit aliquet</a></span>
+                  <div class="meta"><span class="author"><i class="fa fa-user"><i>
+                           
+                          orbiteers</i></i></span></div>
+                </div>
+              </div>
+              <div class="post row post-266 type-post status-publish format-standard hentry category-uncategorized">
+                <div class="col-sm-3"><a href="#"><img src="http://placehold.it/300x200" alt="4 Degrees of Integration"></a></div>
+                <div class="col-sm-9">
+                  <div class="meta"><span class="categories"><a href="#">Amet Pharetra</a></span></div><span class="post--title"><a href="#">Integer posuere erat a ante venenatis dapibus posuere velit aliquet</a></span>
+                  <div class="meta"><span class="author"><i class="fa fa-user"><i>
+                           
+                          orbiteers</i></i></span></div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="col-sm-8 col-md-6 feed blog">
+            <header class="feed--title"><a href="#">FAQs&nbsp;›</a></header>
+            <section class="feed--output"></section>
+          </div>
         </div>
       </div>
     </div>

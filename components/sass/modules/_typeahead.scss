@@ -1,5 +1,6 @@
 .twitter-typeahead {
     line-height: 3.5;
+    width: 100%;
 }
 
 .typeahead-subhead {
@@ -32,8 +33,8 @@
     
     &-dropdown-menu { /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
         /*width: 422px;*/
-        /*width: 100%;*/
-        width: 15em;
+        width: 100%;
+        /*width: 15em;*/
         /*margin-top: 12px;*/
         margin-top: 0;
         padding: 8px 0;
