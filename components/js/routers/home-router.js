@@ -11,7 +11,7 @@ var ParseQueryString = require('util/mixin-parse-query-string');
 
 var UserLocation = require('models/user-location');
 
-var AppRouter = Backbone.Router.extend({
+var HomeRouter = Backbone.Router.extend({
 
     routes: {
         '' : 'home',
@@ -24,6 +24,7 @@ var AppRouter = Backbone.Router.extend({
     showExample: function () {
         console.log('showexmple');
     },
+
     logResultsRoute: function (queryString) {
         console.log('on results route');
     },
@@ -31,8 +32,7 @@ var AppRouter = Backbone.Router.extend({
     userLocation: undefined,   // UserLocation model; persisted in local storage
     searchForm: undefined,     // SearchForm model; throwaway
 
-    initialize: function(options) {
-        this.context = options.context;
+    initialize: function() {
         this.userLocation = new UserLocation({ id: 1 });
         this.listenTo(this, 'all', this.reportRouteEvent)
     },
@@ -40,7 +40,6 @@ var AppRouter = Backbone.Router.extend({
     reportRouteEvent: function(eventName) {
         console.log('Router: ' + eventName);
     },
-
 
     searchResults: function (queryString) {
         console.log('searchResults');
@@ -63,7 +62,6 @@ var AppRouter = Backbone.Router.extend({
                 physicianListView.render();
             }
         });
-        
     },
 
     home: function() {
@@ -128,9 +126,6 @@ console.log('home');
         Backbone.history.start();
     }
     
-    
-    
 });
-_.extend(AppRouter.prototype, ParseQueryString);
 
-module.exports = AppRouter;
+module.exports = HomeRouter;

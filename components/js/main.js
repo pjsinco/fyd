@@ -35,7 +35,8 @@ var PhysicianList = require('collections/physician-list');
  * Router
  *
  */
-var AppRouter = require('./router.js');
+var HomeRouter = require('routers/home-router');
+var ResultsRouter = require('routers/results-router');
 
 
 //var FindADoApp = new Backbone.Router.extend({
@@ -77,15 +78,17 @@ var AppRouter = require('./router.js');
 
 $(function () {
 
-    if (window.location.pathname.indexOf('results') > 0) {
-        var context = 'results'
-    } 
+    var whereWeAre = window.location.pathname;
 
-    var app = new AppRouter({
-        context: context 
-    });
+    if (whereWeAre.indexOf('results') > 0) {
+        var app = new ResultsRouter({
+            queryString: window.location.search
+        });
+    } else {
+        var app = new HomeRouter();
+    }
 
-    app.start({
+    Backbone.history.start({
         //root: '/results/',
         //pushState: true
     });
@@ -103,7 +106,8 @@ module.exports = {
     LocationFormView: LocationFormView,
     SearchFormView: SearchFormView,
     PhysicianList: PhysicianList,
-    AppRouter: AppRouter,
+    HomeRouter: HomeRouter,
+    ResultsRouter: ResultsRouter,
     UserLocation: UserLocation,
     _: _
     //FindADoApp: FindADoApp

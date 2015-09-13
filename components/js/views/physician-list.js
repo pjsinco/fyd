@@ -35,7 +35,7 @@ var PhysicianListView = Backbone.View.extend({
 
     render: function () {
         this.collection.each(this.addOne, this);
-        $('#findYourDoApp').html(this.$el);
+        $('#fydResults').html(this.$el);
     }
 
 });

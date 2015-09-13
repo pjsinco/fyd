@@ -12,7 +12,6 @@ var _ = require('underscore');
  * @return {Object} query params
  */
 var ParseQueryString = {
-    
     getQueryParams: function(queryString) {
 
         if (!queryString) {
@@ -28,8 +27,6 @@ var ParseQueryString = {
             .object()
             .value();
     }
-    
-
 }
 
 module.exports = ParseQueryString;
