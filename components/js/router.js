@@ -31,7 +31,8 @@ var AppRouter = Backbone.Router.extend({
     userLocation: undefined,   // UserLocation model; persisted in local storage
     searchForm: undefined,     // SearchForm model; throwaway
 
-    initialize: function() {
+    initialize: function(options) {
+        this.context = options.context;
         this.userLocation = new UserLocation({ id: 1 });
         this.listenTo(this, 'all', this.reportRouteEvent)
     },

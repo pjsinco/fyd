@@ -2085,7 +2085,8 @@ var AppRouter = Backbone.Router.extend({
     userLocation: undefined,   // UserLocation model; persisted in local storage
     searchForm: undefined,     // SearchForm model; throwaway
 
-    initialize: function() {
+    initialize: function(options) {
+        this.context = options.context;
         this.userLocation = new UserLocation({ id: 1 });
         this.listenTo(this, 'all', this.reportRouteEvent)
     },
@@ -2643,8 +2644,10 @@ var SearchFormView = Backbone.View.extend({
         evt.preventDefault();
         console.log('form submitted: ' + (this.isValid() ? 'valid' : 'invalid' ));
         if (this.isValid()) {
-            console.log(this.$el.serialize());    
-            router
+            var queryString = this.$el.serialize();    
+            window.location = 'http://localhost:3333/results.html?' + 
+                queryString
+            console.log('hiya still here');
         } else {
             this.indicateInvalid();
         }
@@ -15835,7 +15838,15 @@ var AppRouter = require('./router.js');
 
 
 $(function () {
-    var app = new AppRouter();
+
+    if (window.location.pathname.indexOf('results') > 0) {
+        var context = 'results'
+    } 
+
+    var app = new AppRouter({
+        context: context 
+    });
+
     app.start({
         //root: '/results/',
         //pushState: true

@@ -76,7 +76,15 @@ var AppRouter = require('./router.js');
 
 
 $(function () {
-    var app = new AppRouter();
+
+    if (window.location.pathname.indexOf('results') > 0) {
+        var context = 'results'
+    } 
+
+    var app = new AppRouter({
+        context: context 
+    });
+
     app.start({
         //root: '/results/',
         //pushState: true

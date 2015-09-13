@@ -53,8 +53,10 @@ var SearchFormView = Backbone.View.extend({
         evt.preventDefault();
         console.log('form submitted: ' + (this.isValid() ? 'valid' : 'invalid' ));
         if (this.isValid()) {
-            console.log(this.$el.serialize());    
-            router
+            var queryString = this.$el.serialize();    
+            window.location = 'http://localhost:3333/results.html?' + 
+                queryString
+            console.log('hiya still here');
         } else {
             this.indicateInvalid();
         }
