@@ -15,11 +15,15 @@ var AppRouter = Backbone.Router.extend({
 
     routes: {
         '' : 'home',
+        'show': 'showExample',
         'physicians/:id': 'show',
         //'results?*queryString': 'logResultsRoute',
         'physicians?*queryString': 'searchResults',
     },
 
+    showExample: function () {
+        console.log('showexmple');
+    },
     logResultsRoute: function (queryString) {
         console.log('on results route');
     },
@@ -29,7 +33,13 @@ var AppRouter = Backbone.Router.extend({
 
     initialize: function() {
         this.userLocation = new UserLocation({ id: 1 });
+        this.listenTo(this, 'all', this.reportRouteEvent)
     },
+
+    reportRouteEvent: function(eventName) {
+        console.log('Router: ' + eventName);
+    },
+
 
     searchResults: function (queryString) {
         console.log('searchResults');

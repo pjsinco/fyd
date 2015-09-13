@@ -78,7 +78,8 @@ var AppRouter = require('./router.js');
 $(function () {
     var app = new AppRouter();
     app.start({
-        //root: '/results/'
+        //root: '/results/',
+        //pushState: true
     });
 });
 
