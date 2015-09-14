@@ -2652,19 +2652,21 @@ var _ = require('underscore');
 var PhysicianListItemView = Backbone.View.extend({
 
     tagName: 'li',
-    className: 'find-your-do__list-item',
+    className: 'fyd-results__list-item',
 
     events: {
         
     },
 
     template: _.template(
-        '<h2><%= full_name %></h2>' +
-        '<h3><%= specialty %></h3>' +
-        '<div><p data-lat=<%= lat %> data-lon=<%= lon %>>' +
-        '<%= addr_1 %><br/ >' +
-        '<%= city %>, <%= state %> <%= zip %>' +
-        '</p></div>'
+            '<h3 class="fyd-results__name">' +
+                '<a href="/#physicians/<%= id %>"><%= full_name %></a>' +
+            '<h3>' +
+            '<h4><%= specialty %></h4>' +
+            '<div><p data-lat=<%= lat %> data-lon=<%= lon %>>' +
+                '<%= addr_1 %><br/ >' +
+                '<%= city %>, <%= state %> <%= zip %>' +
+            '</p></div>'
     ),
 
     initialize: function () {
