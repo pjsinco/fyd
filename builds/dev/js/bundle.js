@@ -23,7 +23,7 @@ var PhysicianList = Backbone.Collection.extend({
 module.exports = PhysicianList;
 
 
-},{"backbone":21,"models/physician":3}],2:[function(require,module,exports){
+},{"backbone":22,"models/physician":3}],2:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 
@@ -73,7 +73,7 @@ var Location = Backbone.Model.extend({
 
 module.exports = Location;
 
-},{"backbone":21,"underscore":23}],3:[function(require,module,exports){
+},{"backbone":22,"underscore":24}],3:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var Physician = Backbone.Model.extend({
@@ -102,7 +102,7 @@ var Physician = Backbone.Model.extend({
 module.exports = Physician;
 
 
-},{"backbone":21}],4:[function(require,module,exports){
+},{"backbone":22}],4:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 var SearchFormView = require('views/search');
@@ -168,7 +168,7 @@ var SearchForm = Backbone.Model.extend({
 module.exports = SearchForm;
 
 
-},{"backbone":21,"models/location":2,"models/specialty":6,"underscore":23,"views/search":18}],5:[function(require,module,exports){
+},{"backbone":22,"models/location":2,"models/specialty":6,"underscore":24,"views/search":19}],5:[function(require,module,exports){
 var Backbone = require('backbone');
 var SearchView = require('views/search');
 
@@ -187,7 +187,7 @@ debugger;
 module.exports = Search;
 
 
-},{"backbone":21,"views/search":18}],6:[function(require,module,exports){
+},{"backbone":22,"views/search":19}],6:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 var IsEmptyMixin = require('util/mixin-is-empty');
@@ -216,7 +216,7 @@ _.extend(Specialty.prototype, IsEmptyMixin);
 module.exports = Specialty;
 
 
-},{"backbone":21,"underscore":23,"util/mixin-is-empty":11}],7:[function(require,module,exports){
+},{"backbone":22,"underscore":24,"util/mixin-is-empty":11}],7:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 var Location = require('models/location');
@@ -262,7 +262,7 @@ var UserLocation = Backbone.Model.extend({
 module.exports = UserLocation;
 
 
-},{"backbone":21,"backbone.localstorage":20,"models/location":2,"underscore":23}],8:[function(require,module,exports){
+},{"backbone":22,"backbone.localstorage":21,"models/location":2,"underscore":24}],8:[function(require,module,exports){
 var $ = require('jquery');
 
 //https://github.com/twitter/typeahead.js/issues/872
@@ -2051,7 +2051,7 @@ module.exports = (function($) {
     })();
 })(window.jQuery);
 
-},{"jquery":22}],9:[function(require,module,exports){
+},{"jquery":23}],9:[function(require,module,exports){
 var Backbone = require('backbone');
 var $ = require('jquery');
 var _ = require('underscore');
@@ -2183,7 +2183,7 @@ console.log('home');
 
 module.exports = HomeRouter;
 
-},{"backbone":21,"collections/physician-list":1,"jquery":22,"models/location":2,"models/physician":3,"models/search-form":4,"models/user-location":7,"underscore":23,"util/mixin-parse-query-string":12,"views/physician":17,"views/physician-list":16}],10:[function(require,module,exports){
+},{"backbone":22,"collections/physician-list":1,"jquery":23,"models/location":2,"models/physician":3,"models/search-form":4,"models/user-location":7,"underscore":24,"util/mixin-parse-query-string":12,"views/physician":17,"views/physician-list":16}],10:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 var $ = require('jquery');
@@ -2266,7 +2266,7 @@ _.extend(ResultsRouter.prototype, QueryStringHelpers);
 module.exports = ResultsRouter;
 
 
-},{"backbone":21,"collections/physician-list":1,"jquery":22,"models/physician":3,"models/search-form":4,"models/user-location":7,"underscore":23,"util/mixin-string-helpers":13,"views/physician":17,"views/physician-detail":15,"views/physician-list":16}],11:[function(require,module,exports){
+},{"backbone":22,"collections/physician-list":1,"jquery":23,"models/physician":3,"models/search-form":4,"models/user-location":7,"underscore":24,"util/mixin-string-helpers":13,"views/physician":17,"views/physician-detail":15,"views/physician-list":16}],11:[function(require,module,exports){
 var _ = require('underscore');
 
 var IsEmptyMixin = {
@@ -2281,7 +2281,7 @@ var IsEmptyMixin = {
 
 module.exports = IsEmptyMixin;
 
-},{"underscore":23}],12:[function(require,module,exports){
+},{"underscore":24}],12:[function(require,module,exports){
 var _ = require('underscore');
 
 /**
@@ -2315,7 +2315,7 @@ var ParseQueryString = {
 
 module.exports = ParseQueryString;
 
-},{"underscore":23}],13:[function(require,module,exports){
+},{"underscore":24}],13:[function(require,module,exports){
 var _ = require('backbone');
 
 var QueryStringHelpers = {
@@ -2367,7 +2367,7 @@ var QueryStringHelpers = {
 
 module.exports = QueryStringHelpers;
 
-},{"backbone":21}],14:[function(require,module,exports){
+},{"backbone":22}],14:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2631,7 +2631,7 @@ var LocationForm = Backbone.View.extend({
 
 module.exports = LocationForm;
 
-},{"backbone":21,"jquery":22,"models/location":2,"typeahead.0.10.5":8,"underscore":23}],15:[function(require,module,exports){
+},{"backbone":22,"jquery":23,"models/location":2,"typeahead.0.10.5":8,"underscore":24}],15:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 var $ = require('jquery');
@@ -2676,11 +2676,12 @@ var PhysicianDetailView = Backbone.View.extend({
 module.exports = PhysicianDetailView;
 
 
-},{"backbone":21,"jquery":22,"underscore":23}],16:[function(require,module,exports){
+},{"backbone":22,"jquery":23,"underscore":24}],16:[function(require,module,exports){
 var Backbone = require('backbone');
 var $ = require('jquery');
 var _ = require('underscore');
 var PhysicianListItemView = require('views/physician');
+var ResultsMetaView = require('views/results-meta');
 
 
 var PhysicianListView = Backbone.View.extend({
@@ -2695,6 +2696,10 @@ var PhysicianListView = Backbone.View.extend({
 
     initialize: function (options) {
         this.router = options.router;
+        this.resultsMetaView = new ResultsMetaView({
+            length: this.collection.length,
+            el: '#fydResultsMeta'
+        })
     },
 
     /**
@@ -2730,7 +2735,7 @@ var PhysicianListView = Backbone.View.extend({
 module.exports = PhysicianListView;
 
 
-},{"backbone":21,"jquery":22,"underscore":23,"views/physician":17}],17:[function(require,module,exports){
+},{"backbone":22,"jquery":23,"underscore":24,"views/physician":17,"views/results-meta":18}],17:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 
@@ -2769,7 +2774,39 @@ var PhysicianListItemView = Backbone.View.extend({
 module.exports = PhysicianListItemView;
 
 
-},{"backbone":21,"underscore":23}],18:[function(require,module,exports){
+},{"backbone":22,"underscore":24}],18:[function(require,module,exports){
+var Backbone = require('backbone');
+var _ = require('underscore');
+var $ = require('jquery');
+
+var ResultsMetaView = Backbone.View.extend({
+
+    events: {
+        
+    },
+
+    initialize: function (options) {
+        if (options.el) {
+            this.el = $(options.el)
+        }
+
+        if (options.length) {
+            this.length = options.length;
+        }
+        this.render();
+    },
+
+    render: function () {
+        var template = _.template($('#fydResultsMetaTemplate').html());
+        this.$el.html(template({ length: this.length } ));
+    }
+
+});
+
+module.exports = ResultsMetaView;
+
+
+},{"backbone":22,"jquery":23,"underscore":24}],19:[function(require,module,exports){
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
@@ -2853,7 +2890,7 @@ var SearchFormView = Backbone.View.extend({
 module.exports = SearchFormView;
 
 
-},{"backbone":21,"jquery":22,"models/location":2,"underscore":23,"views/location-form":14,"views/specialty-form":19}],19:[function(require,module,exports){
+},{"backbone":22,"jquery":23,"models/location":2,"underscore":24,"views/location-form":14,"views/specialty-form":20}],20:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -3024,7 +3061,7 @@ var SpecialtyView = Backbone.View.extend({
 
 module.exports = SpecialtyView;
 
-},{"backbone":21,"jquery":22,"typeahead.0.10.5":8,"underscore":23}],20:[function(require,module,exports){
+},{"backbone":22,"jquery":23,"typeahead.0.10.5":8,"underscore":24}],21:[function(require,module,exports){
 /**
  * Backbone localStorage Adapter
  * Version 1.1.16
@@ -3284,7 +3321,7 @@ Backbone.sync = function(method, model, options) {
 return Backbone.LocalStorage;
 }));
 
-},{"backbone":21}],21:[function(require,module,exports){
+},{"backbone":22}],22:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.2
 
@@ -5181,7 +5218,7 @@ return Backbone.LocalStorage;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":22,"underscore":23}],22:[function(require,module,exports){
+},{"jquery":23,"underscore":24}],23:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -14393,7 +14430,7 @@ return jQuery;
 
 }));
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -16062,4 +16099,4 @@ module.exports = {
 
 };
 
-},{"backbone":21,"collections/physician-list":1,"jquery":22,"models/location":2,"models/physician":3,"models/search":5,"models/specialty":6,"models/user-location":7,"routers/home-router":9,"routers/results-router":10,"underscore":23,"views/location-form":14,"views/physician":17,"views/physician-detail":15,"views/search":18,"views/specialty-form":19}]},{},["app"]);
+},{"backbone":22,"collections/physician-list":1,"jquery":23,"models/location":2,"models/physician":3,"models/search":5,"models/specialty":6,"models/user-location":7,"routers/home-router":9,"routers/results-router":10,"underscore":24,"views/location-form":14,"views/physician":17,"views/physician-detail":15,"views/search":19,"views/specialty-form":20}]},{},["app"]);

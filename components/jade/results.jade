@@ -9,6 +9,9 @@ html
             div.container-fluid
                 div.hasRightCol.interior-content
                     div#fydResults
+                        div#fydResultsMeta
                         include search-form
 
         include footer
+        script#fydResultsMetaTemplate(type="text/template")
+            <a href="#"><%= length %> DOs near </a>

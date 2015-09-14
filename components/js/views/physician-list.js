@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 var _ = require('underscore');
 var PhysicianListItemView = require('views/physician');
+var ResultsMetaView = require('views/results-meta');
 
 
 var PhysicianListView = Backbone.View.extend({
@@ -16,6 +17,10 @@ var PhysicianListView = Backbone.View.extend({
 
     initialize: function (options) {
         this.router = options.router;
+        this.resultsMetaView = new ResultsMetaView({
+            length: this.collection.length,
+            el: '#fydResultsMeta'
+        })
     },
 
     /**
