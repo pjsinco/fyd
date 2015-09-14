@@ -1,0 +1,13 @@
+div.row.fyd
+    div.col-sm-12
+        div.row
+            div.col-sm-3
+                h3.fyd__title Find Your DO
+            div.col-sm-9
+                form.form-inline.fyd__form#findYourDo(method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo")
+                    div.form-group
+                        input#specialty.form-control(placeholder="Name or specialty" name="specialty" type="text")
+                    div.form-group
+                        input#location.form-control(placeholder="City, state or zip" name="location" type="text")
+                    input(type="submit" value="Go")
+

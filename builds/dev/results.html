@@ -54,7 +54,28 @@
     <div id="interior">
       <div class="container-fluid">
         <div class="hasRightCol interior-content">
-          <div id="fydResults"></div>
+          <div id="fydResults">
+            <div class="row fyd">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h3 class="fyd__title">Find Your DO</h3>
+                  </div>
+                  <div class="col-sm-9">
+                    <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="form-inline fyd__form">
+                      <div class="form-group">
+                        <input id="specialty" placeholder="Name or specialty" name="specialty" type="text" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <input id="location" placeholder="City, state or zip" name="location" type="text" class="form-control">
+                      </div>
+                      <input type="submit" value="Go">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

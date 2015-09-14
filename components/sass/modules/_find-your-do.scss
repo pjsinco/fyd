@@ -18,7 +18,7 @@ $input-border-color: rgba($gray,.1);
 
 }
 
-.find-your-do {
+.fyd {
 
     text-align: center;
 
@@ -27,14 +27,34 @@ $input-border-color: rgba($gray,.1);
         /*display: inline;*/
     }
     
+    &__title {
+        margin-bottom: 0;
+        font-size: 2em;
+        text-align: left;
+        text-transform: uppercase;
+        color: $white;
 
-    form {
+        @media screen and (min-width: $screen-sm-min) {
+            text-align: right;
+        }
+
+        @media screen and (min-width: $screen-md-min) {
+            line-height: 2.5;
+        }
+
+        #fydResults & {
+            color: $gray;
+        }
+    }
+
+
+    &__form {
         display: inline;    
         padding: 1em;
         margin: 1em;
-        background-color: $secondarycolor;  
-        border-width: $input-border-width;
-        border: 1px solid $accentcolor;
+        /*background-color: $secondarycolor;  */
+        /*border-width: $input-border-width;*/
+        /*border: 1px solid $accentcolor;*/
     }
      
     textarea {

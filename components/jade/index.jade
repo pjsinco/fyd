@@ -20,19 +20,7 @@ html(lang="en-US")
                                     div.hero__body 
                                         p 
                                         | Doctors of Osteopathic Medicine are complete physicians and practice in every medical specialty. A D.O. is trained to always first consider the person within the patient.
-                            div.col-sm-12
-                                div.row
-                                    div.col-sm-3
-                                        h3.hero__title Find Your DO
-                                    div.col-sm-9
-                                        form.form-inline.find-your-do#findYourDo(method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo")
-                                            div.form-group
-                                                input#specialty.form-control(placeholder="Name or specialty" name="specialty" type="text")
-                                            div.form-group
-                                                input#location.form-control(placeholder="City, state or zip" name="location" type="text")
-                                            input(type="submit" value="Go")
-                            //-div.hero__image--placeholder
-
+                        include search-form
                                  
         include page-blocks
         include feeds
