@@ -1,8 +1,10 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
+var $ = require('jquery');
 var Physician = require('models/physician');
 var PhysicianList = require('collections/physician-list');
 var PhysicianListView = require('views/physician-list');
+var PhysicianDetailView = require('views/physician-detail');
 var PhysicianListItemView = require('views/physician');
 var QueryStringHelpers = require('util/mixin-string-helpers');
 
@@ -26,10 +28,10 @@ var ResultsRouter = Backbone.Router.extend({
         var physician = new Physician({ id: id });
         physician.fetch({
             success: function() {
-                var physicianView = 
-                    new PhysicianListItemView({ model: physician });
-                physicianView.render();
-                $('body').html(physicianView.el);
+                var physicianDetailView = 
+                    new PhysicianDetailView({ model: physician });
+                physicianDetailView.render();
+                $('#fydResults').html(physicianDetailView.el);
             }
         });
     },

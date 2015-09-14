@@ -12,7 +12,7 @@ var PhysicianListItemView = Backbone.View.extend({
 
     template: _.template(
             '<h3 class="fyd-results__name">' +
-                '<a href="/#physicians/<%= id %>"><%= full_name %></a>' +
+                '<a href="results.html#physicians/<%= id %>"><%= full_name %></a>' +
             '<h3>' +
             '<h4><%= specialty %></h4>' +
             '<div><p data-lat=<%= lat %> data-lon=<%= lon %>>' +

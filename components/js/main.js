@@ -24,6 +24,7 @@ var PhysicianListItemView = require('views/physician');
 var SpecialtyFormView = require('views/specialty-form');
 var LocationFormView = require('views/location-form');
 var SearchFormView = require('views/search');
+var PhysicianDetailView = require('views/physician-detail');
 
 /**
  * Collections
@@ -103,6 +104,7 @@ module.exports = {
     Location: Location,
     Search: Search,
     PhysicianListItemView: PhysicianListItemView,
+    PhysicianDetailView: PhysicianDetailView,
     LocationFormView: LocationFormView,
     SearchFormView: SearchFormView,
     PhysicianList: PhysicianList,
