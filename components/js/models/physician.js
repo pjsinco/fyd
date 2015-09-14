@@ -6,7 +6,7 @@ var Physician = Backbone.Model.extend({
     urlRoot: 'http://lookup.dev/api/v1/physicians',
 
     // when we fetch inside a collection
-    url: 'http://lookup.dev/api/v1/physicians/search',
+    //url: 'http://lookup.dev/api/v1/physicians/search',
 
     initialize: function () {
 

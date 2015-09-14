@@ -1,13 +1,16 @@
 var Backbone = require('backbone');
 var _ = require('underscore');
+var Physician = require('models/physician');
 var PhysicianList = require('collections/physician-list');
 var PhysicianListView = require('views/physician-list');
+var PhysicianListItemView = require('views/physician');
 var QueryStringHelpers = require('util/mixin-string-helpers');
 
 var ResultsRouter = Backbone.Router.extend({
 
     routes: {
-        '' : 'searchResults'       
+        '' : 'searchResults',
+        'physicians/:id': 'show'
     },
 
     hello: function () {
@@ -19,10 +22,23 @@ var ResultsRouter = Backbone.Router.extend({
         //this.queryString = options.queryString;
     },
 
+    show: function(id) {
+        var physician = new Physician({ id: id });
+        physician.fetch({
+            success: function() {
+                var physicianView = 
+                    new PhysicianListItemView({ model: physician });
+                physicianView.render();
+                $('body').html(physicianView.el);
+            }
+        });
+    },
+
     searchResults: function () {
         console.log('searchResults');
         queryString = 
-            QueryStringHelpers.trimLeadingQuestionMark(window.location.search);
+            QueryStringHelpers
+                .trimLeadingQuestionMark(window.location.search);
 
         //console.dir(query);
 
