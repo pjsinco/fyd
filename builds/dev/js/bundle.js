@@ -2673,7 +2673,7 @@ var PhysicianListView = Backbone.View.extend({
 
     collection: undefined,
     tagName: 'ul',
-    className: 'find-your-do__list',
+    className: 'fyd-results__list',
 
     events: {
         
@@ -2697,6 +2697,14 @@ var PhysicianListView = Backbone.View.extend({
         
     },
 
+    template: _.template(
+        '<div id="right">' +
+            '<div class="row">' +
+                '<div id="content" class="mainContent">' +
+                '</div>' +
+            '</div>' +
+        '</div>'
+    ),
 
     render: function () {
         this.collection.each(this.addOne, this);

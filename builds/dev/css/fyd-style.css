@@ -159,11 +159,12 @@
   padding-bottom: 1em;
   padding-left: 0;
   margin-bottom: 1em;
-  border-bottom: 1px solid #00eaff; }
-/* line 46, ../../../components/sass/modules/_find-your-do-results.scss */
+  border-bottom: 1px solid #00eaff;
+  list-style: none; }
+/* line 47, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__locator {
   background: aliceblue; }
-/* line 51, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 52, ../../../components/sass/modules/_find-your-do-results.scss */
 #fydResults .fyd-results__search #specialty {
   background-color: fuchsia; }
 
