@@ -2954,9 +2954,12 @@ var SpecialtyView = Backbone.View.extend({
     },
 
     physicianSuggestionTemplate: _.template(
-        '<div><a href="/#physicians/<%= id %>" id="#physicianLink">' +
-        '<strong><%= first_name %> <%= last_name %></strong>, ' +
-        '<%= designation %>; <%= city %>, <%= state %></a></div>'
+        '<div>' +
+            '<a href="results.html#physicians/<%= id %>">' +
+                '<strong><%= first_name %> <%= last_name %></strong>, ' +
+                '<%= designation %>; <%= city %>, <%= state %>' +
+            '</a>' +
+        '</div>'
     ),
 
     _initTypeahead: function () {

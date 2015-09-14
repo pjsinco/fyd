@@ -452,3 +452,8 @@ var TaskList = Backbone.Collection.extend({
 ```
 * Github: [Variable VVV - The Best VVV Site Wizard](https://github.com/bradp/vv)
     * Using this to spin up doctorsthatdo.dev
+
+#####Mon Sep 14 15:35:03 2015 CDT
+* Blog: [wp.template for front end templating in WordPress](https://lkwdwrd.com/wp-template-js-templates-wp/)
+
+
