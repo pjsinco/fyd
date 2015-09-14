@@ -284,8 +284,9 @@
   color: #999; }
 /* line 31, ../../../components/sass/modules/_typeahead.scss */
 .tt-highlight {
-  font-weight: 800; }
-/* line 35, ../../../components/sass/modules/_typeahead.scss */
+  font-weight: 800;
+  color: #ffaa00; }
+/* line 36, ../../../components/sass/modules/_typeahead.scss */
 .tt-dropdown-menu {
   /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
   /*width: 422px;*/
@@ -301,39 +302,39 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   /*border-radius: 8px;*/
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
-/* line 51, ../../../components/sass/modules/_typeahead.scss */
+/* line 52, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: .875em;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.5;
   text-align: left;
   cursor: pointer;
   /**
    * Target only physician suggestions 
    */ }
-  /* line 62, ../../../components/sass/modules/_typeahead.scss */
+  /* line 63, ../../../components/sass/modules/_typeahead.scss */
   .tt-dataset-physicians .tt-suggestion {
     padding: 0; }
-    /* line 66, ../../../components/sass/modules/_typeahead.scss */
+    /* line 67, ../../../components/sass/modules/_typeahead.scss */
     .tt-dataset-physicians .tt-suggestion a {
       display: block;
       padding-top: .25em;
       padding-right: 1.25em;
       padding-bottom: .25em;
       padding-left: 1.25em; }
-      /* line 73, ../../../components/sass/modules/_typeahead.scss */
+      /* line 74, ../../../components/sass/modules/_typeahead.scss */
       .tt-dataset-physicians .tt-suggestion a:hover {
         text-decoration: none; }
-/* line 80, ../../../components/sass/modules/_typeahead.scss */
+/* line 81, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion.tt-cursor {
   /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
   color: #fff;
   background-color: #00eaff; }
-/* line 86, ../../../components/sass/modules/_typeahead.scss */
+/* line 87, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion a {
   color: inherit; }
-/* line 90, ../../../components/sass/modules/_typeahead.scss */
+/* line 91, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion p {
   margin: 0; }
 

@@ -8,7 +8,6 @@ var PhysicianListItemView = require('views/physician');
 var Location = require('models/location');
 var SearchForm = require('models/search-form');
 var ParseQueryString = require('util/mixin-parse-query-string');
-
 var UserLocation = require('models/user-location');
 
 var HomeRouter = Backbone.Router.extend({

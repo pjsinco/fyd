@@ -7,6 +7,8 @@ var PhysicianListView = require('views/physician-list');
 var PhysicianDetailView = require('views/physician-detail');
 var PhysicianListItemView = require('views/physician');
 var QueryStringHelpers = require('util/mixin-string-helpers');
+var SearchForm = require('models/search-form');
+var UserLocation = require('models/user-location');
 
 var ResultsRouter = Backbone.Router.extend({
 
@@ -20,8 +22,21 @@ var ResultsRouter = Backbone.Router.extend({
     },
 
     initialize: function(options) {
+        this.userLocation = new UserLocation({ id: 1 });
+        var self = this;
+        this.userLocation.fetch({
+            success: function() {
+                self.initSearch()
+            }
+        })
         //this.queryString = window.location.search;
         //this.queryString = options.queryString;
+    },
+
+    initSearch: function (locationAttributes) {
+        this.searchForm = new SearchForm({
+            userLocation: this.userLocation
+        });
     },
 
     show: function(id) {

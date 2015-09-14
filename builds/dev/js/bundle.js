@@ -2062,7 +2062,6 @@ var PhysicianListItemView = require('views/physician');
 var Location = require('models/location');
 var SearchForm = require('models/search-form');
 var ParseQueryString = require('util/mixin-parse-query-string');
-
 var UserLocation = require('models/user-location');
 
 var HomeRouter = Backbone.Router.extend({
@@ -2194,6 +2193,8 @@ var PhysicianListView = require('views/physician-list');
 var PhysicianDetailView = require('views/physician-detail');
 var PhysicianListItemView = require('views/physician');
 var QueryStringHelpers = require('util/mixin-string-helpers');
+var SearchForm = require('models/search-form');
+var UserLocation = require('models/user-location');
 
 var ResultsRouter = Backbone.Router.extend({
 
@@ -2207,8 +2208,21 @@ var ResultsRouter = Backbone.Router.extend({
     },
 
     initialize: function(options) {
+        this.userLocation = new UserLocation({ id: 1 });
+        var self = this;
+        this.userLocation.fetch({
+            success: function() {
+                self.initSearch()
+            }
+        })
         //this.queryString = window.location.search;
         //this.queryString = options.queryString;
+    },
+
+    initSearch: function (locationAttributes) {
+        this.searchForm = new SearchForm({
+            userLocation: this.userLocation
+        });
     },
 
     show: function(id) {
@@ -2252,7 +2266,7 @@ _.extend(ResultsRouter.prototype, QueryStringHelpers);
 module.exports = ResultsRouter;
 
 
-},{"backbone":21,"collections/physician-list":1,"jquery":22,"models/physician":3,"underscore":23,"util/mixin-string-helpers":13,"views/physician":17,"views/physician-detail":15,"views/physician-list":16}],11:[function(require,module,exports){
+},{"backbone":21,"collections/physician-list":1,"jquery":22,"models/physician":3,"models/search-form":4,"models/user-location":7,"underscore":23,"util/mixin-string-helpers":13,"views/physician":17,"views/physician-detail":15,"views/physician-list":16}],11:[function(require,module,exports){
 var _ = require('underscore');
 
 var IsEmptyMixin = {
