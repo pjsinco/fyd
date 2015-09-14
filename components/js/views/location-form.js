@@ -251,7 +251,7 @@ var LocationForm = Backbone.View.extend({
         });
     },
     
-    initAutocomplete() {
+    initAutocomplete: function() {
         this._initBloodhound();
         this.engine.initialize();
         this._initTypeahead();

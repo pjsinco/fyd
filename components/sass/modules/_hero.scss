@@ -62,17 +62,21 @@
     }
 
     &__title {
-        display: inline;
+        /*display: inline;*/
         margin-bottom: 1em;
         margin-right: .5em;
         font-family: $primaryfont;
-        text-align: center;
+        /*text-align: center;*/
         font-weight: $fontbold;
         font-size: 2em;
         text-transform: uppercase;
         letter-spacing: 1px;
         vertical-align: middle;
-        line-height: 2.5;
+        line-height: 1.5;
         color: $white;
+
+        @media screen and (min-width: $screen-sm-min) {
+            text-align: right;
+        }
     }
 }

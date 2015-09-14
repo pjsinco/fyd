@@ -7,6 +7,7 @@
     margin-top: 0;
     margin-bottom: 0;
     padding: .125em 1.25em;
+    font-family: $primaryfont;
     font-size: .75em;
     line-height: 24px;
     text-align: left;
@@ -38,6 +39,8 @@
         /*margin-top: 12px;*/
         margin-top: 0;
         padding: 8px 0;
+        font-family: $primaryfont;
+        font-size: 1.285714286em;
         background-color: #fff;
         border: 1px solid #ccc;
         border: 1px solid rgba(0, 0, 0, 0.2);
@@ -51,6 +54,7 @@
         font-weight: 600;
         line-height: 1.5;
         text-align: left;
+        cursor: pointer;
 
         /**
          * Target only physician suggestions 
