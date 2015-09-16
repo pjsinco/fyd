@@ -56,7 +56,6 @@ var SearchFormView = Backbone.View.extend({
             var queryString = this.$el.serialize();    
             window.location = 'http://localhost:3333/results.html?' + 
                 queryString
-            console.log('hiya still here');
         } else {
             this.indicateInvalid();
         }
