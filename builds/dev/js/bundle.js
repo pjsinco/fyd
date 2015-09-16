@@ -2550,6 +2550,7 @@ var LocationForm = Backbone.View.extend({
     hiddensTemplate: _.template(
         '<input class="hidden-location" id="city" name="city" type="hidden" value="<%= city %>">' +
         '<input class="hidden-location" id="state" name="state" type="hidden" value="<%= state %>">' +
+        '<input class="hidden-location" id="zip" name="zip" type="hidden" value="<%= zip %>">' +
         '<input class="hidden-location" id="lat" name="lat" type="hidden" value="<%= lat %>">' +
         '<input class="hidden-location" id="lon" name="lon" type="hidden" value="<%= lon %>">'
     ),
