@@ -2457,7 +2457,7 @@ var LocationForm = Backbone.View.extend({
 
     el: '#location',
     engine: {},
-    isSet: false,
+    resolved: false,
 
     initialize: function() {
         this.initAutocomplete();
@@ -2490,7 +2490,12 @@ var LocationForm = Backbone.View.extend({
         'typeahead:selected': 'setLocation',
         'typeahead:autocompleted': 'setLocation',
         'typeahead:closed': 'closed',
-        'input': 'inputHandler',
+        'input': 'inputChange',
+    },
+
+    inputChange: function () {
+        this.resolved == false;
+        console.log('resolved = false');
     },
 
     holla: function(model, options)  {
@@ -2499,7 +2504,6 @@ var LocationForm = Backbone.View.extend({
 
 
     opened: function() {
-        console.log('typehaead opened');
     },
 
     parseInput: function() {
@@ -2512,16 +2516,15 @@ var LocationForm = Backbone.View.extend({
     },
 
     setLocation: function(evt, suggestion) {
-
+        this.resolved = true;
+        console.log('resolved = true');
         // User didn't include the zip, so we're tossing out
         // that level of precision
         if (!suggestion.hasOwnProperty('zip')) {
             _.defaults(suggestion, { zip: undefined })
         }
 
-        //this.isSet = true;
         this.model.set(suggestion);
-        //this.triggerChangeEvent();
     },
 
     /**
@@ -2553,7 +2556,10 @@ var LocationForm = Backbone.View.extend({
 
             if (uniqueLocations.length == 1) {
                 console.log('resolved');
+                self.resolved = true;
+                console.log('resolved = true');
                 self.setLocation(null, uniqueLocations[0]);
+            
                 self.render();
                 
             } else {
@@ -2566,14 +2572,13 @@ var LocationForm = Backbone.View.extend({
     },
     
     closed: function(e) {
-
         // we shouldn't call _resolve() on an empty field
-        if (this.$el.typeahead('val') != '') {
+        console.log('we\'re in closed(): resolved: ' + 
+            (this.resolved ? 'true' : 'false'));
+        if (this.$el.typeahead('val') != '' && !this.resolved) {
             console.log('resolving');
             this._resolve();
-        } else {
-            this._unresolve();
-        }
+        } 
     },
 
     focused: function(e) {
