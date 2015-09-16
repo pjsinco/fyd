@@ -117,7 +117,10 @@ var ResultsMeta = Backbone.Model.extend({
     },
 
     initialize: function (attributes) {
-        this.setWho(attributes.count);
+
+        if (attributes !== undefined) {
+            this.setWho(attributes.count);
+        }
     },
 
     /**
@@ -2244,10 +2247,6 @@ var ResultsRouter = Backbone.Router.extend({
         'physicians/:id': 'show'
     },
 
-    hello: function () {
-        console.log('hello from results router');
-    },
-
     initialize: function(options) {
         this.userLocation = new UserLocation({ id: 1 });
         var self = this;
@@ -2299,6 +2298,10 @@ var ResultsRouter = Backbone.Router.extend({
                     router: self
                 });
                 physicianListView.render();
+            },
+            error: function(collection, response) {
+                var physicianListView
+                var resultsMeta = new ResultsMeta(response.responseJSON);
             }
         });
     },
