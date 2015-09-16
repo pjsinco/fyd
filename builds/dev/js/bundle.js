@@ -3050,18 +3050,16 @@ var SpecialtyView = Backbone.View.extend({
                     return url + '?name=' + uriEncodedQuery + '&' + params;
                 },
                 filter: function(physicians) {
-                    return $.map(physicians, function(d) {
-                        return $.map(d, function(e) {
-                            return {
-                                first_name: e.first_name,
-                                last_name: e.last_name,
-                                designation: e.designation,
-                                city: e.city,
-                                state: e.state,
-                                id: e.id,
-                                value: e.full_name
-                            };
-                        });
+                    return $.map(physicians.data, function(d) {
+                        return {
+                            first_name: d.first_name,
+                            last_name: d.last_name,
+                            designation: d.designation,
+                            city: d.city,
+                            state: d.state,
+                            id: d.id,
+                            value: d.full_name
+                        };
                     });
                 }
             }
