@@ -16,7 +16,6 @@ var SearchForm = Backbone.Model.extend({
     searchFormView: undefined, // view; backed by this model
 
     initialize: function (options) {
-
         this.userLocation = options.userLocation;
         options.userLocation.unset('id');
         this.searchLocation = new Location(_.clone(this.userLocation.attributes));

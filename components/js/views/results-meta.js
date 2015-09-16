@@ -4,6 +4,8 @@ var $ = require('jquery');
 
 var ResultsMetaView = Backbone.View.extend({
 
+    el: '#fydResultsMeta',
+
     events: {
         
     },
@@ -13,15 +15,12 @@ var ResultsMetaView = Backbone.View.extend({
             this.el = $(options.el)
         }
 
-        if (options.length) {
-            this.length = options.length;
-        }
         this.render();
     },
 
     render: function () {
         var template = _.template($('#fydResultsMetaTemplate').html());
-        this.$el.html(template({ length: this.length } ));
+        this.$el.html(template( this.model.toJSON() ));
     }
 
 });

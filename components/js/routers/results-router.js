@@ -9,6 +9,7 @@ var PhysicianListItemView = require('views/physician');
 var QueryStringHelpers = require('util/mixin-string-helpers');
 var SearchForm = require('models/search-form');
 var UserLocation = require('models/user-location');
+var Results = require('models/results');
 var ResultsMeta = require('models/results-meta');
 
 var ResultsRouter = Backbone.Router.extend({
@@ -19,6 +20,10 @@ var ResultsRouter = Backbone.Router.extend({
     },
 
     initialize: function(options) {
+        /**
+         * Grab the user's location from local storage
+         *
+         */
         this.userLocation = new UserLocation({ id: 1 });
         var self = this;
         this.userLocation.fetch({
@@ -26,14 +31,9 @@ var ResultsRouter = Backbone.Router.extend({
                 self.initSearch()
             }
         })
-        //this.queryString = window.location.search;
-        //this.queryString = options.queryString;
     },
 
     initSearch: function (locationAttributes) {
-        this.searchForm = new SearchForm({
-            userLocation: this.userLocation
-        });
     },
 
     show: function(id) {
@@ -49,30 +49,30 @@ var ResultsRouter = Backbone.Router.extend({
     },
 
     searchResults: function () {
-        console.log('searchResults');
         queryString = 
             QueryStringHelpers
                 .trimLeadingQuestionMark(window.location.search);
 
-        //console.dir(query);
-
-        this.physicianList = new PhysicianList({});
+        var physicianList = new PhysicianList({});
 
         var self = this;
-        this.physicianList.fetch({
+        physicianList.fetch({
             data: queryString,
-            //beforeSend: this.physicianList.setHeader,
             success: function(collection, response) {
-                var resultsMeta = new ResultsMeta(response.meta);
-                var physicianListView = new PhysicianListView({
-                    collection: self.physicianList,
+                var results = new Results({
+                    resultsMeta: new ResultsMeta(response.meta),
+                    physicianList: physicianList,
+                    userLocation: self.userLocation,
                     router: self
                 });
-                physicianListView.render();
             },
             error: function(collection, response) {
-                var physicianListView
-                var resultsMeta = new ResultsMeta(response.responseJSON);
+                var results = new Results({
+                    resultsMeta: new ResultsMeta(response.responseJSON),
+                    physicianList: physicianList,
+                    userLocation: self.userLocation,
+                    router: self
+                });
             }
         });
     },
@@ -80,4 +80,3 @@ var ResultsRouter = Backbone.Router.extend({
 
 _.extend(ResultsRouter.prototype, QueryStringHelpers);
 module.exports = ResultsRouter;
-

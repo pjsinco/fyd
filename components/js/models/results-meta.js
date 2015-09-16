@@ -12,7 +12,6 @@ var ResultsMeta = Backbone.Model.extend({
     },
 
     initialize: function (attributes) {
-
         if (attributes !== undefined) {
             this.setWho(attributes.count);
         }
