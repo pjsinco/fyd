@@ -17,10 +17,6 @@ var PhysicianListView = Backbone.View.extend({
 
     initialize: function (options) {
         this.router = options.router;
-        this.resultsMetaView = new ResultsMetaView({
-            length: this.collection.length,
-            el: '#fydResultsMeta'
-        })
     },
 
     /**
