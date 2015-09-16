@@ -5,7 +5,6 @@
     * "Ft Worth" vs. "Fort Worth"
 * Note mismatch between "St" and "Saint" in locations table, physicians table
 
-* What to do with docs with no street address?
 
 ```
 physicians table
@@ -31,12 +30,20 @@ locations table
 +---------------+-------+
 ```
 
-* Some physicians have empty fields for city
-* In the FindADO query, can we not concatenate fellow designations onto the `designation` field?
-        * See Dr. Hubka: "DO, FACOOG, FACOG,CS"
+* ~~What to do with docs with no street address?~~
 
-###Bad resolves
-* "Bronx" should resolve to "Bronx, NY"
+* ~~Some physicians have empty fields for city~~
+
+* In the FindADO query, better to not concatenate fellow designations onto the `designation` field
+        * Ex.: Dr. Hubka: "DO, FACOOG, FACOG,CS"
+
+* In specialty/physician input, typeahead dropdown doesn't open when only a physician name matches.
+    * Ex.: in Dumas, Texas, there's a doctor named Ositadinma O. Opara, DO
+        * Typing "Opa" into specialty/physician field doesn't open the dropdown to reveal Dr. Opara's name.
+
+
+###Bad resolves?
+* Should "Bronx" should resolve to "Bronx, NY"?
 ```
 Object {city: "Bronx", state: "NY", lat: 40.820195, lon: -73.920218, value: "Bronx, NY"}
 Object {city: "Bronxville", state: "NY", lat: 40.940639, lon: -73.822578, value: "Bronxville, NY"}
