@@ -15,6 +15,7 @@ var Specialty = require('models/specialty');
 var Location = require('models/location');
 var Search = require('models/search');
 var UserLocation = require('models/user-location');
+var ResultsMeta = require('models/results-meta');
 
 /**
  * Views

@@ -9,7 +9,7 @@ var PhysicianListItemView = require('views/physician');
 var QueryStringHelpers = require('util/mixin-string-helpers');
 var SearchForm = require('models/search-form');
 var UserLocation = require('models/user-location');
-var ResultMeta = require('models/result-meta');
+var ResultsMeta = require('models/results-meta');
 
 var ResultsRouter = Backbone.Router.extend({
 
@@ -66,10 +66,8 @@ var ResultsRouter = Backbone.Router.extend({
         this.physicianList.fetch({
             data: queryString,
             //beforeSend: this.physicianList.setHeader,
-            success: function() {
-                var resultMeta = new ResultMeta({
-                    
-                });
+            success: function(collection, response) {
+                var resultsMeta = new ResultsMeta(response.meta);
                 var physicianListView = new PhysicianListView({
                     collection: self.physicianList,
                     router: self

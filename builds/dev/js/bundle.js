@@ -105,16 +105,23 @@ module.exports = Physician;
 },{"backbone":23}],4:[function(require,module,exports){
 var Backbone = require('backbone');
 
-var ResultMeta = Backbone.Model.extend({
+var ResultsMeta = Backbone.Model.extend({
 
     
-    initialize: function (options) {
-        
+    defaults: {
+        city: undefined,
+        state: undefined,
+        zip: undefined,
+        specialty: undefined
+    },
+
+    initialize: function () {
+
     }
 
 });
 
-module.exports = ResultMeta;
+module.exports = ResultsMeta;
 
 
 
@@ -2211,7 +2218,7 @@ var PhysicianListItemView = require('views/physician');
 var QueryStringHelpers = require('util/mixin-string-helpers');
 var SearchForm = require('models/search-form');
 var UserLocation = require('models/user-location');
-var ResultMeta = require('models/result-meta');
+var ResultsMeta = require('models/results-meta');
 
 var ResultsRouter = Backbone.Router.extend({
 
@@ -2268,10 +2275,8 @@ var ResultsRouter = Backbone.Router.extend({
         this.physicianList.fetch({
             data: queryString,
             //beforeSend: this.physicianList.setHeader,
-            success: function() {
-                var resultMeta = new ResultMeta({
-                    
-                });
+            success: function(collection, response) {
+                var resultsMeta = new ResultsMeta(response.meta);
                 var physicianListView = new PhysicianListView({
                     collection: self.physicianList,
                     router: self
@@ -2286,7 +2291,7 @@ _.extend(ResultsRouter.prototype, QueryStringHelpers);
 module.exports = ResultsRouter;
 
 
-},{"backbone":23,"collections/physician-list":1,"jquery":24,"models/physician":3,"models/result-meta":4,"models/search-form":5,"models/user-location":8,"underscore":25,"util/mixin-string-helpers":14,"views/physician":18,"views/physician-detail":16,"views/physician-list":17}],12:[function(require,module,exports){
+},{"backbone":23,"collections/physician-list":1,"jquery":24,"models/physician":3,"models/results-meta":4,"models/search-form":5,"models/user-location":8,"underscore":25,"util/mixin-string-helpers":14,"views/physician":18,"views/physician-detail":16,"views/physician-list":17}],12:[function(require,module,exports){
 var _ = require('underscore');
 
 var IsEmptyMixin = {
@@ -16018,6 +16023,7 @@ var Specialty = require('models/specialty');
 var Location = require('models/location');
 var Search = require('models/search');
 var UserLocation = require('models/user-location');
+var ResultsMeta = require('models/results-meta');
 
 /**
  * Views
@@ -16119,4 +16125,4 @@ module.exports = {
 
 };
 
-},{"backbone":23,"collections/physician-list":1,"jquery":24,"models/location":2,"models/physician":3,"models/search":6,"models/specialty":7,"models/user-location":8,"routers/home-router":10,"routers/results-router":11,"underscore":25,"views/location-form":15,"views/physician":18,"views/physician-detail":16,"views/search":20,"views/specialty-form":21}]},{},["app"]);
+},{"backbone":23,"collections/physician-list":1,"jquery":24,"models/location":2,"models/physician":3,"models/results-meta":4,"models/search":6,"models/specialty":7,"models/user-location":8,"routers/home-router":10,"routers/results-router":11,"underscore":25,"views/location-form":15,"views/physician":18,"views/physician-detail":16,"views/search":20,"views/specialty-form":21}]},{},["app"]);
