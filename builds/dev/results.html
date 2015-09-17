@@ -53,29 +53,59 @@
     </header>
     <div id="interior">
       <div class="container-fluid">
-        <div class="hasRightCol interior-content">
-          <div id="fydResults">
-            <div class="row fyd">
-              <div class="col-sm-12">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h3 class="fyd__title">Find Your DO</h3>
+        <div class="row fyd">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-3">
+                <h3 class="fyd__title">Find Your DO</h3>
+              </div>
+              <div class="col-sm-9">
+                <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="form-inline fyd__form">
+                  <div class="form-group">
+                    <input id="specialty" placeholder="Name or specialty" name="specialty" type="text" class="form-control">
                   </div>
-                  <div class="col-sm-9">
-                    <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="form-inline fyd__form">
-                      <div class="form-group">
-                        <input id="specialty" placeholder="Name or specialty" name="specialty" type="text" class="form-control">
-                      </div>
-                      <div class="form-group">
-                        <input id="location" placeholder="City, state or zip" name="location" type="text" class="form-control">
-                      </div>
-                      <input type="submit" value="Go">
-                    </form>
+                  <div class="form-group">
+                    <input id="location" placeholder="City, state or zip" name="location" type="text" class="form-control">
                   </div>
-                </div>
+                  <input type="submit" value="Go">
+                </form>
               </div>
             </div>
-            <div id="fydResultsMeta"></div>
+          </div>
+        </div>
+        <div class="hasRightCol interior-content">
+          <div id="right">
+            <div class="row">
+              <div id="content" class="main-content">
+                <div id="fydResults"></div>
+              </div>
+              <div id="sidebar">
+                <div class="sideBar_ElementHolder sideBar_MapElementHolder">
+                  <div class="sideBar_GoogleMapHolder">
+                    <div id="googleMapWrapper" class="desktop-only"><img src="http://placehold.it/600x420"></div>
+                  </div>
+                  <div class="sideBar_MapList">
+                    <div data-lat="41.8936651" data-lng="-87.6237211" data-map_id="814" class="sideBar_MapListAddress">
+                      <div id="sideBar_ClickableElement_814" class="sideBar_MapAddressElement nameText">AMERICAN OSTEOPATHIC ASSOCIATION</div>
+                      <div class="sideBar_MapAddressElement addressText1">142 E. Ontario St.</div>
+                      <div class="sideBar_MapAddressElement addressText2"> </div>
+                      <div class="sideBar_MapAddressElement cityStateZipText">Chicago, IL 60611-2864</div>
+                      <div class="sideBar_MapAddressElement directionsButton mobileOnly"><a href="http://maps.google.com/maps?hl=en&amp;amp;f=d&amp;amp;daddr=142+E.+Ontario+St.+Chicago%2C+IL+60611-2864" target="_blank" class="button">Get Directions</a></div>
+                      <div class="sideBar_MapAddressElement phoneText desktopOnly">General Phone: 1.312.202.8000</div>
+                      <div class="sideBar_MapAddressElement phoneText mobileOnly"><a href="tel://1.312.202.8000" class="button">Call Now</a></div>
+                      <div class="sideBar_MapAddressElement directionsText desktopOnly"><a href="http://maps.google.com/maps?hl=en&amp;amp;f=d&amp;amp;daddr=142+E.+Ontario+St.+Chicago%2C+IL+60611-2864" target="_blank">Driving Directions</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sideBar_ElementHolder sideBar_ImageElementHolder">
+                  <div class="sideBar_Caption">
+                    <h3>Amet Venenatis Porta</h3>
+                    <div class="caption">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas sed diam eget risus varius blandit sit amet non magna.</div>
+                  </div>
+                </div>
+                <div class="sideBar_Spacer"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -126,5 +156,6 @@
     <script src="js/bundle.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
     <script id="fydResultsMetaTemplate" type="text/template"><%= count %> <%= who %> near <%= city %>, <%= state %></script>
+    <script id="fyd"></script>
   </body>
 </html>

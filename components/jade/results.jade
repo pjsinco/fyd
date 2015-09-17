@@ -7,11 +7,20 @@ html
 
         div#interior
             div.container-fluid
+                include search-form
                 div.hasRightCol.interior-content
-                    div#fydResults
-                        include search-form
-                        div#fydResultsMeta
+                    div#right
+                        div.row
+                            div#content.main-content
+                                div#fydResults
+                                
+                            div#sidebar
+                                include sidebar-map
+                                include sidebar-image
+                                div.sideBar_Spacer
 
         include footer
         script#fydResultsMetaTemplate(type="text/template")
             <%= count %> <%= who %> near <%= city %>, <%= state %>
+
+        script#fyd
