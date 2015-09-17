@@ -23,4 +23,12 @@ html
         script#fydResultsMetaTemplate(type="text/template")
             <%= count %> <%= who %> near <%= city %>, <%= state %>
 
-        script#fyd
+        script#fydDetailTemplate(type="text/template")
+            | <h1><%= full_name %></h1>
+            | <h4>
+            |   <%= addr_1 %><br > 
+            |   <% if (addr_2 != '') { %>
+            |      <%= addr_2 %><br />
+            |   <% } %>
+            |   <%= city %>, <%= state %> <%= zip %>
+            | </h4>
