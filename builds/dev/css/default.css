@@ -367,6 +367,9 @@ a {
   white-space: -hp-pre-wrap;
   word-wrap: break-word;
 }
+a.readmore:after {
+  content: '\00A0 \203A';
+}
 
 a:hover {
   color: #01eaff;
