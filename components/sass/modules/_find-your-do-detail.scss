@@ -10,4 +10,12 @@
         border-bottom: 1px solid $secondarycolor;
     }
 
+    &__subhead {
+        margin-bottom: .5em;
+    }
+
+    &__email-link {
+        color: inherit;
+    }
+
 }

@@ -1,22 +1,32 @@
 
 <script id="fydDetailTemplate" type="text/template">
-  <h3 class="fyd-detail__specialty"><%= specialty %></h3>
+  <h3 class="fyd-detail__specialty"><strong><%= specialty %></strong>&nbsp;&bull;&nbsp;Age 38&nbsp;&bull;&nbsp;Female</h3>
   <h1 class="fyd-detail__name"><%= full_name %></h1>
+  <h6 class="fyd-detail__subhead">Office location</h6>
   <h4>
-    <%= addr_1 %><br > 
+    <%= addr_1 %><br /> 
     <% if (addr_2 != '') { %>
        <%= addr_2 %><br />
     <% } %>
-    <%= city %>, <%= state %> <%= zip %>
+    <%= city %>, <%= state %> <%= zip %><br />
   </h4>
-  <h3><i class="fa fa-phone"></i> <%= phone %><h3>
-  <% if (email != '') { %>
-  <h3><i class="fa fa-envelope-o"></i> <%= email %><h3>
-  <% } %>
+  <h6 class="fyd-detail__subhead">Contact</h6>
+  <h4>
+    <i class="fa fa-phone"></i> <%= phone %><br />
+    <% if (email != '') { %>
+    <a href="mailto:<%= email %>" class="fyd-detail__email-link"><i class="fa fa-envelope-o"></i>  Email Dr. <%= last_name %></a>
+    <% } %>
   <% if (website != '') { %>
-  <h3><i class="fa fa-external-link"></i> <%= website %><h3>
+  <i class="fa fa-external-link"></i> <%= website %>
   <% } %>
-  <h5>About Dr. <%= last_name %></h5>
-  <p>Dr. <%= last_name %> graduated in <%= grad_year %> from the <%= school %>.
-  <p>Dr. <%= last_name %> also specializes in <%= secondary %>.
+  </h4>
+  <h6 class="fyd-detail__subhead">About Dr. <%= last_name %></h6>
+  <ul class="fyd-details__list">
+      <li class="fyd-details__list-item">Dr. <%= last_name %> graduated in <%= grad_year %> from the <%= school %>.</li>
+      <% if (secondary != 'BLANK') { %>
+      <li class="fyd-details__list-item">Dr. <%= last_name %> also specializes in <%= secondary %>.</li>
+      <% } %>
+      <% if (abms_cert) { %>
+      <li class="fyd-details__list-item">Dr. <%= last_name %> is board-certified by the American Board of Medical Specialties.</li>
+      <% } %>
 </script>

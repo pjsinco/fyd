@@ -194,6 +194,12 @@
 .fyd-detail__name {
   padding-bottom: .6em;
   border-bottom: 1px solid #00eaff; }
+/* line 13, ../../../components/sass/modules/_find-your-do-detail.scss */
+.fyd-detail__subhead {
+  margin-bottom: .5em; }
+/* line 17, ../../../components/sass/modules/_find-your-do-detail.scss */
+.fyd-detail__email-link {
+  color: inherit; }
 
 /* line 1, ../../../components/sass/modules/_hero.scss */
 .hero {
