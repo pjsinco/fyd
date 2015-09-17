@@ -87,12 +87,12 @@
                   </div>
                   <div class="sideBar_MapList">
                     <div data-lat="41.8936651" data-lng="-87.6237211" data-map_id="814" class="sideBar_MapListAddress">
-                      <div id="sideBar_ClickableElement_814" class="sideBar_MapAddressElement nameText">AMERICAN OSTEOPATHIC ASSOCIATION</div>
-                      <div class="sideBar_MapAddressElement addressText1">142 E. Ontario St.</div>
+                      <div id="sideBar_ClickableElement_814" class="sideBar_MapAddressElement nameText">Dr. Ipsum's office</div>
+                      <div class="sideBar_MapAddressElement addressText1">394 E. Lorem St.</div>
                       <div class="sideBar_MapAddressElement addressText2"> </div>
-                      <div class="sideBar_MapAddressElement cityStateZipText">Chicago, IL 60611-2864</div>
+                      <div class="sideBar_MapAddressElement cityStateZipText">Ryder, ND 58779</div>
                       <div class="sideBar_MapAddressElement directionsButton mobileOnly"><a href="http://maps.google.com/maps?hl=en&amp;amp;f=d&amp;amp;daddr=142+E.+Ontario+St.+Chicago%2C+IL+60611-2864" target="_blank" class="button">Get Directions</a></div>
-                      <div class="sideBar_MapAddressElement phoneText desktopOnly">General Phone: 1.312.202.8000</div>
+                      <div class="sideBar_MapAddressElement phoneText desktopOnly">General Phone: 1.202.555.5000</div>
                       <div class="sideBar_MapAddressElement phoneText mobileOnly"><a href="tel://1.312.202.8000" class="button">Call Now</a></div>
                       <div class="sideBar_MapAddressElement directionsText desktopOnly"><a href="http://maps.google.com/maps?hl=en&amp;amp;f=d&amp;amp;daddr=142+E.+Ontario+St.+Chicago%2C+IL+60611-2864" target="_blank">Driving Directions</a></div>
                     </div>
@@ -162,8 +162,13 @@
           <%= count %> <%= who %> near <%= city %>, <%= state %>
     </script>
     <script id="fydDetailTemplate" type="text/template">
-      <h3 class="fyd-detail__specialty"><strong><%= specialty %></strong>&nbsp;&bull;&nbsp;Age 38&nbsp;&bull;&nbsp;Female</h3>
-      <h1 class="fyd-detail__name"><%= full_name %></h1>
+      <div class="fyd-detail__header">
+          <div class="fyd-detail__imagecontainer pull-left">
+               <img class="fyd-detail__image img-responsive" src="http://placehold.it/135x135" />    </div>
+          <h3 class="fyd-detail__specialty"><strong><%= specialty %></strong></h3>
+          <h1 class="fyd-detail__name"><%= full_name %></h1>
+          <h6 class="fyd-detail__meta">XX years experience&nbsp;&bull;&nbsp;Gender</h6>
+      </div>
       <h6 class="fyd-detail__subhead">Office location</h6>
       <h4>
         <%= addr_1 %><br /> 
@@ -174,22 +179,24 @@
       </h4>
       <h6 class="fyd-detail__subhead">Contact</h6>
       <h4>
+        <% if (phone != '') { %>
         <i class="fa fa-phone"></i> <%= phone %><br />
-        <% if (email != '') { %>
-        <a href="mailto:<%= email %>" class="fyd-detail__email-link"><i class="fa fa-envelope-o"></i>  Email Dr. <%= last_name %></a>
         <% } %>
-      <% if (website != '') { %>
-      <i class="fa fa-external-link"></i> <%= website %>
-      <% } %>
+        <% if (email != '') { %>
+        <a href="mailto:<%= email %>" class="fyd-detail__link"><i class="fa fa-envelope-o"></i>  Email Dr. <%= last_name %></a><br />
+        <% } %>
+        <% if (website != '') { %>
+        <a href="<%= website %>" class="fyd-detail__link"><%= website %></a><br />
+        <% } %>
       </h4>
       <h6 class="fyd-detail__subhead">About Dr. <%= last_name %></h6>
-      <ul class="fyd-details__list">
-          <li class="fyd-details__list-item">Dr. <%= last_name %> graduated in <%= grad_year %> from the <%= school %>.</li>
+      <ul class="fyd-detail__list">
+          <li class="fyd-detail__listitem">Dr. <%= last_name %> graduated in <%= grad_year %> from the <%= school %>.</li>
           <% if (secondary != 'BLANK') { %>
-          <li class="fyd-details__list-item">Dr. <%= last_name %> also specializes in <%= secondary %>.</li>
+          <li class="fyd-detail__listitem">Dr. <%= last_name %> also specializes in <%= secondary %>.</li>
           <% } %>
-          <% if (abms_cert) { %>
-          <li class="fyd-details__list-item">Dr. <%= last_name %> is board-certified by the American Board of Medical Specialties.</li>
+          <% if (abms_cert == 1) { %>
+          <li class="fyd-detail__listitem">Dr. <%= last_name %> is board-certified by the American Board of Medical Specialties.</li>
           <% } %>
     </script>
   </body>

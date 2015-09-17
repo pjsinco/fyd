@@ -5,17 +5,42 @@
         color: $primarycolor;
     }
 
-    &__name {
-        padding-bottom: .6em;
+    &__header {
+        padding-bottom: 1em;
+        margin-bottom: 2em;
         border-bottom: 1px solid $secondarycolor;
+    }
+
+    &__name {
+        margin-bottom: 12px;
+    }
+
+    &__meta {
+        font-weight: 200;
+        color: $gray
     }
 
     &__subhead {
         margin-bottom: .5em;
     }
 
-    &__email-link {
+    &__link {
         color: inherit;
+    }
+
+    &__listitem {
+        font-size: 18px;
+        line-height: 1.6;
+        font-family: $primaryfont;
+        color: #979797;
+    }
+
+    &__imagecontainer {
+        position: relative;
+        top: 6px;
+        /*max-width: 85px;*/
+        max-width: 135px;
+        margin-right: 1em;
     }
 
 }

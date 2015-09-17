@@ -480,4 +480,5 @@ var TaskList = Backbone.Collection.extend({
 #####Mon Sep 14 15:35:03 2015 CDT
 * Blog: [wp.template for front end templating in WordPress](https://lkwdwrd.com/wp-template-js-templates-wp/)
 
-
+#####Thu Sep 17 16:54:27 2015 CDT
+* SitePoint: [Create an Icon Font Using Illustrator & IcoMoon](http://www.sitepoint.com/create-an-icon-font-illustrator-icomoon/)
