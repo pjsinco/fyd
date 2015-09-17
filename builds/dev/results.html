@@ -73,6 +73,7 @@
             </div>
           </div>
         </div>
+        <div id="fydResultsMeta"></div>
         <div class="hasRightCol interior-content">
           <div id="right">
             <div class="row">
@@ -82,7 +83,7 @@
               <div id="sidebar">
                 <div class="sideBar_ElementHolder sideBar_MapElementHolder">
                   <div class="sideBar_GoogleMapHolder">
-                    <div id="googleMapWrapper" class="desktop-only"><img src="http://placehold.it/600x420"></div>
+                    <div id="googleMapWrapper" class="desktop-only"><img src="http://placehold.it/600x600"></div>
                   </div>
                   <div class="sideBar_MapList">
                     <div data-lat="41.8936651" data-lng="-87.6237211" data-map_id="814" class="sideBar_MapListAddress">
@@ -155,9 +156,14 @@
     </footer>
     <script src="js/bundle.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
-    <script id="fydResultsMetaTemplate" type="text/template"><%= count %> <%= who %> near <%= city %>, <%= state %></script>
+    <script id="fydResultsMetaTemplate" type="text/template">
+      <div class="row fyd fyd-results__report">
+      <div class="col-sm-12">
+          <%= count %> <%= who %> near <%= city %>, <%= state %>
+    </script>
     <script id="fydDetailTemplate" type="text/template">
-      <h1><%= full_name %></h1>
+      <h3 class="fyd-detail__specialty"><%= specialty %></h3>
+      <h1 class="fyd-detail__name"><%= full_name %></h1>
       <h4>
         <%= addr_1 %><br > 
         <% if (addr_2 != '') { %>
@@ -165,6 +171,16 @@
         <% } %>
         <%= city %>, <%= state %> <%= zip %>
       </h4>
+      <h3><i class="fa fa-phone"></i> <%= phone %><h3>
+      <% if (email != '') { %>
+      <h3><i class="fa fa-envelope-o"></i> <%= email %><h3>
+      <% } %>
+      <% if (website != '') { %>
+      <h3><i class="fa fa-external-link"></i> <%= website %><h3>
+      <% } %>
+      <h5>About Dr. <%= last_name %></h5>
+      <p>Dr. <%= last_name %> graduated in <%= grad_year %> from the <%= school %>.
+      <p>Dr. <%= last_name %> also specializes in <%= secondary %>.
     </script>
   </body>
 </html>

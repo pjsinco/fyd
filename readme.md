@@ -55,6 +55,23 @@ Object {city: "Bronxville", state: "NY", lat: 40.940639, lon: -73.822578, value:
             * because there are multiple zips that begin with "4882"
         * *but* "6061" *does* resolve, even tho there several zips begin with "6061"
 
+* Note the incorrect `lon` value in 68544
+```
++-------+-------+---------+-------+-----------+-----------+
+| id    | state | city    | zip   | lat       | lon       |
++-------+-------+---------+-------+-----------+-----------+
+| 28979 | NE    | Lincoln | 68544 | 40.764500 | 96.294100 |
++-------+-------+---------+-------+-----------+-----------+
+1 row in set (0.00 sec)
+
++-------+-------+---------+-------+-----------+------------+
+| id    | state | city    | zip   | lat       | lon        |
++-------+-------+---------+-------+-----------+------------+
+| 28978 | NE    | Lincoln | 68542 | 40.787298 | -96.700531 |
++-------+-------+---------+-------+-----------+------------+
+```
+
+* Remove [Smokey Bear's](http://blogs.usda.gov/2014/07/01/letters-to-smokey-bear-reveal-promise-of-hope-for-the-future/) ZIP: 20252
 
 #dboFindaDO
 * Fri Jul 31 11:50:51 2015 CDT 

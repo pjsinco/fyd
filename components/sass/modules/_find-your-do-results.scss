@@ -22,6 +22,10 @@
 
     }
 
+    &__report {
+        font-size: 2.571428571em;
+    }
+
     &__title {
         margin-bottom: 2em;
     
@@ -29,6 +33,7 @@
 
     &__list {
         list-style-type: none;
+        margin-left: 0;
         padding: 0;
     } 
 

@@ -1,5 +1,6 @@
 script#fydDetailTemplate(type="text/template")
-    | <h1><%= full_name %></h1>
+    | <h3 class="fyd-detail__specialty"><%= specialty %></h3>
+    | <h1 class="fyd-detail__name"><%= full_name %></h1>
     | <h4>
     |   <%= addr_1 %><br > 
     |   <% if (addr_2 != '') { %>
@@ -7,4 +8,14 @@ script#fydDetailTemplate(type="text/template")
     |   <% } %>
     |   <%= city %>, <%= state %> <%= zip %>
     | </h4>
+    | <h3><i class="fa fa-phone"></i> <%= phone %><h3>
+    | <% if (email != '') { %>
+    | <h3><i class="fa fa-envelope-o"></i> <%= email %><h3>
+    | <% } %>
+    | <% if (website != '') { %>
+    | <h3><i class="fa fa-external-link"></i> <%= website %><h3>
+    | <% } %>
+    | <h5>About Dr. <%= last_name %></h5>
+    | <p>Dr. <%= last_name %> graduated in <%= grad_year %> from the <%= school %>.
+    | <p>Dr. <%= last_name %> also specializes in <%= secondary %>.
 

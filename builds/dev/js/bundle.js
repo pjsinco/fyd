@@ -2853,7 +2853,7 @@ var ResultsMetaView = Backbone.View.extend({
     },
 
     initialize: function (options) {
-        if (options.el) {
+        if (options.el !== undefined) {
             this.el = $(options.el)
         }
 

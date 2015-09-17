@@ -1,0 +1,13 @@
+.fyd-detail {
+
+    &__specialty {
+        text-transform: uppercase;
+        color: $primarycolor;
+    }
+
+    &__name {
+        padding-bottom: .6em;
+        border-bottom: 1px solid $secondarycolor;
+    }
+
+}
