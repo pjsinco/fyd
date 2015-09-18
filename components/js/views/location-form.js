@@ -12,23 +12,8 @@ var LocationForm = Backbone.View.extend({
 
     initialize: function() {
         this.initAutocomplete();
-
-        var self = this;
-
-//        var options = {
-//            url: 'http://lookup.dev/api/v1/locations/random', 
-//        };
-//
-//        this.model = new Location({}, options);
         this.listenTo(this.model, 'change', this.render);
-
-        //this.model.fetch({
-            //success: function(response) {
-                self.render();
-                self.triggerChangeEvent();
-            //}
-        //});
-
+        this.render();
     },
 
     logError: function() {
@@ -41,12 +26,14 @@ var LocationForm = Backbone.View.extend({
         'typeahead:selected': 'setLocation',
         'typeahead:autocompleted': 'setLocation',
         'typeahead:closed': 'closed',
-        'input': 'inputChange',
+        'change': 'inputChange',
     },
 
     inputChange: function () {
-        this.resolved == false;
-        console.log('resolved = false');
+        if (this.resolved) {
+            this.resolved = false;
+            this._unresolve();
+        }
     },
 
     holla: function(model, options)  {
@@ -60,10 +47,6 @@ var LocationForm = Backbone.View.extend({
     parseInput: function() {
         var val = this.$el.typeahead('val');
         console.log('val grabbed in parse input: ' + val);
-    },
-
-    triggerChangeEvent: function() {
-        this.trigger('change', this.model);
     },
 
     setLocation: function(evt, suggestion) {

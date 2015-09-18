@@ -39,6 +39,7 @@ var SearchForm = Backbone.Model.extend({
      *
      */
     updateLocations: function(model, options) {
+debugger;
         var attributes = _.clone(model.attributes);
 
         if (model.isEmpty()) {
