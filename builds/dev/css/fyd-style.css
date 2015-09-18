@@ -155,23 +155,28 @@
 /* line 15, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__name {
   margin-top: 0;
-  font-size: 1.142857143em;
+  margin-bottom: .3571428571em;
+  /*font-size: 1.142857143em;*/
   font-weight: 600;
   text-transform: uppercase;
   color: #ffaa00; }
 /* line 24, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__kicker {
+  margin-bottom: .5em;
+  color: #8f8f8f; }
+/* line 29, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__report {
   font-size: 2.571428571em;
   font-family: "gothambook", sans-serif; }
-/* line 30, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 35, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__title {
   margin-bottom: 2em; }
-/* line 35, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 40, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__list {
   list-style-type: none;
   margin-left: 0;
   padding: 0; }
-/* line 41, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 46, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__list-item {
   padding-top: 1em;
   padding-right: 0;
@@ -180,10 +185,13 @@
   margin-bottom: 1em;
   border-bottom: 1px solid #00eaff;
   list-style: none; }
-/* line 53, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 56, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__body {
+  font-family: "gothambook", sans-serif; }
+/* line 60, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__locator {
   background: aliceblue; }
-/* line 58, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 65, ../../../components/sass/modules/_find-your-do-results.scss */
 #fydResults .fyd-results__search #specialty {
   background-color: fuchsia; }
 

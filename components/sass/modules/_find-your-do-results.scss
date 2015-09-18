@@ -14,11 +14,16 @@
 .fyd-results {
     &__name {
         margin-top: 0;
-        font-size: 1.142857143em;
+        margin-bottom: .3571428571em;
+        /*font-size: 1.142857143em;*/
         font-weight: 600;
         text-transform: uppercase;
         color: $primarycolor;
+    }
 
+    &__kicker {
+        margin-bottom: .5em;
+        color: $gray;
     }
 
     &__report {
@@ -46,8 +51,10 @@
         margin-bottom: 1em;
         border-bottom: 1px solid $secondarycolor;
         list-style: none;
-        
-        
+    }
+
+    &__body {
+        font-family: $primaryfont;
     }
 
     &__locator {
