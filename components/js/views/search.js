@@ -1,7 +1,6 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
-    Location = require('models/location'),
     LocationFormView = require('views/location-form'),
     SpecialtyFormView = require('views/specialty-form');
 
@@ -62,7 +61,7 @@ var SearchFormView = Backbone.View.extend({
     },
     
     isValid: function() {
-        return !this.model.searchLocation.isEmpty();
+        return !this.model.searchLocation.isEmpty() || this.resolved;
     },
 
     indicateInvalid: function() {

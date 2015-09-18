@@ -31,6 +31,7 @@
     "grunt-contrib-jade": "^0.15.0",
     "jade": "^1.11.0",
     "jquery": "^2.1.4",
+    "tipso": "^1.0.6",
     "underscore": "^1.8.3"
   }
 }

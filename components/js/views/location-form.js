@@ -30,10 +30,8 @@ var LocationForm = Backbone.View.extend({
     },
 
     inputChange: function () {
-        if (this.resolved) {
-            this.resolved = false;
-            this._unresolve();
-        }
+        this.resolved = false;
+        this._unresolve();
     },
 
     holla: function(model, options)  {

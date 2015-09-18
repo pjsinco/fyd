@@ -223,7 +223,6 @@ var SearchForm = Backbone.Model.extend({
      *
      */
     updateLocations: function(model, options) {
-debugger;
         var attributes = _.clone(model.attributes);
 
         if (model.isEmpty()) {
@@ -2480,10 +2479,8 @@ var LocationForm = Backbone.View.extend({
     },
 
     inputChange: function () {
-        if (this.resolved) {
-            this.resolved = false;
-            this._unresolve();
-        }
+        this.resolved = false;
+        this._unresolve();
     },
 
     holla: function(model, options)  {
@@ -2858,7 +2855,6 @@ module.exports = ResultsMetaView;
 var Backbone = require('backbone'),
     _ = require('underscore'),
     $ = require('jquery'),
-    Location = require('models/location'),
     LocationFormView = require('views/location-form'),
     SpecialtyFormView = require('views/specialty-form');
 
@@ -2894,7 +2890,7 @@ var SearchFormView = Backbone.View.extend({
     },
 
     events: {
-        'submit': 'formSubmit'
+        submit: 'formSubmit'
     },
 
     formSubmit: function(evt) {
@@ -2919,7 +2915,7 @@ var SearchFormView = Backbone.View.extend({
     },
     
     isValid: function() {
-        return !this.model.searchLocation.isEmpty();
+        return !this.model.searchLocation.isEmpty() || this.resolved;
     },
 
     indicateInvalid: function() {
@@ -2937,7 +2933,7 @@ var SearchFormView = Backbone.View.extend({
 module.exports = SearchFormView;
 
 
-},{"backbone":24,"jquery":64,"models/location":2,"underscore":65,"views/location-form":16,"views/specialty-form":22}],22:[function(require,module,exports){
+},{"backbone":24,"jquery":64,"underscore":65,"views/location-form":16,"views/specialty-form":22}],22:[function(require,module,exports){
 var Backbone = require('backbone'),
     $ = require('jquery'),
     _ = require('underscore'),
@@ -3368,7 +3364,7 @@ return Backbone.LocalStorage;
 
 },{"backbone":24}],24:[function(require,module,exports){
 (function (global){
-//     Backbone.js 1.2.2
+//     Backbone.js 1.2.3
 
 //     (c) 2010-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Backbone may be freely distributed under the MIT license.
@@ -3414,7 +3410,7 @@ return Backbone.LocalStorage;
   var slice = Array.prototype.slice;
 
   // Current version of the library. Keep in sync with `package.json`.
-  Backbone.VERSION = '1.2.2';
+  Backbone.VERSION = '1.2.3';
 
   // For Backbone's purposes, jQuery, Zepto, Ender, or My Library (kidding) owns
   // the `$` variable.
@@ -4136,6 +4132,7 @@ return Backbone.LocalStorage;
 
   // Splices `insert` into `array` at index `at`.
   var splice = function(array, insert, at) {
+    at = Math.min(Math.max(at, 0), array.length);
     var tail = Array(array.length - at);
     var length = insert.length;
     for (var i = 0; i < tail.length; i++) tail[i] = array[i + at];
@@ -5526,7 +5523,9 @@ function drainQueue() {
         currentQueue = queue;
         queue = [];
         while (++queueIndex < len) {
-            currentQueue[queueIndex].run();
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
         }
         queueIndex = -1;
         len = queue.length;
@@ -5578,7 +5577,6 @@ process.binding = function (name) {
     throw new Error('process.binding is not supported');
 };
 
-// TODO(shtylman)
 process.cwd = function () { return '/' };
 process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
