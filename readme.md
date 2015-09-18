@@ -482,3 +482,6 @@ var TaskList = Backbone.Collection.extend({
 
 #####Thu Sep 17 16:54:27 2015 CDT
 * SitePoint: [Create an Icon Font Using Illustrator & IcoMoon](http://www.sitepoint.com/create-an-icon-font-illustrator-icomoon/)
+
+#####Fri Sep 18 05:44:54 2015 CDT
+* SO: [Templates in separate files with Backbone](http://stackoverflow.com/questions/17316252/separate-template-files-not-rendering-using-backbone-and-underscore)
