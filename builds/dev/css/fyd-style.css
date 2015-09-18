@@ -223,8 +223,8 @@
   line-height: 1.6;
   font-family: "gothambook", sans-serif;
   color: #979797; }
-/* line 38, ../../../components/sass/modules/_find-your-do-detail.scss */
-.fyd-detail__imagecontainer {
+/* line 42, ../../../components/sass/modules/_find-your-do-detail.scss */
+.fyd-detail__profileimagecontainer {
   position: relative;
   top: 6px;
   /*max-width: 85px;*/

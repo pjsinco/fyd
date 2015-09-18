@@ -163,41 +163,49 @@
     </script>
     <script id="fydDetailTemplate" type="text/template">
       <div class="fyd-detail__header">
-          <div class="fyd-detail__imagecontainer pull-left">
+          <div class="fyd-detail__profileimagecontainer pull-left">
                <img class="fyd-detail__image img-responsive" src="http://placehold.it/135x135" />    </div>
           <h3 class="fyd-detail__specialty"><strong><%= specialty %></strong></h3>
           <h1 class="fyd-detail__name"><%= full_name %></h1>
           <h6 class="fyd-detail__meta">XX years experience&nbsp;&bull;&nbsp;Gender</h6>
       </div>
-      <h6 class="fyd-detail__subhead">Office location</h6>
-      <h4>
-        <%= addr_1 %><br /> 
-        <% if (addr_2 != '') { %>
-           <%= addr_2 %><br />
-        <% } %>
-        <%= city %>, <%= state %> <%= zip %><br />
-      </h4>
-      <h6 class="fyd-detail__subhead">Contact</h6>
-      <h4>
-        <% if (phone != '') { %>
-        <i class="fa fa-phone"></i> <%= phone %><br />
-        <% } %>
-        <% if (email != '') { %>
-        <a href="mailto:<%= email %>" class="fyd-detail__link"><i class="fa fa-envelope-o"></i>  Email Dr. <%= last_name %></a><br />
-        <% } %>
-        <% if (website != '') { %>
-        <a href="<%= website %>" class="fyd-detail__link"><%= website %></a><br />
-        <% } %>
-      </h4>
-      <h6 class="fyd-detail__subhead">About Dr. <%= last_name %></h6>
-      <ul class="fyd-detail__list">
-          <li class="fyd-detail__listitem">Dr. <%= last_name %> graduated in <%= grad_year %> from the <%= school %>.</li>
-          <% if (secondary != 'BLANK') { %>
-          <li class="fyd-detail__listitem">Dr. <%= last_name %> also specializes in <%= secondary %>.</li>
+      <div class="fyd-detail__body">
+          <% if (aoa_cert) {  %>
+          <div class="fyd-detail__boardcertcontainer pull-right">
+              <img src="img/logo-aoa-board-certified.png" />
+          </div>
           <% } %>
-          <% if (abms_cert == 1) { %>
-          <li class="fyd-detail__listitem">Dr. <%= last_name %> is board-certified by the American Board of Medical Specialties.</li>
-          <% } %>
+          <h6 class="fyd-detail__subhead">Office location</h6>
+          <h4>
+            <%= addr_1 %><br /> 
+            <% if (addr_2 != '') { %>
+               <%= addr_2 %><br />
+            <% } %>
+            <%= city %>, <%= state %> <%= zip %><br />
+          </h4>
+          <h6 class="fyd-detail__subhead">Contact</h6>
+          <h4>
+            <% if (phone != '') { %>
+            <i class="fa fa-phone"></i> <%= phone %><br />
+            <% } %>
+            <% if (email != '') { %>
+            <a href="mailto:<%= email %>" class="fyd-detail__link"><i class="fa fa-envelope-o"></i>  Email Dr. <%= last_name %></a><br />
+            <% } %>
+            <% if (website != '') { %>
+            <a href="<%= website %>" class="fyd-detail__link"><%= website %></a><br />
+            <% } %>
+          </h4>
+          <h6 class="fyd-detail__subhead">About Dr. <%= last_name %></h6>
+          <ul class="fyd-detail__list">
+              <li class="fyd-detail__listitem">Dr. <%= last_name %> graduated in <%= grad_year %> from the <%= school %>.</li>
+              <% if (secondary != 'BLANK') { %>
+              <li class="fyd-detail__listitem">Dr. <%= last_name %> also specializes in <%= secondary %>.</li>
+              <% } %>
+              <% if (abms_cert == 1) { %>
+              <li class="fyd-detail__listitem">Dr. <%= last_name %> is board-certified by the American Board of Medical Specialties.</li>
+              <% } %>
+          </ul>
+      </div>
     </script>
   </body>
 </html>
