@@ -37,7 +37,7 @@ var SearchFormView = Backbone.View.extend({
     },
 
     events: {
-        'submit': 'formSubmit'
+        submit: 'formSubmit'
     },
 
     formSubmit: function(evt) {
