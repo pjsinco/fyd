@@ -485,3 +485,5 @@ var TaskList = Backbone.Collection.extend({
 
 #####Fri Sep 18 05:44:54 2015 CDT
 * SO: [Templates in separate files with Backbone](http://stackoverflow.com/questions/17316252/separate-template-files-not-rendering-using-backbone-and-underscore)
+
+* Github: [A Lightweight Responsive jQuery Tooltip Plugin](https://github.com/object505/tipso)
