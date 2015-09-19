@@ -23,12 +23,9 @@ var ResultsMeta = Backbone.Model.extend({
      */
     setWho: function(count) {
         var who = 'DO';
-        if (count > 1) {
+        if (count === 0 || count > 1) {
             who += 's';
-        } else if (count == 0) {
-            // TODO
         } 
-
         this.set('who', who);
     }
 

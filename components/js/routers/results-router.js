@@ -68,7 +68,7 @@ var ResultsRouter = Backbone.Router.extend({
             },
             error: function(collection, response) {
                 var results = new Results({
-                    resultsMeta: new ResultsMeta(response.responseJSON),
+                    resultsMeta: new ResultsMeta(response.responseJSON.meta),
                     physicianList: physicianList,
                     userLocation: self.userLocation,
                     router: self
