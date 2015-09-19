@@ -21,8 +21,8 @@ var SearchForm = Backbone.Model.extend({
         this.searchLocation = new Location(_.clone(this.userLocation.attributes));
 
         // Capture the searched specialty, if there is one
-        if (options.specialty !== '') {
-            this.specialty = new Specialty({ full: options.specialty });
+        if (options.specialty && !options.specialty.isEmpty()) {
+            this.specialty = options.specialty;
         } else {
             this.specialty = new Specialty();
         }

@@ -6,11 +6,6 @@ var Specialty = Backbone.Model.extend({
 
     idAttribute: 'code',
 
-    defaults: {
-        code: undefined,
-        full: undefined
-    },
-
     initialize: function () {
         this.listenTo(this, 'change', this.heardChangeEvent)
     },

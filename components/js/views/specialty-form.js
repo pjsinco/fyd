@@ -15,15 +15,17 @@ var SpecialtyView = Backbone.View.extend({
 
     initialize: function () {
         this.initAutocomplete();
-        this.render();
 
-        if (!this.model.isEmpty()) {
-            this.renderSpecialtyInInput();
+        if (this.model && !this.model.isEmpty()) {
+            this.render();
         }
     },
 
     setSpecialty: function(evt, suggestion) {
-        this.model.set(suggestion);
+        this.model.set({
+            code: suggestion.code,
+            full: suggestion.name
+        });
         this.render();
     },
 
@@ -143,6 +145,7 @@ var SpecialtyView = Backbone.View.extend({
 
     render: function() {
         this.renderHidden();
+        this.renderSpecialtyInInput();
     },
 
     renderSpecialtyInInput: function () {
@@ -150,13 +153,12 @@ var SpecialtyView = Backbone.View.extend({
     },
 
     hiddenTemplate: _.template(
-        '<input id="sCode" name="s_code" type="hidden" value="<%= code %>">'
+        '<input id="code" name="code" type="hidden" value="<%= code %>">'
     ),
 
     renderHidden: function() {
         var $form = $('#findYourDo');
-        $form.find('#sCode').remove();
-
+        $form.find('#code').remove();
         if (!this.model.isEmpty()) {
             $form.prepend(this.hiddenTemplate(this.model.toJSON()));
         }

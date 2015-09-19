@@ -107,15 +107,6 @@ var Backbone = require('backbone');
 
 var ResultsMeta = Backbone.Model.extend({
 
-    defaults: {
-        city: undefined,
-        state: undefined,
-        zip: undefined,
-        specialty: undefined,
-        count: undefined,
-        who: undefined,
-    },
-
     initialize: function (attributes) {
         if (attributes !== undefined) {
             this.setWho(attributes.count);
@@ -147,6 +138,7 @@ var ResultsMeta = require('models/results-meta');
 var ResultsMetaView = require('views/results-meta');
 var PhysicianListView = require('views/physician-list');
 var SearchForm = require('models/search-form');
+var Specialty = require('models/specialty');
 
 var Results = Backbone.Model.extend({
 
@@ -168,7 +160,10 @@ var Results = Backbone.Model.extend({
 
         this.searchForm = new SearchForm({
             userLocation: this.userLocation,
-            specialty: this.resultsMeta.get('specialty')
+            specialty: new Specialty({
+                full: this.resultsMeta.get('specialty'),
+                code: this.resultsMeta.get('code')
+            })
         });
 
         this.physicianListView.render();
@@ -179,7 +174,7 @@ var Results = Backbone.Model.extend({
 module.exports = Results;
 
 
-},{"backbone":24,"models/results-meta":4,"models/search-form":6,"views/physician-list":18,"views/results-meta":20}],6:[function(require,module,exports){
+},{"backbone":24,"models/results-meta":4,"models/search-form":6,"models/specialty":8,"views/physician-list":18,"views/results-meta":20}],6:[function(require,module,exports){
 var Backbone = require('backbone');
 var _ = require('underscore');
 var SearchFormView = require('views/search');
@@ -203,8 +198,8 @@ var SearchForm = Backbone.Model.extend({
         this.searchLocation = new Location(_.clone(this.userLocation.attributes));
 
         // Capture the searched specialty, if there is one
-        if (options.specialty !== '') {
-            this.specialty = new Specialty({ full: options.specialty });
+        if (options.specialty && !options.specialty.isEmpty()) {
+            this.specialty = options.specialty;
         } else {
             this.specialty = new Specialty();
         }
@@ -278,11 +273,6 @@ var IsEmptyMixin = require('util/mixin-is-empty');
 var Specialty = Backbone.Model.extend({
 
     idAttribute: 'code',
-
-    defaults: {
-        code: undefined,
-        full: undefined
-    },
 
     initialize: function () {
         this.listenTo(this, 'change', this.heardChangeEvent)
@@ -2961,15 +2951,17 @@ var SpecialtyView = Backbone.View.extend({
 
     initialize: function () {
         this.initAutocomplete();
-        this.render();
 
-        if (!this.model.isEmpty()) {
-            this.renderSpecialtyInInput();
+        if (this.model && !this.model.isEmpty()) {
+            this.render();
         }
     },
 
     setSpecialty: function(evt, suggestion) {
-        this.model.set(suggestion);
+        this.model.set({
+            code: suggestion.code,
+            full: suggestion.name
+        });
         this.render();
     },
 
@@ -3089,6 +3081,7 @@ var SpecialtyView = Backbone.View.extend({
 
     render: function() {
         this.renderHidden();
+        this.renderSpecialtyInInput();
     },
 
     renderSpecialtyInInput: function () {
@@ -3096,13 +3089,12 @@ var SpecialtyView = Backbone.View.extend({
     },
 
     hiddenTemplate: _.template(
-        '<input id="sCode" name="s_code" type="hidden" value="<%= code %>">'
+        '<input id="code" name="code" type="hidden" value="<%= code %>">'
     ),
 
     renderHidden: function() {
         var $form = $('#findYourDo');
-        $form.find('#sCode').remove();
-
+        $form.find('#code').remove();
         if (!this.model.isEmpty()) {
             $form.prepend(this.hiddenTemplate(this.model.toJSON()));
         }

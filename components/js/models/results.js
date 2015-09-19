@@ -3,6 +3,7 @@ var ResultsMeta = require('models/results-meta');
 var ResultsMetaView = require('views/results-meta');
 var PhysicianListView = require('views/physician-list');
 var SearchForm = require('models/search-form');
+var Specialty = require('models/specialty');
 
 var Results = Backbone.Model.extend({
 
@@ -24,7 +25,10 @@ var Results = Backbone.Model.extend({
 
         this.searchForm = new SearchForm({
             userLocation: this.userLocation,
-            specialty: this.resultsMeta.get('specialty')
+            specialty: new Specialty({
+                full: this.resultsMeta.get('specialty'),
+                code: this.resultsMeta.get('code')
+            })
         });
 
         this.physicianListView.render();

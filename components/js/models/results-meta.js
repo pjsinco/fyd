@@ -2,15 +2,6 @@ var Backbone = require('backbone');
 
 var ResultsMeta = Backbone.Model.extend({
 
-    defaults: {
-        city: undefined,
-        state: undefined,
-        zip: undefined,
-        specialty: undefined,
-        count: undefined,
-        who: undefined,
-    },
-
     initialize: function (attributes) {
         if (attributes !== undefined) {
             this.setWho(attributes.count);
