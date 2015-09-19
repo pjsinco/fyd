@@ -2307,8 +2307,13 @@ var ResultsRouter = Backbone.Router.extend({
 
     show: function(id) {
         var physician = new Physician({ id: id });
+        var self = this;
         physician.fetch({
             success: function() {
+                this.searchForm = new SearchForm({
+                    userLocation: self.userLocation
+                    //specialty: this.resultsMeta.get('specialty')
+                });
                 var physicianDetailView = 
                     new PhysicianDetailView({ model: physician });
                 physicianDetailView.render();
