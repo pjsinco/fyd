@@ -128,9 +128,12 @@ var ResultsMeta = Backbone.Model.extend({
      */
     setWho: function(count) {
         var who = 'DO';
-        if (count === 0 || count > 1) {
+        if (count > 1) {
             who += 's';
+        } else if (count == 0) {
+            // TODO
         } 
+
         this.set('who', who);
     }
 
@@ -2329,7 +2332,7 @@ var ResultsRouter = Backbone.Router.extend({
             },
             error: function(collection, response) {
                 var results = new Results({
-                    resultsMeta: new ResultsMeta(response.responseJSON.meta),
+                    resultsMeta: new ResultsMeta(response.responseJSON),
                     physicianList: physicianList,
                     userLocation: self.userLocation,
                     router: self
