@@ -19,20 +19,27 @@ var SearchForm = Backbone.Model.extend({
         this.userLocation = options.userLocation;
         options.userLocation.unset('id');
         this.searchLocation = new Location(_.clone(this.userLocation.attributes));
-        this.specialty = new Specialty();
+
+        // Capture the searched specialty, if there is one
+        if (options.specialty !== '') {
+            this.specialty = new Specialty({ full: options.specialty });
+        } else {
+            this.specialty = new Specialty();
+        }
+
         this.searchFormView = new SearchFormView({ 
-            model: this ,
+            model: this,
             el: '#findYourDo'
         });
 
         this.listenTo(this, 'all', this.reportEvent);
         this.listenTo(this.searchLocation, 'change', this.updateLocations);
-        this.listenTo(this.specialty, 'change', this.updateSpecialty);
+        //this.listenTo(this.specialty, 'change', this.updateSpecialty);
     },
 
-    updateSpecialty: function (model, options) {
- console.log('way up in SearchForm model, heard change to specialty');
-    },
+//    updateSpecialty: function (model, options) {
+// console.log('way up in SearchForm model, heard change to specialty');
+//    },
 
     /**
      * Update the UserLocation and SearchLocation models.

@@ -16,6 +16,10 @@ var SpecialtyView = Backbone.View.extend({
     initialize: function () {
         this.initAutocomplete();
         this.render();
+
+        if (!this.model.isEmpty()) {
+            this.renderSpecialtyInInput();
+        }
     },
 
     setSpecialty: function(evt, suggestion) {
@@ -139,7 +143,10 @@ var SpecialtyView = Backbone.View.extend({
 
     render: function() {
         this.renderHidden();
+    },
 
+    renderSpecialtyInInput: function () {
+        this.$el.typeahead('val', this.model.get('full'));
     },
 
     hiddenTemplate: _.template(

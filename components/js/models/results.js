@@ -23,7 +23,8 @@ var Results = Backbone.Model.extend({
         this.userLocation = options.userLocation;
 
         this.searchForm = new SearchForm({
-            userLocation: this.userLocation
+            userLocation: this.userLocation,
+            specialty: this.resultsMeta.get('specialty')
         });
 
         this.physicianListView.render();

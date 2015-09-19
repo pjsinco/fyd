@@ -128,12 +128,9 @@ var ResultsMeta = Backbone.Model.extend({
      */
     setWho: function(count) {
         var who = 'DO';
-        if (count > 1) {
+        if (count === 0 || count > 1) {
             who += 's';
-        } else if (count == 0) {
-            // TODO
         } 
-
         this.set('who', who);
     }
 
@@ -170,7 +167,8 @@ var Results = Backbone.Model.extend({
         this.userLocation = options.userLocation;
 
         this.searchForm = new SearchForm({
-            userLocation: this.userLocation
+            userLocation: this.userLocation,
+            specialty: this.resultsMeta.get('specialty')
         });
 
         this.physicianListView.render();
@@ -203,20 +201,27 @@ var SearchForm = Backbone.Model.extend({
         this.userLocation = options.userLocation;
         options.userLocation.unset('id');
         this.searchLocation = new Location(_.clone(this.userLocation.attributes));
-        this.specialty = new Specialty();
+
+        // Capture the searched specialty, if there is one
+        if (options.specialty !== '') {
+            this.specialty = new Specialty({ full: options.specialty });
+        } else {
+            this.specialty = new Specialty();
+        }
+
         this.searchFormView = new SearchFormView({ 
-            model: this ,
+            model: this,
             el: '#findYourDo'
         });
 
         this.listenTo(this, 'all', this.reportEvent);
         this.listenTo(this.searchLocation, 'change', this.updateLocations);
-        this.listenTo(this.specialty, 'change', this.updateSpecialty);
+        //this.listenTo(this.specialty, 'change', this.updateSpecialty);
     },
 
-    updateSpecialty: function (model, options) {
- console.log('way up in SearchForm model, heard change to specialty');
-    },
+//    updateSpecialty: function (model, options) {
+// console.log('way up in SearchForm model, heard change to specialty');
+//    },
 
     /**
      * Update the UserLocation and SearchLocation models.
@@ -2332,7 +2337,7 @@ var ResultsRouter = Backbone.Router.extend({
             },
             error: function(collection, response) {
                 var results = new Results({
-                    resultsMeta: new ResultsMeta(response.responseJSON),
+                    resultsMeta: new ResultsMeta(response.responseJSON.meta),
                     physicianList: physicianList,
                     userLocation: self.userLocation,
                     router: self
@@ -2952,6 +2957,10 @@ var SpecialtyView = Backbone.View.extend({
     initialize: function () {
         this.initAutocomplete();
         this.render();
+
+        if (!this.model.isEmpty()) {
+            this.renderSpecialtyInInput();
+        }
     },
 
     setSpecialty: function(evt, suggestion) {
@@ -3075,7 +3084,10 @@ var SpecialtyView = Backbone.View.extend({
 
     render: function() {
         this.renderHidden();
+    },
 
+    renderSpecialtyInInput: function () {
+        this.$el.typeahead('val', this.model.get('full'));
     },
 
     hiddenTemplate: _.template(
