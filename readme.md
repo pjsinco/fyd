@@ -489,3 +489,6 @@ var TaskList = Backbone.Collection.extend({
 * Github: [A Lightweight Responsive jQuery Tooltip Plugin](https://github.com/object505/tipso)
 
 * npm: [The npm Blog — Making your jQuery plugin work better with npm]()
+
+#####Sat Sep 19 11:23:49 2015 CDT
+* Nanobar: [Very very lightweight progress bars](http://nanobar.micronube.com/)
