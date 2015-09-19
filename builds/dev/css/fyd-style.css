@@ -100,6 +100,28 @@
   font-size: .75em;
   font-weight: 400;
   color: #8f8f8f; }
+/* line 81, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__tag {
+  display: inline-block;
+  padding-top: .2em;
+  padding-right: .6em;
+  padding-bottom: .3em;
+  padding-left: .6em;
+  font-size: 75%;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  color: #fff;
+  background-color: #8f8f8f; }
+  /* line 96, ../../../components/sass/modules/_find-your-do-results.scss */
+  .fyd-results__tag:hover, .fyd-results__tag:focus {
+    cursor: pointer; }
+  /* line 100, ../../../components/sass/modules/_find-your-do-results.scss */
+  .fyd-results__tag [data-role="remove"]:after {
+    content: "\00d7";
+    padding: 0 2px; }
 
 /* line 3, ../../../components/sass/modules/_find-your-do-detail.scss */
 .fyd-detail__specialty {

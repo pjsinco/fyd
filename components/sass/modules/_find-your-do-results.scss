@@ -78,4 +78,29 @@
 
     }
 
+    &__tag {
+        display: inline-block;
+        padding-top: .2em;
+        padding-right: .6em;
+        padding-bottom: .3em;
+        padding-left: .6em;
+        font-size: 75%;
+        font-weight: $fontbold;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        color: $white;
+        background-color: $gray;
+
+        &:hover, &:focus {
+            cursor: pointer;
+        }
+
+        & [data-role="remove"]:after {
+            content: "\00d7";
+            padding: 0 2px;
+        }
+    }
+
 }

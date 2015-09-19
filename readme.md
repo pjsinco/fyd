@@ -37,9 +37,9 @@ locations table
 * In the FindADO query, better to not concatenate fellow designations onto the `designation` field
         * Ex.: Dr. Hubka: "DO, FACOOG, FACOG,CS"
 
-* In specialty/physician input, typeahead dropdown doesn't open when only a physician name matches.
-    * Ex.: in Dumas, Texas, there's a doctor named Ositadinma O. Opara, DO
-        * Typing "Opa" into specialty/physician field doesn't open the dropdown to reveal Dr. Opara's name.
+~~* In specialty/physician input, typeahead dropdown doesn't open when only a physician name matches.~~
+    ~~* Ex.: in Dumas, Texas, there's a doctor named Ositadinma O. Opara, DO~~
+        ~~* Typing "Opa" into specialty/physician field doesn't open the dropdown to reveal Dr. Opara's name.~~
 
 
 ###Bad resolves?
