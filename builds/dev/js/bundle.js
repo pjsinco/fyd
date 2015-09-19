@@ -2802,7 +2802,7 @@ var PhysicianListItemView = Backbone.View.extend({
             '<div class="fyd-results__body"><p data-lat=<%= lat %> data-lon=<%= lon %>>' +
                 '<%= addr_1 %><br/ >' +
                 '<%= city %>, <%= state %> <%= zip %>' +
-            '</div>'
+            '</p></div>'
     ),
 
     initialize: function () {

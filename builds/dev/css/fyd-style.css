@@ -84,31 +84,25 @@
   border-bottom: 1px solid #01eaff;
   list-style: none; }
   /* line 57, ../../../components/sass/modules/_find-your-do-results.scss */
-  .fyd-results__list-item:hover {
-    cursor: pointer; }
-    /* line 60, ../../../components/sass/modules/_find-your-do-results.scss */
-    .fyd-results__list-item:hover a {
-      -webkit-transition: all 0.3s ease;
-      -o-transition: all 0.3s ease;
-      transition: all 0.3s ease;
-      color: #01eaff; }
-/* line 67, ../../../components/sass/modules/_find-your-do-results.scss */
+  .fyd-results__list-item a {
+    display: block; }
+/* line 71, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__body {
   font-family: "gothambook", sans-serif;
   line-height: 1.5; }
-/* line 72, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 76, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__locator {
   background: aliceblue; }
-/* line 77, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 81, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__head {
   color: #8f8f8f; }
-/* line 82, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 86, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__subhead {
   text-transform: uppercase;
   font-size: .75em;
   font-weight: 400;
   color: #8f8f8f; }
-/* line 90, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 94, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__tag {
   display: inline-block;
   padding-top: .2em;
@@ -123,10 +117,10 @@
   vertical-align: baseline;
   color: #fff;
   background-color: #8f8f8f; }
-  /* line 105, ../../../components/sass/modules/_find-your-do-results.scss */
+  /* line 109, ../../../components/sass/modules/_find-your-do-results.scss */
   .fyd-results__tag:hover, .fyd-results__tag:focus {
     cursor: pointer; }
-  /* line 109, ../../../components/sass/modules/_find-your-do-results.scss */
+  /* line 113, ../../../components/sass/modules/_find-your-do-results.scss */
   .fyd-results__tag [data-role="remove"]:after {
     content: "\00d7";
     padding: 0 2px; }

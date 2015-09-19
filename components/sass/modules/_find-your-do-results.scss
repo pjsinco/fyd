@@ -54,14 +54,18 @@
         border-bottom: 1px solid $secondarycolor;
         list-style: none;
 
-        &:hover {
-            cursor: pointer;
-
-            & a {
-                @include transition(all 0.3s ease);
-                color: $secondarycolor;
-            }
+        & a {
+            display: block;
         }
+
+//        &:hover {
+//            cursor: pointer;
+//
+//            & a {
+//                @include transition(all 0.3s ease);
+//                color: $secondarycolor;
+//            }
+//        }
     }
 
     &__body {
