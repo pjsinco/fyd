@@ -5,22 +5,19 @@ html(lang="en-US")
     body.page.home
         include header
 
-        //-include tt-demo
-
         div.outer-row
-            div.hero
-                div.hero__image
-                    div.img-wrapper
-                        img(src="http://placekitten.com/1400/600")
-                div.hero__overlay
+            div.hero#hero-wrapper
+                div.hero--image(style="background-image: url()")
+                        //-img(src="http://placekitten.com/1400/600")
+                div.hero--band
                     div.container-fluid
                         div.row
-                            div.col-sm-12
+                            div.col-xs-12.hero--message
                                 div.hero__content
                                     div.hero__body 
-                                        p 
-                                        | Doctors of Osteopathic Medicine are complete physicians and practice in every medical specialty. A D.O. is trained to always first consider the person within the patient.
-                        include search-form
+                                        //-p 
+                                        //-| Doctors of Osteopathic Medicine are complete physicians and practice in every medical specialty. A D.O. is trained to always first consider the person within the patient.
+                        include search-form-orbit
                                  
         include page-blocks
         include feeds

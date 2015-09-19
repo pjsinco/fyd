@@ -34,119 +34,16 @@
 /*@import 'helpers';*/
 /*@import 'base/index';*/
 /*@import 'layout/index';*/
-/* line 4, ../../../components/sass/modules/_find-your-do.scss */
-.fyd input[type='text']:focus, .fyd textarea[type='text']:focus {
-  border-width: 2px;
-  border-style: solid;
-  border-color: #01eaff;
-  outline: 0;
-  -moz-transition-property: border;
-  -o-transition-property: border;
-  -webkit-transition-property: border;
-  transition-property: border;
-  -moz-transition-duration: 0.3s;
-  -o-transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s; }
-
-/* line 21, ../../../components/sass/modules/_find-your-do.scss */
-.fyd {
-  text-align: center; }
-  @media screen and (min-width: 768px) {
-    /* line 21, ../../../components/sass/modules/_find-your-do.scss */
-    .fyd {
-      text-align: left;
-      /*display: inline;*/ } }
-  /* line 30, ../../../components/sass/modules/_find-your-do.scss */
-  .fyd__title {
-    margin-bottom: 0;
-    font-size: 2em;
-    text-align: left;
-    text-transform: uppercase;
-    color: #fff; }
-    @media screen and (min-width: 768px) {
-      /* line 30, ../../../components/sass/modules/_find-your-do.scss */
-      .fyd__title {
-        text-align: right; } }
-    @media screen and (min-width: 992px) {
-      /* line 30, ../../../components/sass/modules/_find-your-do.scss */
-      .fyd__title {
-        line-height: 2.5; } }
-    /* line 45, ../../../components/sass/modules/_find-your-do.scss */
-    #fydResults .fyd__title {
-      color: #8f8f8f; }
-  /* line 51, ../../../components/sass/modules/_find-your-do.scss */
-  .fyd__form {
-    display: inline;
-    padding: 1em;
-    margin: 1em;
-    /*background-color: $secondarycolor;  */
-    /*border-width: $input-border-width;*/
-    /*border: 1px solid $accentcolor;*/ }
-  /* line 60, ../../../components/sass/modules/_find-your-do.scss */
-  .fyd textarea {
-    line-height: 1.4; }
-    /* line 63, ../../../components/sass/modules/_find-your-do.scss */
-    .fyd textarea:focus {
-      -moz-transition-property: border;
-      -o-transition-property: border;
-      -webkit-transition-property: border;
-      transition-property: border;
-      -moz-transition-duration: 0.2s;
-      -o-transition-duration: 0.2s;
-      -webkit-transition-duration: 0.2s;
-      transition-duration: 0.2s;
-      border: 1px solid #ffaa00;
-      outline: 0; }
-  /* line 71, ../../../components/sass/modules/_find-your-do.scss */
-  .fyd input {
-    border-radius: 0;
-    vertical-align: middle; }
-  /* line 76, ../../../components/sass/modules/_find-your-do.scss */
-  .fyd input, .fyd textarea {
-    padding-top: .5em;
-    padding-right: .5em;
-    padding-bottom: .5em;
-    padding-left: .75em;
-    margin-bottom: 0;
-    width: 100%;
-    height: 3.6875em;
-    border-left-style: solid;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-width: 2px;
-    border-color: rgba(143, 143, 143, 0.1);
-    font-size: 1em;
-    font-family: "gothambook", sans-serif;
-    color: #333; }
-    @media screen and (min-width: 992px) {
-      /* line 76, ../../../components/sass/modules/_find-your-do.scss */
-      .fyd input, .fyd textarea {
-        font-size: 1.5em; } }
-    /* line 105, ../../../components/sass/modules/_find-your-do.scss */
-    .fyd input[type='submit'], .fyd textarea[type='submit'] {
-      width: 100%;
-      margin-right: 0;
-      text-transform: uppercase;
-      font-weight: 600;
-      /*font-size: 1.125em;*/
-      letter-spacing: 1px;
-      color: #fff;
-      border: none;
-      background: linear-gradient(to bottom, #ffaa00 0%, #ed9e00 100%);
-      box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.2); }
-      @media screen and (min-width: 768px) {
-        /* line 105, ../../../components/sass/modules/_find-your-do.scss */
-        .fyd input[type='submit'], .fyd textarea[type='submit'] {
-          width: 6.5em; } }
-  /* line 125, ../../../components/sass/modules/_find-your-do.scss */
-  .fyd hr {
-    margin-bottom: 1.6875em;
-    margin-top: 3em;
-    border: 0;
-    height: 0;
-    border-top: 1px solid #ddd; }
+/* line 27, ../../../components/sass/modules/_find-your-do.scss */
+.page:not(.home) .fyd {
+  margin-top: 2em; }
+  /* line 31, ../../../components/sass/modules/_find-your-do.scss */
+  .page:not(.home) .fyd .hero--title {
+    color: #8f8f8f; }
+/* line 90, ../../../components/sass/modules/_find-your-do.scss */
+.fyd input {
+  padding-right: .5em;
+  padding-left: .75em; }
 
 /* line 6, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd__form--inside {
@@ -166,17 +63,19 @@
   color: #8f8f8f; }
 /* line 29, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__report {
-  font-size: 2.571428571em;
-  font-family: "gothambook", sans-serif; }
-/* line 35, ../../../components/sass/modules/_find-your-do-results.scss */
+  margin-top: 1em;
+  font-size: 1.5em;
+  font-family: "gothambook", sans-serif;
+  color: #8f8f8f; }
+/* line 37, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__title {
   margin-bottom: 2em; }
-/* line 40, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 42, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__list {
   list-style-type: none;
   margin-left: 0;
   padding: 0; }
-/* line 46, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 48, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__list-item {
   padding-top: 1em;
   padding-right: 0;
@@ -185,15 +84,22 @@
   margin-bottom: 1em;
   border-bottom: 1px solid #01eaff;
   list-style: none; }
-/* line 56, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 58, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__body {
-  font-family: "gothambook", sans-serif; }
-/* line 60, ../../../components/sass/modules/_find-your-do-results.scss */
+  font-family: "gothambook", sans-serif;
+  line-height: 1.5; }
+/* line 63, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__locator {
   background: aliceblue; }
-/* line 65, ../../../components/sass/modules/_find-your-do-results.scss */
-#fydResults .fyd-results__search #specialty {
-  background-color: fuchsia; }
+/* line 68, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__head {
+  color: #8f8f8f; }
+/* line 73, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__subhead {
+  text-transform: uppercase;
+  font-size: .75em;
+  font-weight: 400;
+  color: #8f8f8f; }
 
 /* line 3, ../../../components/sass/modules/_find-your-do-detail.scss */
 .fyd-detail__specialty {

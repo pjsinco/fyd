@@ -52,39 +52,35 @@
       </nav>
     </header>
     <div class="outer-row">
-      <div class="hero">
-        <div class="hero__image">
-          <div class="img-wrapper"><img src="http://placekitten.com/1400/600"></div>
+      <div id="hero-wrapper" class="hero">
+        <div style="background-image: url()" class="hero--image">
         </div>
-        <div class="hero__overlay">
+        <div class="hero--band">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-xs-12 hero--message">
                 <div class="hero__content">
                   <div class="hero__body"> 
-                    <p> </p>Doctors of Osteopathic Medicine are complete physicians and practice in every medical specialty. A D.O. is trained to always first consider the person within the patient.
                   </div>
                 </div>
               </div>
             </div>
             <div class="row fyd">
-              <div class="col-sm-12">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h3 class="fyd__title">Find Your DO</h3>
-                  </div>
-                  <div class="col-sm-9">
-                    <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="form-inline fyd__form">
-                      <div class="form-group">
-                        <input id="specialty" placeholder="Name or specialty" name="specialty" type="text" class="form-control">
+              <div class="col-md-3 hero--title">FIND YOUR DO</div>
+              <div class="col-md-9 hero--form">
+                <form id="findYourDo" action="">
+                  <div class="hero--form--inner">
+                    <div class="row">
+                      <div class="col-sm-6 location">
+                        <input id="specialty" placeholder="Name or specialty" name="specialty" type="text">
                       </div>
-                      <div class="form-group">
-                        <input id="location" placeholder="City, state or zip" name="location" type="text" class="form-control">
+                      <div class="col-sm-6 speciality">
+                        <input id="location" placeholder="City, state or zip" name="location" type="text">
                       </div>
-                      <input type="submit" value="Go">
-                    </form>
-                  </div>
-                </div>
+                    </div>
+                  </div><span class="hero--form--button">
+                    <button>GO <i class="fa fa-angle-double-right"></i></button></span>
+                </form>
               </div>
             </div>
           </div>

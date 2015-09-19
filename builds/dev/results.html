@@ -54,23 +54,21 @@
     <div id="interior">
       <div class="container-fluid">
         <div class="row fyd">
-          <div class="col-sm-12">
-            <div class="row">
-              <div class="col-sm-3">
-                <h3 class="fyd__title">Find Your DO</h3>
-              </div>
-              <div class="col-sm-9">
-                <form id="findYourDo" method="GET" action="http://lookup.dev/physicians/search" accept-charset="UTF-8" name="findYourDo" class="form-inline fyd__form">
-                  <div class="form-group">
-                    <input id="specialty" placeholder="Name or specialty" name="specialty" type="text" class="form-control">
+          <div class="col-md-3 hero--title">FIND YOUR DO</div>
+          <div class="col-md-9 hero--form">
+            <form id="findYourDo" action="">
+              <div class="hero--form--inner">
+                <div class="row">
+                  <div class="col-sm-6 location">
+                    <input id="specialty" placeholder="Name or specialty" name="specialty" type="text">
                   </div>
-                  <div class="form-group">
-                    <input id="location" placeholder="City, state or zip" name="location" type="text" class="form-control">
+                  <div class="col-sm-6 speciality">
+                    <input id="location" placeholder="City, state or zip" name="location" type="text">
                   </div>
-                  <input type="submit" value="Go">
-                </form>
-              </div>
-            </div>
+                </div>
+              </div><span class="hero--form--button">
+                <button>GO <i class="fa fa-angle-double-right"></i></button></span>
+            </form>
           </div>
         </div>
         <div id="fydResultsMeta"></div>
@@ -157,9 +155,12 @@
     <script src="js/bundle.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
     <script id="fydResultsMetaTemplate" type="text/template">
-      <div class="row fyd fyd-results__report">
-      <div class="col-sm-12">
-          <%= count %> <%= who %> near <%= city %>, <%= state %>
+      <div class="row fyd-results__report">
+          <div class="col-sm-12">
+              <div class="fyd-results__head"><%= count %> <%= who %> near <%= city %>, <%= state %></div>
+              <div class="fyd-results__subhead">Who practice <%= specialty %></div>
+          </div>
+      </div>
     </script>
     <script id="fydDetailTemplate" type="text/template">
       <div class="fyd-detail__header">
