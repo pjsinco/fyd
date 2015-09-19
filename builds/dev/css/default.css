@@ -338,9 +338,10 @@ span[class^="fa-"], span[class*=" fa-"], .postsNav span {
 html,
 body {
   font-family: "Trebuchet MS", Tahoma, Verdana, sans-serif;
-  font-size: 14px;
-  color: #585352;
-  line-height: 1.78571;
+  font-size: 16px;
+  color: #5d5d5d;
+  line-height: 35px;
+  letter-spacing: 0.025em;
 }
 
 * {

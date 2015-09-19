@@ -38,7 +38,7 @@
 .fyd input[type='text']:focus, .fyd textarea[type='text']:focus {
   border-width: 2px;
   border-style: solid;
-  border-color: #00eaff;
+  border-color: #01eaff;
   outline: 0;
   -moz-transition-property: border;
   -o-transition-property: border;
@@ -183,7 +183,7 @@
   padding-bottom: 1em;
   padding-left: 0;
   margin-bottom: 1em;
-  border-bottom: 1px solid #00eaff;
+  border-bottom: 1px solid #01eaff;
   list-style: none; }
 /* line 56, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__body {
@@ -203,7 +203,7 @@
 .fyd-detail__header {
   padding-bottom: 1em;
   margin-bottom: 2em;
-  border-bottom: 1px solid #00eaff; }
+  border-bottom: 1px solid #01eaff; }
 /* line 14, ../../../components/sass/modules/_find-your-do-detail.scss */
 .fyd-detail__name {
   margin-bottom: 12px; }
@@ -379,7 +379,7 @@
 .tt-suggestion.tt-cursor {
   /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
   color: #fff;
-  background-color: #00eaff; }
+  background-color: #01eaff; }
 /* line 87, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion a {
   color: inherit; }
