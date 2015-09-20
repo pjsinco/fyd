@@ -35,11 +35,13 @@
 /*@import 'layout/index';*/
 /* line 27, ../../../components/sass/modules/_find-your-do.scss */
 .page:not(.home) .fyd {
-  margin-top: 2em; }
-  /* line 31, ../../../components/sass/modules/_find-your-do.scss */
+  padding-bottom: 2em;
+  margin-top: 2em;
+  border-bottom: 1px solid #efefef; }
+  /* line 33, ../../../components/sass/modules/_find-your-do.scss */
   .page:not(.home) .fyd .hero--title {
     color: #8f8f8f; }
-/* line 90, ../../../components/sass/modules/_find-your-do.scss */
+/* line 92, ../../../components/sass/modules/_find-your-do.scss */
 .fyd input {
   padding-right: .5em;
   padding-left: .75em; }
