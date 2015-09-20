@@ -28,7 +28,8 @@ var Results = Backbone.Model.extend({
             specialty: new Specialty({
                 full: this.resultsMeta.get('specialty'),
                 code: this.resultsMeta.get('code')
-            })
+            }),
+            router: this.router
         });
 
         this.physicianListView.render();

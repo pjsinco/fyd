@@ -163,7 +163,8 @@ var Results = Backbone.Model.extend({
             specialty: new Specialty({
                 full: this.resultsMeta.get('specialty'),
                 code: this.resultsMeta.get('code')
-            })
+            }),
+            router: this.router
         });
 
         this.physicianListView.render();
@@ -204,19 +205,21 @@ var SearchForm = Backbone.Model.extend({
             this.specialty = new Specialty();
         }
 
+        this.router = options.router;
+
         this.searchFormView = new SearchFormView({ 
             model: this,
             el: '#findYourDo'
         });
 
-        this.listenTo(this, 'all', this.reportEvent);
+        //this.listenTo(this, 'all', this.reportEvent);
         this.listenTo(this.searchLocation, 'change', this.updateLocations);
-        //this.listenTo(this.specialty, 'change', this.updateSpecialty);
+        this.listenTo(this.specialty, 'navigateToNewRoute', this.navigateToNewRoute);
     },
 
-//    updateSpecialty: function (model, options) {
-// console.log('way up in SearchForm model, heard change to specialty');
-//    },
+    navigateToNewRoute: function(model, options) {
+        this.router.navigate('resulst.html#physicians/' + model.id, { trigger: true} );
+    },
 
     /**
      * Update the UserLocation and SearchLocation models.
@@ -236,7 +239,8 @@ var SearchForm = Backbone.Model.extend({
 
 
     reportEvent: function (eventName) {
-        console.log(eventName + ' event on SearchForm model');
+        console.log('reporting from search-form model: ' + 
+            eventName + ' event on SearchForm model');
     },
 
 });
@@ -255,7 +259,6 @@ var Search = Backbone.Model.extend({
     locationModel: undefined,
 
     initialize: function (options) {
-debugger;
         this.searchView = new SearchView({ el: '#findYourDo' });
         this.listenTo(this.locationModel, 'change', 'From inside Search model, heard a change to Location model');
     }
@@ -2290,6 +2293,11 @@ var ResultsRouter = Backbone.Router.extend({
                 self.initSearch()
             }
         })
+
+        this.vent = _.extend({}, Backbone.events);
+        this.listenTo(this.vent, 'x', function(e) {
+            console.log('heard a holler up here in router');
+        });
     },
 
     initSearch: function (locationAttributes) {
@@ -2944,10 +2952,9 @@ var SpecialtyView = Backbone.View.extend({
 
     el: $('#specialty'),
 
-
     events: {
         'typeahead:closed': 'closed',
-        'typeahead:selected': 'setSpecialty'
+        'typeahead:selected': 'handleSuggestion',
     },
 
     initialize: function (options) {
@@ -2970,12 +2977,21 @@ var SpecialtyView = Backbone.View.extend({
         //this.saerch
     },
 
-    setSpecialty: function(evt, suggestion) {
-        this.model.set({
-            code: suggestion.code,
-            full: suggestion.name
-        });
-        this.render();
+    handleSuggestion: function(evt, suggestion) {
+
+        // if it's a specialty, which has a 'code' property, set it
+        if (suggestion.hasOwnProperty('code')) {
+            this.model.set({
+                code: suggestion.code,
+                full: suggestion.name
+            });
+            this.render();
+        } else if (suggestion.hasOwnProperty('value')) {
+            // TODO Fix the magic value: "results.html"
+            var origin = window.location.origin;
+            window.location.href = window.location.origin + 
+                '/results.html#physicians/' + suggestion.id;        
+        }
     },
 
     clearSpecialty: function() {
@@ -3054,7 +3070,7 @@ var SpecialtyView = Backbone.View.extend({
 
     physicianSuggestionTemplate: _.template(
         '<div>' +
-            '<a href="results.html#physicians/<%= id %>"><%= full_name %><br />' +
+            '<a id="physicianLink" href="results.html#physicians/<%= id %>"><%= full_name %><br />' +
                 '<span class="typeahead-location"><%= city %>, <%= state %><span>' +
             '</a>' +
         '</div>'

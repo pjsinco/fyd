@@ -27,19 +27,21 @@ var SearchForm = Backbone.Model.extend({
             this.specialty = new Specialty();
         }
 
+        this.router = options.router;
+
         this.searchFormView = new SearchFormView({ 
             model: this,
             el: '#findYourDo'
         });
 
-        this.listenTo(this, 'all', this.reportEvent);
+        //this.listenTo(this, 'all', this.reportEvent);
         this.listenTo(this.searchLocation, 'change', this.updateLocations);
-        //this.listenTo(this.specialty, 'change', this.updateSpecialty);
+        this.listenTo(this.specialty, 'navigateToNewRoute', this.navigateToNewRoute);
     },
 
-//    updateSpecialty: function (model, options) {
-// console.log('way up in SearchForm model, heard change to specialty');
-//    },
+    navigateToNewRoute: function(model, options) {
+        this.router.navigate('resulst.html#physicians/' + model.id, { trigger: true} );
+    },
 
     /**
      * Update the UserLocation and SearchLocation models.
@@ -59,7 +61,8 @@ var SearchForm = Backbone.Model.extend({
 
 
     reportEvent: function (eventName) {
-        console.log(eventName + ' event on SearchForm model');
+        console.log('reporting from search-form model: ' + 
+            eventName + ' event on SearchForm model');
     },
 
 });

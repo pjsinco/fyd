@@ -31,6 +31,11 @@ var ResultsRouter = Backbone.Router.extend({
                 self.initSearch()
             }
         })
+
+        this.vent = _.extend({}, Backbone.events);
+        this.listenTo(this.vent, 'x', function(e) {
+            console.log('heard a holler up here in router');
+        });
     },
 
     initSearch: function (locationAttributes) {

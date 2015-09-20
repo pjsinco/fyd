@@ -7,10 +7,9 @@ var SpecialtyView = Backbone.View.extend({
 
     el: $('#specialty'),
 
-
     events: {
         'typeahead:closed': 'closed',
-        'typeahead:selected': 'setSpecialty'
+        'typeahead:selected': 'handleSuggestion',
     },
 
     initialize: function (options) {
@@ -33,12 +32,21 @@ var SpecialtyView = Backbone.View.extend({
         //this.saerch
     },
 
-    setSpecialty: function(evt, suggestion) {
-        this.model.set({
-            code: suggestion.code,
-            full: suggestion.name
-        });
-        this.render();
+    handleSuggestion: function(evt, suggestion) {
+
+        // if it's a specialty, which has a 'code' property, set it
+        if (suggestion.hasOwnProperty('code')) {
+            this.model.set({
+                code: suggestion.code,
+                full: suggestion.name
+            });
+            this.render();
+        } else if (suggestion.hasOwnProperty('value')) {
+            // TODO Fix the magic value: "results.html"
+            var origin = window.location.origin;
+            window.location.href = window.location.origin + 
+                '/results.html#physicians/' + suggestion.id;        
+        }
     },
 
     clearSpecialty: function() {
@@ -117,7 +125,7 @@ var SpecialtyView = Backbone.View.extend({
 
     physicianSuggestionTemplate: _.template(
         '<div>' +
-            '<a href="results.html#physicians/<%= id %>"><%= full_name %><br />' +
+            '<a id="physicianLink" href="results.html#physicians/<%= id %>"><%= full_name %><br />' +
                 '<span class="typeahead-location"><%= city %>, <%= state %><span>' +
             '</a>' +
         '</div>'
