@@ -2,14 +2,18 @@ script#fydResultsMetaTemplate(type="text/template")
     | <div class="row fyd-results__report">
     |     <div class="col-sm-12">
     |         <div class="fyd-results__head"><%= count %> <%= who %> near <%= city %>, <%= state %></div>
+    |         <% if (specialty) { %>
     |         <div class="fyd-results__subhead">Who practice <%= specialty %></div>
+    |         <% } %>
     |     </div>
     |     <div class="fyd-results__filter clearfix">
     |         <div class="col-xs-12 col-sm-6">
     |             <div class="fyd-results__tags">
-    |                 <span class="fyd-results__tag">Internal medicine 
+    |             <% if (specialty) { %>
+    |                 <span class="fyd-results__tag"><%= specialty %>
     |                     <span data-role="remove"></span>
     |                 </span>
+    |             <% } %>
     |                 <span class="fyd-results__tag">25 miles 
     |                     <span data-role="remove"></span>
     |                 </span> 
