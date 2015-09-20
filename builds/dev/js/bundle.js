@@ -2987,7 +2987,7 @@ var SpecialtyView = Backbone.View.extend({
         this.specialtyEngine = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            limit: 7,
+            limit: 25,
             prefetch: {
                 url: 'http://lookup.dev/api/v1/specialties',
                 filter: function(obj) {
