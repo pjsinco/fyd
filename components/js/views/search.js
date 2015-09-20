@@ -62,7 +62,8 @@ var SearchFormView = Backbone.View.extend({
     },
     
     isValid: function() {
-        return !this.model.searchLocation.isEmpty() || this.resolved;
+        return !this.model.searchLocation.isEmpty() || 
+            this.locationFormView.resolved;
     },
 
     indicateInvalid: function() {

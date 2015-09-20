@@ -2487,6 +2487,7 @@ var LocationForm = Backbone.View.extend({
     },
 
     inputChange: function () {
+        console.log('change event');
         this.resolved = false;
         this._unresolve();
     },
@@ -2924,7 +2925,8 @@ var SearchFormView = Backbone.View.extend({
     },
     
     isValid: function() {
-        return !this.model.searchLocation.isEmpty() || this.resolved;
+        return !this.model.searchLocation.isEmpty() || 
+            this.locationFormView.resolved;
     },
 
     indicateInvalid: function() {
