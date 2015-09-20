@@ -86,8 +86,9 @@
     }
     
     &-suggestion.tt-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
-        color: #fff;
-        background-color: $secondarycolor;
+        /*color: #fff;*/
+        background-color: lighten($primarycolor, 45%);
+        /*@include transition(all, 0.2s, ease);*/
     
     }
 

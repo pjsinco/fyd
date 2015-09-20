@@ -314,12 +314,13 @@
 /* line 88, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion.tt-cursor {
   /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
-  color: #fff;
-  background-color: #01eaff; }
-/* line 94, ../../../components/sass/modules/_typeahead.scss */
+  /*color: #fff;*/
+  background-color: #fff7e6;
+  /*@include transition(all, 0.2s, ease);*/ }
+/* line 95, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion a {
   color: inherit; }
-/* line 98, ../../../components/sass/modules/_typeahead.scss */
+/* line 99, ../../../components/sass/modules/_typeahead.scss */
 .tt-suggestion p {
   margin: 0; }
 
