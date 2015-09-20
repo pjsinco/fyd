@@ -71,11 +71,11 @@
             </form>
           </div>
         </div>
-        <div id="fydResultsMeta"></div>
         <div class="hasRightCol interior-content">
           <div id="right">
             <div class="row">
               <div id="content" class="main-content">
+                <div id="fydResultsMeta"></div>
                 <div id="fydResults"></div>
               </div>
               <div id="sidebar">
@@ -160,21 +160,21 @@
               <div class="fyd-results__head"><%= count %> <%= who %> near <%= city %>, <%= state %></div>
               <div class="fyd-results__subhead">Who practice <%= specialty %></div>
           </div>
-      </div>
-      <div class="row">
-          <div class="col-sm-12">
-              <div class="fyd-results__filter">
-                  <div class="fyd-results__tags pull-left">
-                      <span class="fyd-results__tag">Lorem 
+          <div class="fyd-results__filter clearfix">
+              <div class="col-xs-12 col-sm-6">
+                  <div class="fyd-results__tags">
+                      <span class="fyd-results__tag">Internal medicine 
                           <span data-role="remove"></span>
                       </span>
-                      <span class="fyd-results__tag">Ipsum 
+                      <span class="fyd-results__tag">25 miles 
                           <span data-role="remove"></span>
                       </span> 
                   </div>
-                  <div class="fyd-results__sort pull-right">
-                      <label class="">Sort by</label>
-                      <select class="fyd-results__select form-control">
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                  <div class="fyd-results__sort">
+                      <label class="fyd-results__label">Sort by</label>
+                      <select class="fyd-results__select">
                           <option value="distance">Distance</option>
                           <option value="name">Name</option>
                           <option value="experience">Experience</option>

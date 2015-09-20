@@ -36,6 +36,13 @@ $input-border-color: rgba($gray,.1);
 
     }
 
+    &__form {
+        
+        &--inside {
+            background-color: #f5f5f5;
+        }
+    }
+
 //    text-align: center;
 //
 //    @media screen and (min-width: $screen-sm-min) {

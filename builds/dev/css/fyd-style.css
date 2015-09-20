@@ -41,16 +41,15 @@
   /* line 33, ../../../components/sass/modules/_find-your-do.scss */
   .page:not(.home) .fyd .hero--title {
     color: #8f8f8f; }
-/* line 92, ../../../components/sass/modules/_find-your-do.scss */
+/* line 41, ../../../components/sass/modules/_find-your-do.scss */
+.fyd__form--inside {
+  background-color: #f5f5f5; }
+/* line 99, ../../../components/sass/modules/_find-your-do.scss */
 .fyd input {
   padding-right: .5em;
   padding-left: .75em; }
 
-/* line 6, ../../../components/sass/modules/_find-your-do-results.scss */
-.fyd__form--inside {
-  background-color: #f5f5f5; }
-
-/* line 15, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 5, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__name {
   margin-top: 0;
   margin-bottom: .3571428571em;
@@ -58,25 +57,62 @@
   font-weight: 600;
   text-transform: uppercase;
   color: #ffaa00; }
-/* line 24, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 14, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__kicker {
   margin-bottom: .5em;
   color: #8f8f8f; }
-/* line 29, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 19, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__report {
-  margin-top: 1em;
+  /*margin-top: 1em;*/
   font-size: 1.5em;
   font-family: "gothambook", sans-serif;
   color: #8f8f8f; }
-/* line 37, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 27, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__title {
   margin-bottom: 2em; }
-/* line 42, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 32, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__label {
+  font-size: .5833333333em; }
+/* line 36, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__sort {
+  margin-top: 1em; }
+  @media (min-width: 768px) {
+    /* line 36, ../../../components/sass/modules/_find-your-do-results.scss */
+    .fyd-results__sort {
+      margin-top: 0;
+      float: right; } }
+/* line 46, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__select {
+  display: inline;
+  width: 80%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
+  @media (min-width: 768px) {
+    /* line 46, ../../../components/sass/modules/_find-your-do-results.scss */
+    .fyd-results__select {
+      width: 64%; } }
+  @media (min-width: 768px) {
+    /* line 46, ../../../components/sass/modules/_find-your-do-results.scss */
+    .fyd-results__select {
+      width: 64%; } }
+/* line 74, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__list {
   list-style-type: none;
   margin-left: 0;
   padding: 0; }
-/* line 48, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 80, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__list-item {
   padding-top: 1em;
   padding-right: 0;
@@ -85,26 +121,26 @@
   margin-bottom: 1em;
   border-bottom: 1px solid #01eaff;
   list-style: none; }
-  /* line 57, ../../../components/sass/modules/_find-your-do-results.scss */
+  /* line 89, ../../../components/sass/modules/_find-your-do-results.scss */
   .fyd-results__list-item a {
     display: block; }
-/* line 71, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 103, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__body {
   font-family: "gothambook", sans-serif;
   line-height: 1.5; }
-/* line 76, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 108, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__locator {
   background: aliceblue; }
-/* line 81, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 113, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__head {
   color: #8f8f8f; }
-/* line 86, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 118, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__subhead {
   text-transform: uppercase;
   font-size: .75em;
   font-weight: 400;
   color: #8f8f8f; }
-/* line 94, ../../../components/sass/modules/_find-your-do-results.scss */
+/* line 126, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__tag {
   display: inline-block;
   padding-top: .2em;
@@ -119,10 +155,10 @@
   vertical-align: baseline;
   color: #fff;
   background-color: #8f8f8f; }
-  /* line 109, ../../../components/sass/modules/_find-your-do-results.scss */
+  /* line 141, ../../../components/sass/modules/_find-your-do-results.scss */
   .fyd-results__tag:hover, .fyd-results__tag:focus {
     cursor: pointer; }
-  /* line 113, ../../../components/sass/modules/_find-your-do-results.scss */
+  /* line 145, ../../../components/sass/modules/_find-your-do-results.scss */
   .fyd-results__tag [data-role="remove"]:after {
     content: "\00d7";
     padding: 0 2px; }
