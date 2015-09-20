@@ -13,12 +13,24 @@ var SpecialtyView = Backbone.View.extend({
         'typeahead:selected': 'setSpecialty'
     },
 
-    initialize: function () {
+    initialize: function (options) {
+        
+        if (options.searchLocation) {
+            this.searchLocation = options.searchLocation;
+        }
+
         this.initAutocomplete();
 
         if (this.model && !this.model.isEmpty()) {
             this.render();
         }
+
+        //this.listenTo(this.searchLocation, 'change', this.updateSearchLocation);
+
+    },
+
+    updateSearchLocation: function(model, options) {
+        //this.saerch
     },
 
     setSpecialty: function(evt, suggestion) {
@@ -86,8 +98,10 @@ var SpecialtyView = Backbone.View.extend({
                 filter: function(physicians) {
                     return $.map(physicians.data, function(d) {
                         return {
-                            first_name: d.first_name,
-                            last_name: d.last_name,
+                            //first_name: d.first_name,
+                            //last_name: d.last_name,
+                            //middle_name: d.middle_name,
+                            full_name: d.full_name,
                             designation: d.designation,
                             city: d.city,
                             state: d.state,
@@ -103,16 +117,14 @@ var SpecialtyView = Backbone.View.extend({
 
     physicianSuggestionTemplate: _.template(
         '<div>' +
-            '<a href="results.html#physicians/<%= id %>">' +
-                '<strong><%= first_name %> <%= last_name %></strong>, ' +
-                '<%= designation %>; <%= city %>, <%= state %>' +
+            '<a href="results.html#physicians/<%= id %>"><%= full_name %><br />' +
+                '<span class="typeahead-location"><%= city %>, <%= state %><span>' +
             '</a>' +
         '</div>'
     ),
 
     _initTypeahead: function () {
         var self = this;
-
         this.$el.typeahead({
             hint: false,
             highlight: true,
@@ -124,8 +136,11 @@ var SpecialtyView = Backbone.View.extend({
             display: 'value',
             source: self.physicianEngine.ttAdapter(),
             templates: {
-                header: '<h5 class="typeahead-subhead">Physicians near ' +
-                    '[city, state]</h5>',
+                //header: '<h5 class="typeahead-subhead">Physicians near ' +
+                    //self.searchLocation.get('city') + ', ' +
+                    //self.searchLocation.get('state') + '</h5>',
+                header: '<h5 class="typeahead-subhead">Nearby physicians</h5>',
+                suggestion: self.physicianSuggestionTemplate,
                 suggestion: self.physicianSuggestionTemplate,
                 engine: _
             },

@@ -26,7 +26,8 @@ var SearchFormView = Backbone.View.extend({
         });
 
         this.specialtyFormView = new SpecialtyFormView({
-            model: this.model.specialty
+            model: this.model.specialty,
+            searchLocation: this.model.searchLocation
         });
 
     },
