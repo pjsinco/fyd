@@ -118,12 +118,12 @@
   padding-right: 0;
   padding-bottom: 1em;
   padding-left: 0;
-  margin-bottom: 1em;
+  margin-bottom: 0;
   border-bottom: 1px solid #01eaff;
   list-style: none; }
   /* line 89, ../../../components/sass/modules/_find-your-do-results.scss */
   .fyd-results__list-item a {
-    display: block; }
+    display: inline-block; }
 /* line 103, ../../../components/sass/modules/_find-your-do-results.scss */
 .fyd-results__body {
   font-family: "gothambook", sans-serif;
@@ -154,14 +154,24 @@
   white-space: nowrap;
   vertical-align: baseline;
   color: #fff;
-  background-color: #8f8f8f; }
+  background-color: #c6c6c6; }
   /* line 141, ../../../components/sass/modules/_find-your-do-results.scss */
   .fyd-results__tag:hover, .fyd-results__tag:focus {
-    cursor: pointer; }
-  /* line 145, ../../../components/sass/modules/_find-your-do-results.scss */
+    cursor: pointer;
+    background-color: #8f8f8f;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+  /* line 148, ../../../components/sass/modules/_find-your-do-results.scss */
   .fyd-results__tag [data-role="remove"]:after {
     content: "\00d7";
     padding: 0 2px; }
+/* line 154, ../../../components/sass/modules/_find-your-do-results.scss */
+.fyd-results__imagecontainer {
+  display: inline-block;
+  margin-left: .33em;
+  opacity: .4;
+  height: 23px; }
 
 /* line 3, ../../../components/sass/modules/_find-your-do-detail.scss */
 .fyd-detail__specialty {

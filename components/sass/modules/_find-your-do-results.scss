@@ -82,12 +82,12 @@
         padding-right: 0;
         padding-bottom: 1em;
         padding-left: 0;
-        margin-bottom: 1em;
+        margin-bottom: 0;
         border-bottom: 1px solid $secondarycolor;
         list-style: none;
 
         & a {
-            display: block;
+            display: inline-block;
         }
 
 //        &:hover {
@@ -136,16 +136,26 @@
         white-space: nowrap;
         vertical-align: baseline;
         color: $white;
-        background-color: $gray;
+        background-color: #c6c6c6;
 
         &:hover, &:focus {
             cursor: pointer;
+            background-color: $gray;
+
+            @include transition(all .3s ease);
         }
 
         & [data-role="remove"]:after {
             content: "\00d7";
             padding: 0 2px;
         }
+    }
+
+    &__imagecontainer {
+        display: inline-block;
+        margin-left: .33em;
+        opacity: .4;
+        height: 23px;
     }
 
 }
