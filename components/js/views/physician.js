@@ -17,6 +17,7 @@ var PhysicianListItemView = Backbone.View.extend({
                 '<% if (aoa_cert) { %><span class="fyd-results__imagecontainer"><img src="img/logo-aoa-board-certified-28.png" /></span><% } %>' +
             '</h3>' +
             '<div class="fyd-results__body"><p data-lat=<%= lat %> data-lon=<%= lon %>>' +
+                '<% if (addr_2) { %><%= addr_2 %><br /><% } %>' +
                 '<%= addr_1 %><br/ >' +
                 '<%= city %>, <%= state %> <%= zip %>' +
             '</p></div>'
