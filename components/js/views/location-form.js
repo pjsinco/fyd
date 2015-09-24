@@ -170,7 +170,7 @@ var LocationForm = Backbone.View.extend({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             limit: 10,
             remote: {
-                url: 'http://lookup.dev/api/v1/locations/search',
+                url: 'http://lookupapi.dev/api/v1/locations/search',
                 replace: function(url, urlEncodedQuery) {
                     return url + '?q=' + urlEncodedQuery;
                 },

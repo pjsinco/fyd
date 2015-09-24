@@ -73,7 +73,7 @@ var SpecialtyView = Backbone.View.extend({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             limit: 25,
             prefetch: {
-                url: 'http://lookup.dev/api/v1/specialties',
+                url: 'http://lookupapi.dev/api/v1/specialties',
                 filter: function(obj) {
                     //console.log(obj['data']);
                     return _.map(obj['data'], function(specialty) {
@@ -90,7 +90,7 @@ var SpecialtyView = Backbone.View.extend({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             //limit: 7,
             remote: {
-                url: 'http://lookup.dev/api/v1/physicians/search',
+                url: 'http://lookupapi.dev/api/v1/physicians/search',
                 replace: function(url, uriEncodedQuery) {
                     // Grab the location from the hidden form fields
                     var loc = {

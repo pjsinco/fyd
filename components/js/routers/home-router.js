@@ -91,7 +91,7 @@ console.log('home');
 
     spoofGeoLocate: function () {
         var modelOptions = {
-            url: 'http://lookup.dev/api/v1/locations/random', 
+            url: 'http://lookupapi.dev/api/v1/locations/random', 
         };
         var randomLocation = new Location({}, modelOptions);
         var self = this;
