@@ -492,3 +492,6 @@ var TaskList = Backbone.Collection.extend({
 
 #####Sat Sep 19 11:23:49 2015 CDT
 * Nanobar: [Very very lightweight progress bars](http://nanobar.micronube.com/)
+
+#####Fri Sep 25 12:50:03 2015 CDT
+* Good explanation of Bloodhound tokenizing: [Bloodhound suggestion engine](https://github.com/twitter/typeahead.js/blob/master/doc/migration/0.10.0.md#tokenization-methods-must-be-provided)
