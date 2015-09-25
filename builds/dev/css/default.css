@@ -461,46 +461,30 @@ ul li {
         Link Buttons
 \*------------------------------*/
 a.link-button, p.link-button a, a span.link-button, a.button, input[type="submit"].link-button, input[type="image"].link-button, div.link-button {
-  font-size: 14px;
-  line-height: 1;
-  color: #FFF !important;
-  letter-spacing: 0.14px;
-  text-shadow: 0 1px 1px rgba(114, 69, 59, 0.75);
-  background: #c8543c;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  background: #c8543c;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wNSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA=='), #c8543c;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.1)), color-stop(100%, rgba(0, 0, 0, 0.05))), #c8543c;
-  background: -moz-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.05)), #c8543c;
-  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.05)), #c8543c;
-  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.05)), #c8543c;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36), 0 0 0 5px #f2f2f2, 0 0 0 6px #e5e5e5;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36), 0 0 0 5px #f2f2f2, 0 0 0 6px #e5e5e5;
-  border: 1px solid #b44b2f;
-  border-bottom: none;
-  display: inline-block;
-  padding: 13px 50px;
-  margin-top: 15px;
-  margin-bottom: 7px;
-  text-decoration: none;
-  font-weight: normal;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  cursor: pointer;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+  padding: 8px 15px;
+  color: #fff;
+  font-size: 21px;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ViNjhkZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Q0NWRjYyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eb68de), color-stop(100%, #d45dcc));
+  background-image: -moz-linear-gradient(top, #eb68de, #d45dcc);
+  background-image: -webkit-linear-gradient(top, #eb68de, #d45dcc);
+  background-image: linear-gradient(to bottom, #eb68de, #d45dcc);
+  background: #d45dcc;
+  color: #fff;
 }
 a.link-button:hover, p.link-button a:hover, a span.link-button:hover, a.button:hover, input[type="submit"].link-button:hover, input[type="image"].link-button:hover, div.link-button:hover {
-  text-decoration: none;
-  opacity: 0.9;
-  filter: alpha(opacity=90);
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-a.link-button:after, p.link-button a:after, a span.link-button:after, a.button:after, input[type="submit"].link-button:after, input[type="image"].link-button:after, div.link-button:after {
-  content: '\00A0 \203A';
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjEuMCIgeDI9IjAuNSIgeTI9IjAuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ViNjhkZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Q0NWRjYyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #eb68de), color-stop(100%, #d45dcc));
+  background-image: -moz-linear-gradient(bottom, #eb68de, #d45dcc);
+  background-image: -webkit-linear-gradient(bottom, #eb68de, #d45dcc);
+  background-image: linear-gradient(to top, #eb68de, #d45dcc);
 }
 
 /*# sourceMappingURL=default.css.map */
