@@ -497,3 +497,9 @@ var TaskList = Backbone.Collection.extend({
 * Good explanation of Bloodhound tokenizing: [Bloodhound suggestion engine](https://github.com/twitter/typeahead.js/blob/master/doc/migration/0.10.0.md#tokenization-methods-must-be-provided)
 
 * [Modernize Your WordPress JavaScript](https://webdevstudios.com/2015/09/03/modernize-wordpress-javascript/)
+
+#####Sat Sep 26 11:32:54 2015 CDT
+* Github: [WordPress-Plugin-Boilerplate](https://github.com/DevinVinson/WordPress-Plugin-Boilerplate)
+> A standardized, organized, object-oriented foundation for building high-quality WordPress Plugins.
+
+
