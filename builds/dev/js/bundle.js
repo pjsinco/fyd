@@ -6,7 +6,8 @@ var PhysicianList = Backbone.Collection.extend({
 
     model: Physician,
     
-    url: 'http://lookup.dev/api/v1/physicians/search',
+    //url: 'http://lookup.dev/api/v1/physicians/search',
+    url: 'http://lookupapi.dev/api/v1/physicians/search',
     
     parse: function(response) {
         return response.data;
@@ -29,7 +30,7 @@ var _ = require('underscore');
 
 var Location = Backbone.Model.extend({
 
-    urlRoot: 'http://lookup.dev/api/v1/locations',
+    urlRoot: 'http://lookupapi.dev/api/v1/locations',
 
     defaults: {
         city: undefined,
@@ -79,10 +80,10 @@ var Backbone = require('backbone');
 var Physician = Backbone.Model.extend({
 
     // when we fetch outside a collection
-    urlRoot: 'http://lookup.dev/api/v1/physicians',
+    urlRoot: 'http://lookupapi.dev/api/v1/physicians',
 
     // when we fetch inside a collection
-    //url: 'http://lookup.dev/api/v1/physicians/search',
+    //url: 'http://lookupapi.dev/api/v1/physicians/search',
 
     initialize: function () {
 
@@ -2221,7 +2222,7 @@ console.log('home');
 
     spoofGeoLocate: function () {
         var modelOptions = {
-            url: 'http://lookup.dev/api/v1/locations/random', 
+            url: 'http://lookupapi.dev/api/v1/locations/random', 
         };
         var randomLocation = new Location({}, modelOptions);
         var self = this;
@@ -2627,7 +2628,7 @@ var LocationForm = Backbone.View.extend({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             limit: 10,
             remote: {
-                url: 'http://lookup.dev/api/v1/locations/search',
+                url: 'http://lookupapi.dev/api/v1/locations/search',
                 replace: function(url, urlEncodedQuery) {
                     return url + '?q=' + urlEncodedQuery;
                 },
@@ -3022,7 +3023,7 @@ var SpecialtyView = Backbone.View.extend({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             limit: 25,
             prefetch: {
-                url: 'http://lookup.dev/api/v1/specialties',
+                url: 'http://lookupapi.dev/api/v1/specialties',
                 filter: function(obj) {
                     //console.log(obj['data']);
                     return _.map(obj['data'], function(specialty) {
@@ -3039,7 +3040,7 @@ var SpecialtyView = Backbone.View.extend({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             //limit: 7,
             remote: {
-                url: 'http://lookup.dev/api/v1/physicians/search',
+                url: 'http://lookupapi.dev/api/v1/physicians/search',
                 replace: function(url, uriEncodedQuery) {
                     // Grab the location from the hidden form fields
                     var loc = {
